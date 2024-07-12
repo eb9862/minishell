@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:03:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 01:23:13 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 02:04:37 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ void adjust_file_name(t_token_list *token_list)
     {
         if (token -> previous)
         {
-            if (token -> previous -> type == RDRT_APPEND_OUT)
-                token -> type = FILE_CONTENT;
-            if (token -> previous -> type == RDRT_INPUT)
-                token -> type = FILE_CONTENT;
-            if (token -> previous -> type == RDRT_TRUNC_OUT)
-                token -> type = FILE_CONTENT;
-            if (token -> previous -> type == RDRT_HEREDOC)
-                token -> type = DELEMETER;
+            if (token -> type == CMD)
+            {
+                if (token -> previous -> type == RDRT_APPEND_OUT)
+                    token -> type = FILE_CONTENT;
+                if (token -> previous -> type == RDRT_INPUT)
+                    token -> type = FILE_CONTENT;
+                if (token -> previous -> type == RDRT_TRUNC_OUT)
+                    token -> type = FILE_CONTENT;
+                if (token -> previous -> type == RDRT_HEREDOC)
+                    token -> type = DELEMETER;
+            }
         }
         token = token -> next;
     }

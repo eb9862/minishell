@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:57:03 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/10 22:14:42 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 02:13:57 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,12 @@ int	is_delemeter(char *line, char *delemeter)
 	return (0);
 }
 
-int	open_file(t_token *token)
-{
-	int	fd;
-
-	fd = open(token -> content, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	token -> fd = fd;
-	return (1);
-}
-
 int	handle_heredoc(t_token *token)
 {
 	int		fd;
 	char	*line;
 	char	*delemeter;
-	printf("heredoc handler invoked!!\n");
+
 	delemeter = token -> content;
 	fd = open("tmp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
@@ -43,8 +32,10 @@ int	handle_heredoc(t_token *token)
 	while (1)
 	{
 		line = get_next_line(0);
-		if (!line || is_delemeter(line, delemeter))
+		if (!line || is_delemeter(line, delemeter)){
+			free(line);
 			break;
+		}
 		write(fd, line, ft_strlen(line));
 		free(line);
 	}
@@ -59,14 +50,6 @@ int	handle_file(t_token_list *token_list)
 	token = token_list -> head;
 	while(token)
 	{
-		if (token -> type == FILE_CONTENT)
-		{
-			if (!open_file(token))
-			{
-				(clear_file(token_list),clear_token_list(token_list));
-				return (0);
-			}
-		}
 		if (token -> type == DELEMETER)
 		{
 			if (!handle_heredoc(token))

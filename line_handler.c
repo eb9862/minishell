@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 01:20:35 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 02:02:43 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void handle_line(char *line)
      token_list = get_token_list(line);
      if (!token_list)
           return ;
+     print_token(token_list);
      if (!validate(token_list))
           return ;
      // t_token *token = token_list -> head;

@@ -104,7 +104,7 @@ t_env_list	*copy_env_list(t_env_node *head)
 	}
 	return (env_list);
 }
-#include <stdio.h>
+
 
 void	del_env_node(t_env_list *list, char *env_var)
 {
