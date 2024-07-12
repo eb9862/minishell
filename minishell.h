@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "get_next_line.h"
+#include "./libft/libft.h"
 
 
 enum e_token_type
@@ -74,9 +75,6 @@ typedef struct s_process_list
 
 t_env_list *init_env(char **envp);
 void clear_env_list(t_env_list *env_list);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strtrim(char *s1, char const *set);
-int	ft_strlen(char *s);
 enum e_token_type is_seperator(char *s);
 int regist_token(t_token_list *token_list, char *line, int start, int end);
 void clear_token_list(t_token_list *token_list);

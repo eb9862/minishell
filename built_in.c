@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:25:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/10 22:09:32 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:11:24 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,16 +170,16 @@ void	env(t_env_node *lst)
 	return (0);
 }*/
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	printf("test : %d %s\n", argc, argv[0]);
-	t_env_list *test = init_env(envp);
+// int	main(int argc, char *argv[], char *envp[])
+// {
+// 	printf("test : %d %s\n", argc, argv[0]);
+// 	t_env_list *test = init_env(envp);
 	
-	t_env_node *head = test->head;
-	export(argc, head);
-	unset(argc, argv, test);
-	write(1, "#################################################\n",50);
-	export(argc, head);
-	//env(head);
-	clear_env_list(test);
-}
+// 	t_env_node *head = test->head;
+// 	export(argc, head);
+// 	unset(argc, argv, test);
+// 	write(1, "#################################################\n",50);
+// 	export(argc, head);
+// 	//env(head);
+// 	clear_env_list(test);
+// }

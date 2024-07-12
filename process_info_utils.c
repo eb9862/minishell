@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:23:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/07 03:39:30 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 01:22:18 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int set_file_content(t_process_info *process, t_token *token, t_token_list *toke
     return (1);
 }
 
-int set_delemeter(t_process_info *process, t_token *token, t_token_list *token_list)
+int set_delemeter(t_process_info *process, t_token *token)
 {
     process -> delemeter = token -> content;
     return (1);
@@ -81,7 +81,7 @@ int set_str_data(t_process_info *process ,t_token *token, t_token_list *token_li
     }
     else if (token -> type == DELEMETER)
     {
-        if (!set_delemeter(process, token, token_list))
+        if (!set_delemeter(process, token))
             return (0);
     }
 
