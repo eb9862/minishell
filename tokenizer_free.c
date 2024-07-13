@@ -6,14 +6,13 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:09:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 22:14:53 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 23:08:56 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void clear_token(t_token *token)
+void	clear_token(t_token *token)
 {
 	if (token -> type == FILE_CONTENT)
 	{
@@ -24,20 +23,20 @@ void clear_token(t_token *token)
 		close(token -> fd);
 		unlink("tmp_file");
 	}
-    free(token);
+	free(token);
 }
 
-void clear_token_list(t_token_list *token_list)
+void	clear_token_list(t_token_list *token_list)
 {
-	t_token *now;
-	t_token *tmp;
+	t_token	*now;
+	t_token	*tmp;
 
 	now = token_list -> head;
-	while(now)
+	while (now)
 	{
 		tmp = now -> next;
-        clear_token(now);
-        now = tmp;
+		clear_token(now);
+		now = tmp;
 	}
-    free(token_list);
+	free(token_list);
 }

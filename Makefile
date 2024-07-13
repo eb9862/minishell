@@ -11,7 +11,6 @@ DIR_LIBFT = ./libft
 SRCS =	built_in.c\
 		built_in_utils.c\
 		env_var.c\
-		envp_list.c\
 		excutor.c\
 		file_handler.c\
 		get_next_line.c\
