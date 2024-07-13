@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 22:56:20 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 01:47:16 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ typedef struct s_process_info
 	char					*infile_name;
 	char					*outfile_name;
 	int						is_redirected;
-	int						is_heredoc;
-	char					*delemeter;
 	struct s_process_info	*next;
 }	t_process_info;
 

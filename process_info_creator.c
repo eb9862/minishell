@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:59:38 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 23:03:50 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 01:48:04 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ t_process_info	*create_process_info(void)
 	process_info -> program_name = NULL;
 	process_info -> argv = NULL;
 	process_info -> is_redirected = 0;
-	process_info -> is_heredoc = 0;
 	process_info -> in = 0;
 	process_info -> out = 1;
 	process_info -> infile_name = NULL;
 	process_info -> outfile_name = NULL;
 	process_info -> next = NULL;
-	process_info -> delemeter = NULL;
 	return (process_info);
 }
 
@@ -65,8 +63,6 @@ int	regist_process(t_process_list *list, t_token *st, \
 		if (now -> type == RDRT_APPEND_OUT \
 			|| now -> type == RDRT_TRUNC_OUT || now -> type == RDRT_INPUT)
 			process_info -> is_redirected = 1;
-		if (now -> type == RDRT_HEREDOC)
-			process_info -> is_heredoc = 1;
 		now = now -> next;
 	}
 	add_process_last(list, process_info);

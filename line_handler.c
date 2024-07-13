@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 23:21:35 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 01:47:36 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void	print_process(t_process_info *process)
 	printf("====process====\n");
 	printf("name = %s\n", process -> program_name);
 	print_argv(process -> argv);
-	printf("delemeter = %s\n", process -> delemeter);
 	printf("in = %d\n", process -> in);
 	printf("infile_name = %s\n", process -> infile_name);
-	printf("is_heredoc = %d\n", process -> is_heredoc);
 	printf("is_redirected = %d\n", process -> is_redirected);
 	printf("out = %d\n", process -> out);
 	printf("outfile_name = %s\n", process -> outfile_name);
@@ -85,7 +83,6 @@ void	handle_line(char *line)
 		return ;
 	if (!validate(token_list))
 		return ;
-	print_token(token_list);
 	process_list = get_process_list(token_list);
 	if (!process_list)
 	{
