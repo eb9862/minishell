@@ -6,22 +6,33 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:23:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 16:55:46 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 22:11:20 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int set_cmd(t_process_info *process, t_token *token)
+int set_cmd(t_process_info *process, t_token_list *token_list, int cmd_count)
 {
-    char    **argv;
+	char	**argv;
+	t_token	*token;
+	int		i;
 
-    argv = ft_split(token -> content, ' ');
-    if (!argv)
-        return (0);
-    process -> program_name = argv[0];
-    process -> argv = argv;
-    return (1);
+	i = 0;
+	token = token_list -> head;
+	argv = (char **)malloc(sizeof(char *) * (cmd_count + 1));
+	if (!argv)
+		return (0);
+	while(token)
+	{
+		if (token -> type == CMD)
+			argv[i++] = token -> content;
+		token = token -> next;
+	}
+	argv[i] = 0;
+	process -> program_name = argv[0];
+	process -> argv = argv;
+	return (1);
 }
 
 int set_file_content(t_process_info *process, t_token *token, t_token_list *token_list)
@@ -75,11 +86,11 @@ void add_process_last(t_process_list *list, t_process_info *process)
 
 int set_str_data(t_process_info *process ,t_token *token, t_token_list *token_list)
 {
+    int cmd_count;
+
+    cmd_count = 0;
     if (token -> type == CMD)
-    {
-        if (!set_cmd(process, token))
-            return (0);
-    }
+        cmd_count++;
     else if (token -> type == FILE_CONTENT)
     {
         if (!set_file_content(process, token, token_list))
@@ -90,6 +101,6 @@ int set_str_data(t_process_info *process ,t_token *token, t_token_list *token_li
         if (!set_delemeter(process, token))
             return (0);
     }
-
+    set_cmd(process, token_list, cmd_count);
     return (1);
 }

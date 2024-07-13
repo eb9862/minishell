@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:03:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 02:04:37 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 19:44:36 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,19 @@ int fill_token(t_token_list *token_list, char *line)
     j = 0;
     while (line[i])
     {
-        while(line[i] && !is_seperator(line + i))
+        while(line[i] && !is_seperator(line + i) && line[i] != ' ')
             i++;
         if(!regist_token(token_list, line, j, i))
             return(0);
+        while(line[i] && line[i] == ' ')
+            i++;
         j = i;
-        while(line[i] && is_seperator(line + i))
+        while(line[i] && is_seperator(line + i) && line[i] != ' ')
             i++;
         if(!regist_token(token_list, line, j, i))
             return(0);
+        while(line[i] && line[i] == ' ')
+            i++;
         j = i;
     }
     return (1);

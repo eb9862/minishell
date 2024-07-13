@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:09:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 16:00:57 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 22:14:53 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void clear_token(t_token *token)
 		close(token -> fd);
 		unlink("tmp_file");
 	}
-    free(token -> content);
     free(token);
 }
 

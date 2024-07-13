@@ -20,7 +20,8 @@ enum e_token_type
     RDRT_TRUNC_OUT,
     RDRT_INPUT,
     FILE_CONTENT,
-    DELEMETER
+    DELEMETER,
+    SPACE
 };
 
 // evnp -> linked list
