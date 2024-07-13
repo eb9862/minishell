@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:59:38 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 01:48:04 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 02:14:26 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,18 @@ int	regist_process(t_process_list *list, t_token *st, \
 {
 	t_process_info	*process_info;
 	t_token			*now;
+	int				cc;
 
+	cc = 0;
 	process_info = create_process_info();
 	if (!process_info)
 		return (0);
 	now = st;
 	while (now != et)
 	{
-		if (now -> type == CMD \
-			|| now -> type == FILE_CONTENT || now -> type == DELEMETER)
+		if (now -> type == CMD)
+			cc++;
+		if (now -> type == FILE_CONTENT || now -> type == DELEMETER)
 		{
 			if (!set_str_data(process_info, now, token_list))
 				return (0);
@@ -65,7 +68,7 @@ int	regist_process(t_process_list *list, t_token *st, \
 			process_info -> is_redirected = 1;
 		now = now -> next;
 	}
-	add_process_last(list, process_info);
+	(set_cmd(process_info, st, et, cc), add_process_last(list, process_info));
 	return (1);
 }
 

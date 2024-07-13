@@ -6,28 +6,28 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:23:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 01:48:55 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 02:09:20 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	set_cmd(t_process_info *process, t_token_list *token_list, int cmd_count)
+int	set_cmd(t_process_info *process, t_token *st, t_token *et, int cmd_count)
 {
 	char	**argv;
-	t_token	*token;
+	t_token	*now;
 	int		i;
 
 	i = 0;
-	token = token_list -> head;
+	now = st;
 	argv = (char **)malloc(sizeof(char *) * (cmd_count + 1));
 	if (!argv)
 		return (0);
-	while (token)
+	while (now != et)
 	{
-		if (token -> type == CMD)
-			argv[i++] = token -> content;
-		token = token -> next;
+		if (now -> type == CMD)
+			argv[i++] = now -> content;
+		now = now -> next;
 	}
 	argv[i] = 0;
 	process -> program_name = argv[0];
@@ -87,12 +87,7 @@ void	add_process_last(t_process_list *list, t_process_info *process)
 int	set_str_data(t_process_info *process, \
 	t_token *token, t_token_list *token_list)
 {
-	int	cmd_count;
-
-	cmd_count = 0;
-	if (token -> type == CMD)
-		cmd_count++;
-	else if (token -> type == FILE_CONTENT)
+	if (token -> type == FILE_CONTENT)
 	{
 		if (!set_file_content(process, token, token_list))
 			return (0);
@@ -101,7 +96,6 @@ int	set_str_data(t_process_info *process, \
 	{
 		if (!set_heredoc_fd(process, token))
 			return (0);
-	}
-	set_cmd(process, token_list, cmd_count);
+	}	
 	return (1);
 }

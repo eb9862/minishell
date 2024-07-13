@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 01:47:16 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 02:06:42 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
 int					handle_file(t_token_list *token_list);
 int					open_file(t_process_info *process, t_token *token);
+int					set_cmd(t_process_info *process, t_token *st, \
+						t_token *et, int cmd_count);
 // test
 void				print_process(t_process_info *process);
 void				print_token_type(enum e_token_type type);
