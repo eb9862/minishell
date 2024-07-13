@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 02:02:43 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 16:01:44 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void print_token(t_token_list *token_list)
           printf("===token===\n");
           print_token_type(token -> type);
           printf("content = %s\n", token -> content);
+          printf("fd = %d\n", token -> fd);
           token = token -> next;
      }
 }
@@ -75,22 +76,21 @@ void print_token(t_token_list *token_list)
 void handle_line(char *line)
 {
     t_token_list *token_list;
-//     t_process_list *process_list;
+    t_process_list *process_list;
 
      token_list = get_token_list(line);
      if (!token_list)
           return ;
-     print_token(token_list);
      if (!validate(token_list))
           return ;
-     // t_token *token = token_list -> head;
-     // process_list = get_process_list(token_list);
-     // if (!process_list)
-     // {
-     //      clear_token_list(token_list);
-     //      return ;
-     // }
-     // excute(process_list);
-     // clear_process_list(process_list);
-     // clear_token_list(token_list);
+     print_token(token_list);
+     process_list = get_process_list(token_list);
+     if (!process_list)
+     {
+          clear_token_list(token_list);
+          return ;
+     }
+     excute(process_list);
+     clear_process_list(process_list);
+     clear_token_list(token_list);
 }

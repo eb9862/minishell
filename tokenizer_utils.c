@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:08:40 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/09 22:45:42 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 14:36:11 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ char *get_content(char *line, int start, int end)
     size = end - start + 1;
     content = (char *)malloc(sizeof(char) * size);
     if (!content)
+	{
         return (0);
+	}
 	while (content_idx + start < end)
 	{
 		content[content_idx] = line[content_idx + start];

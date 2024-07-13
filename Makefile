@@ -13,7 +13,6 @@ SRCS =	built_in.c\
 		env_var.c\
 		envp_list.c\
 		excutor.c\
-		file_close.c\
 		file_handler.c\
 		get_next_line.c\
 		get_next_line_utils.c\

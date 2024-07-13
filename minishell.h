@@ -95,6 +95,7 @@ void excute(t_process_list *process_list);
 char	*get_next_line(int fd);
 void clear_file(t_token_list *token_list);
 int	handle_file(t_token_list *token_list);
+int open_file(t_process_info *process, t_token *token);
 // test
 void print_process(t_process_info *process);
 void print_token_type(enum e_token_type type);

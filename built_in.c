@@ -6,13 +6,13 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:25:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/13 01:11:24 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 14:34:12 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-//#include <linux/limits.h> // linux PATH_MAX
-#include <sys/syslimits.h>
+#include <linux/limits.h> // linux PATH_MAX
+// #include <sys/syslimits.h>
 #include <stdio.h>
 #include <stdlib.h>
 

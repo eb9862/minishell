@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:23:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 01:22:18 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 16:55:46 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,32 @@ int set_cmd(t_process_info *process, t_token *token)
 
 int set_file_content(t_process_info *process, t_token *token, t_token_list *token_list)
 {
-    t_token *now;
-    t_token *prev;
+    t_token	*now;
+	int		res;
 
     now = token_list -> head;
-    prev = NULL;
     while (now && now != token)
-    {
-        prev = now;
         now = now -> next;
-    } 
-    if (prev -> type == RDRT_APPEND_OUT || prev -> type == RDRT_TRUNC_OUT)
-        process -> outfile_name = token -> content;
-    if (prev -> type == RDRT_INPUT)
-        process -> infile_name = token -> content;
+    res = open_file(process, now);
+	if (res == -1)
+	{
+		printf("%s", token -> content);
+        printf(": create file error");
+		return (0);
+	}
+	else if (res == -2)
+	{
+		printf("%s", token -> content);
+        printf(": No such file or directory\n");
+		return (0);
+	}
     return (1);
 }
 
 int set_delemeter(t_process_info *process, t_token *token)
 {
     process -> delemeter = token -> content;
+    process -> in = token -> fd;
     return (1);
 }
 
