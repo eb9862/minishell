@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra -g3
 
 NAME = minishell
 
-HEADER = built_in.h minishell.h get_next_line.h
+HEADER = built_in.h minishell.h
 
 DIR_LIBFT = ./libft
 
@@ -35,7 +35,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(DIR_LIBFT) all
-	$(MAKE) -C $(DIR_GNL)
+	$(MAKE) -C $(DIR_GNL) all
 	$(CC) $(CFLAGS) -lreadline $^ -o $(NAME) -lm -lft -L $(DIR_LIBFT) -lgnl -L $(DIR_GNL)
 
 %.o : %.c
