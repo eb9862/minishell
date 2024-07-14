@@ -8,7 +8,7 @@ HEADER = built_in.h minishell.h
 
 DIR_LIBFT = ./libft
 
-DIR_LIBFT = ./gnl
+DIR_GNL = ./gnl
 
 SRCS =	built_in.c\
 		built_in_utils.c\
