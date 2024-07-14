@@ -13,7 +13,6 @@ DIR_LIBFT = ./gnl
 SRCS =	built_in.c\
 		built_in_utils.c\
 		env_var.c\
-		envp_list.c\
 		excutor.c\
 		file_handler.c\
 		line_handler.c\

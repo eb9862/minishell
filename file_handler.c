@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:57:03 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 16:55:47 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/13 22:37:57 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,28 @@ int	open_input_file(t_process_info *process, t_token *token)
 	return (1);
 }
 
-int open_file(t_process_info *process, t_token *token)
+int	open_file(t_process_info *process, t_token *token)
 {
-	enum	e_token_type type;
-	int		fd;
+	enum e_token_type	type;
+	int					fd;
 
 	type = token -> previous -> type;
 	if (type == RDRT_APPEND_OUT || type == RDRT_TRUNC_OUT)
 	{
 		process -> outfile_name = token -> content;
 		if (type == RDRT_APPEND_OUT)
-			fd = open(process -> outfile_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
+			fd = open(process -> outfile_name, \
+				O_WRONLY | O_CREAT | O_APPEND, 0777);
 		else
-			fd = open(process -> outfile_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			fd = open(process -> outfile_name, \
+				O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd == -1)
 			return (-1);
 		process -> out = fd;
 		token -> fd = fd;
 	}
 	else if (type == RDRT_INPUT)
-		return open_input_file(process, token);
+		return (open_input_file(process, token));
 	return (1);
 }
 
@@ -68,9 +70,10 @@ int	handle_heredoc(t_token *token)
 	while (1)
 	{
 		line = get_next_line(0);
-		if (!line || is_delemeter(line, delemeter)){
+		if (!line || is_delemeter(line, delemeter))
+		{
 			free(line);
-			break;
+			break ;
 		}
 		write(fd, line, ft_strlen(line));
 		free(line);
@@ -81,10 +84,10 @@ int	handle_heredoc(t_token *token)
 
 int	handle_file(t_token_list *token_list)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = token_list -> head;
-	while(token)
+	while (token)
 	{
 		if (token -> type == DELEMETER)
 		{
