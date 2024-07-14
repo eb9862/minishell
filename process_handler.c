@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 21:33:41 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/15 02:01:01 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,38 @@ void	excute_child_process(t_process_info *process, char **envp)
 
 	if (pipe(fd) == -1)
 		return ;
+
 	pid = fork();
 	if (pid == 0)
 	{
 		close(fd[0]);
 		path_name = get_path_name(process -> program_name, envp);
+		if (process -> is_redirected)
+			set_stream(process -> in, process -> out, fd);
 		execve(path_name, process -> argv, envp);
 	}
 	else
 	{
 		close(fd[1]);
+		dup2(fd[0], 0);
 		waitpid(pid, NULL, 0);
 	}
-	
 }
 
 void	handle_process(t_process_list *process_list, char **envp)
 {
 	t_process_info	*process;
+	int		original_in;
+	int		original_out;
 
 	process = process_list -> head;
+	original_in = dup(STDIN_FILENO);
+	original_out = dup(STDOUT_FILENO);
 	while (process)
 	{
 		excute_child_process(process, envp);
 		process = process -> next;
 	}
+	dup2(original_in, 0);
+	dup2(original_out, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 01:05:12 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:34:36 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ void	print_token(t_token_list *token_list)
 	}
 }
 
+void print_process_list(t_process_list *process_list)
+{
+	t_process_info *process;
+
+	process = process_list -> head;
+	while(process)
+	{
+		print_process(process);
+		process = process -> next;
+	}
+}
+
 void	handle_line(char *line, char **envp)
 {
 	t_token_list	*token_list;
@@ -84,6 +96,7 @@ void	handle_line(char *line, char **envp)
 	if (!validate(token_list))
 		return ;
 	process_list = get_process_list(token_list);
+	print_process_list(process_list);
 	if (!process_list)
 	{
 		clear_token_list(token_list);

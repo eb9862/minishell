@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 01:07:38 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:17:02 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <fcntl.h>
 #include "./libft/libft.h"
 #include "./gnl/get_next_line.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 enum e_token_type
 {
