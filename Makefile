@@ -19,6 +19,7 @@ SRCS =	built_in.c\
 		main.c\
 		process_free.c\
 		process_info_creator.c\
+		process_handler.c\
 		process_info_utils.c\
 		tokenizer_free.c\
 		tokenizer_utils.c\

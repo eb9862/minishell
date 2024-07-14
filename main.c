@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 22:43:47 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:23:31 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 		line = readline("porschell🏎  ");
 		if (!line)
 			return (0);
-		handle_line(line);
+		handle_line(line, envp);
 		free(line);
 	}
 	clear_env_list(env_list);

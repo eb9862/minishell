@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 02:06:42 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:07:38 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,14 @@ int					regist_token(t_token_list *token_list, \
 						char *line, int start, int end);
 void				clear_token_list(t_token_list *token_list);
 t_token_list		*get_token_list(char *line);
-void				handle_line(char *line);
+void				handle_line(char *line, char**envp);
 int					validate(t_token_list *token_list);
 int					is_redirection(enum e_token_type type);
 void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
 t_process_list		*get_process_list(t_token_list *token_list);
+void				handle_process(t_process_list *process_list, char **envp);
 void				adjust_file_name(t_token_list *token_list);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
@@ -105,6 +106,7 @@ void				add_process_last(t_process_list *list, \
 						t_process_info *process);
 void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
+void				free_split(char **split);
 int					handle_file(t_token_list *token_list);
 int					open_file(t_process_info *process, t_token *token);
 int					set_cmd(t_process_info *process, t_token *st, \
