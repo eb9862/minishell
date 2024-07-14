@@ -7,8 +7,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "get_next_line.h"
 #include "./libft/libft.h"
+#include "./gnl/get_next_line.h"
 
 
 enum e_token_type

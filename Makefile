@@ -8,14 +8,14 @@ HEADER = built_in.h minishell.h get_next_line.h
 
 DIR_LIBFT = ./libft
 
+DIR_LIBFT = ./gnl
+
 SRCS =	built_in.c\
 		built_in_utils.c\
 		env_var.c\
 		envp_list.c\
 		excutor.c\
 		file_handler.c\
-		get_next_line.c\
-		get_next_line_utils.c\
 		line_handler.c\
 		main.c\
 		process_free.c\
@@ -36,17 +36,20 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(DIR_LIBFT) all
-	$(CC) $(CFLAGS) -lreadline $^ -o $(NAME) -lm -lft -L $(DIR_LIBFT)
+	$(MAKE) -C $(DIR_GNL)
+	$(CC) $(CFLAGS) -lreadline $^ -o $(NAME) -lm -lft -L $(DIR_LIBFT) -lgnl -L $(DIR_GNL)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean :
 	$(MAKE) -C $(DIR_LIBFT) clean
+	$(MAKE) -C $(DIR_GNL) clean
 	rm -rf $(OBJS)
 
 fclean : clean
 	$(MAKE) -C $(DIR_LIBFT) fclean
+	$(MAKE) -C $(DIR_GNL) fclean
 	rm -rf $(NAME)
 
 re : fclean all
