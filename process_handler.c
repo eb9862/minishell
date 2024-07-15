@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 02:01:01 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 02:02:48 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ char	*get_path_name(char *p_name, char **envp)
 
 void	set_stream(int in, int out, int *fd)
 {
+	(void) fd;
 	if (in != 0)
-		dup2(in, 0);
-	dup2(fd[1], 1);
+		dup2(in, STDIN_FILENO);
 	if (out != 1)
 		dup2(out, 1);
 }
@@ -94,6 +94,9 @@ void	excute_child_process(t_process_info *process, char **envp)
 	if (pid == 0)
 	{
 		close(fd[0]);
+		printf("process in = %d out = %d\n", process -> in , process -> out);
+		if (process -> next)
+			dup2(fd[1], STDOUT_FILENO);
 		path_name = get_path_name(process -> program_name, envp);
 		if (process -> is_redirected)
 			set_stream(process -> in, process -> out, fd);
@@ -121,6 +124,8 @@ void	handle_process(t_process_list *process_list, char **envp)
 		excute_child_process(process, envp);
 		process = process -> next;
 	}
-	dup2(original_in, 0);
-	dup2(original_out, 1);
+	dup2(original_in, STDIN_FILENO);
+	dup2(original_out, STDOUT_FILENO);
+	close(original_in);
+	close(original_out);
 }

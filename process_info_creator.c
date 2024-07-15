@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:59:38 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 01:21:50 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:38:07 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	regist_process(t_process_list *list, t_token *st, \
 			if (!set_str_data(process_info, now, token_list))
 				return (0);
 		}
-		if (now -> type == RDRT_APPEND_OUT \
+		if (now -> type == RDRT_APPEND_OUT || now -> type == RDRT_HEREDOC\
 			|| now -> type == RDRT_TRUNC_OUT || now -> type == RDRT_INPUT)
 			process_info -> is_redirected = 1;
 		now = now -> next;

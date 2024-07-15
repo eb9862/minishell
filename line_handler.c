@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 01:34:36 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:07:30 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	handle_line(char *line, char **envp)
 	if (!validate(token_list))
 		return ;
 	process_list = get_process_list(token_list);
-	print_process_list(process_list);
 	if (!process_list)
 	{
 		clear_token_list(token_list);

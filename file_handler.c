@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:57:03 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 22:37:57 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 02:00:11 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_delemeter(char *line, char *delemeter)
 {
+	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
+		return (0); 
 	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)
 		return (1);
 	return (0);
@@ -64,11 +66,12 @@ int	handle_heredoc(t_token *token)
 	char	*delemeter;
 
 	delemeter = token -> content;
-	fd = open("tmp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd = open("tmp_file", O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (0);
 	while (1)
 	{
+		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (!line || is_delemeter(line, delemeter))
 		{
