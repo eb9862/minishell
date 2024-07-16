@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:09:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/16 02:05:15 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:34:11 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	clear_token(t_token *token)
 	if (token -> type == DELEMETER)
 	{
 		close(token -> fd);
-		// unlink("tmp_file");
+		unlink("tmp_file");
 	}
 	free(token);
 }

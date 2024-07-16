@@ -15,6 +15,7 @@ SRCS =	built_in.c\
 		env_var.c\
 		excutor.c\
 		file_handler.c\
+		file_handler_utils.c\
 		line_handler.c\
 		main.c\
 		process_free.c\

@@ -6,20 +6,11 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:57:03 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/16 02:00:11 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:46:59 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_delemeter(char *line, char *delemeter)
-{
-	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
-		return (0); 
-	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)
-		return (1);
-	return (0);
-}
 
 int	open_input_file(t_process_info *process, t_token *token)
 {
@@ -59,28 +50,18 @@ int	open_file(t_process_info *process, t_token *token)
 	return (1);
 }
 
+
 int	handle_heredoc(t_token *token)
 {
 	int		fd;
-	char	*line;
-	char	*delemeter;
+	int		is_created;
 
-	delemeter = token -> content;
-	fd = open("tmp_file", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	is_created = create_heredoc_file(token);
+	if (!is_created)
+		return (0);
+	fd = open("tmp_file",O_RDONLY);
 	if (fd == -1)
 		return (0);
-	while (1)
-	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
-		if (!line || is_delemeter(line, delemeter))
-		{
-			free(line);
-			break ;
-		}
-		write(fd, line, ft_strlen(line));
-		free(line);
-	}
 	token -> fd = fd;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/15 01:17:02 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:46:34 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void				add_process_last(t_process_list *list, \
 void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
 void				free_split(char **split);
+int					create_heredoc_file(t_token *token);
 int					handle_file(t_token_list *token_list);
 int					open_file(t_process_info *process, t_token *token);
 int					set_cmd(t_process_info *process, t_token *st, \
