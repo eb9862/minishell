@@ -6,13 +6,11 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 21:01:01 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 23:49:17 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	status;
 
 int	quotes_check(char *line)
 {
@@ -23,7 +21,7 @@ int	quotes_check(char *line)
 	i = 0;
 	sq_count = 0;
 	dq_count = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == '\'')
 			sq_count++;
@@ -40,9 +38,11 @@ int	main(int ac, char **av, char **envp)
 {
 	char		*line;
 	t_env_list	*env_list;
+	int			status;
 
 	(void)ac;
 	(void)av;
+	status = 0;
 	env_list = init_env(envp);
 	(void)env_list;
 	while (1)

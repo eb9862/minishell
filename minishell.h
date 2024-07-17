@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 20:12:23 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 23:45:34 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
 t_process_list		*get_process_list(t_token_list *token_list);
-void				handle_process(t_process_list *process_list, char **envp, int *status);
+void				handle_process(t_process_list *process_list, char **envp, \
+						int *status, int count);
 void				adjust_file_name(t_token_list *token_list);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
