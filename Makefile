@@ -26,7 +26,8 @@ SRCS =	built_in.c\
 		tokenizer_utils.c\
 		tokenizer.c\
 		validator_utils.c\
-		validator.c
+		validator.c\
+		minishell_test_utils.c
 
 
 OBJS = $(SRCS:.c=.o)

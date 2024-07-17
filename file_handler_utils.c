@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:41:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/16 15:46:25 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:36:24 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_delemeter(char *line, char *delemeter)
 {
 	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
-		return (0); 
+		return (0);
 	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)
 		return (1);
 	return (0);

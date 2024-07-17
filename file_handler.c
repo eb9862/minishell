@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:57:03 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/16 15:46:59 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:34:40 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	open_file(t_process_info *process, t_token *token)
 	return (1);
 }
 
-
 int	handle_heredoc(t_token *token)
 {
 	int		fd;
@@ -59,7 +58,7 @@ int	handle_heredoc(t_token *token)
 	is_created = create_heredoc_file(token);
 	if (!is_created)
 		return (0);
-	fd = open("tmp_file",O_RDONLY);
+	fd = open("tmp_file", O_RDONLY);
 	if (fd == -1)
 		return (0);
 	token -> fd = fd;

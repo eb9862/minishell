@@ -6,23 +6,23 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/16 15:46:34 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:28:13 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include "./libft/libft.h"
-#include "./gnl/get_next_line.h"
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "./libft/libft.h"
+# include "./gnl/get_next_line.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 enum e_token_type
 {
@@ -80,6 +80,7 @@ typedef struct s_process_info
 
 typedef struct s_process_list
 {
+	int				count;
 	t_process_info	*head;
 	t_process_info	*tail;
 }	t_process_list;

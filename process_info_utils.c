@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:23:05 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/14 02:09:20 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 14:18:59 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	add_process_last(t_process_list *list, t_process_info *process)
 			now = now -> next;
 		now -> next = process;
 	}
+	list -> count++;
 }
 
 int	set_str_data(t_process_info *process, \
