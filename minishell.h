@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 15:28:13 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 20:12:23 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,14 @@ int					regist_token(t_token_list *token_list, \
 						char *line, int start, int end);
 void				clear_token_list(t_token_list *token_list);
 t_token_list		*get_token_list(char *line);
-void				handle_line(char *line, char**envp);
+void				handle_line(char *line, char**envp, int *status);
 int					validate(t_token_list *token_list);
 int					is_redirection(enum e_token_type type);
 void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
 t_process_list		*get_process_list(t_token_list *token_list);
-void				handle_process(t_process_list *process_list, char **envp);
+void				handle_process(t_process_list *process_list, char **envp, int *status);
 void				adjust_file_name(t_token_list *token_list);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);

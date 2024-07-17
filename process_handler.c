@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 15:31:45 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/17 21:46:52 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ char	*get_path_name(char *p_name, char **envp)
 		i++;
 	}
 	free_split(paths);
-	return (0);
+	printf("%s : command not found\n", p_name);
+	exit(127);
+	// return (0);
 }
 
 void	set_stream(int in, int out)
@@ -67,7 +69,7 @@ void	set_stream(int in, int out)
 		dup2(out, 1);
 }
 
-void	excute_child_process(t_process_info *process, char **envp)
+void	excute_child_process(t_process_info *process, char **envp , pid_t pids[], int i)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -76,14 +78,12 @@ void	excute_child_process(t_process_info *process, char **envp)
 	if (pipe(fd) == -1)
 		return ;
 	pid = fork();
+	pids[i] = pid;
 	if (pid == 0)
 	{
 		close(fd[0]);
 		if (process -> next)
-		{
-			dup2(fd[1], STDOUT_FILENO);
-			close(fd[1]);
-		}
+			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
 		path_name = get_path_name(process -> program_name, envp);
 		if (process -> is_redirected)
 			set_stream(process -> in, process -> out);
@@ -92,16 +92,17 @@ void	excute_child_process(t_process_info *process, char **envp)
 	else
 	{
 		close(fd[1]);
-		(dup2(fd[0], 0), close(fd[0]));
+		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
 	}
 }
 
-void	handle_process(t_process_list *process_list, char **envp)
+void	handle_process(t_process_list *process_list, char **envp, int *status)
 {
 	t_process_info	*process;
 	int				original_in;
 	int				original_out;
 	int				i;
+	pid_t			pids[process_list -> count];
 
 	i = -1;
 	process = process_list -> head;
@@ -109,11 +110,13 @@ void	handle_process(t_process_list *process_list, char **envp)
 	original_out = dup(STDOUT_FILENO);
 	while (process)
 	{
-		excute_child_process(process, envp);
+		++i;
+		excute_child_process(process, envp, pids, i);
 		process = process -> next;
 	}
+	i = -1;
 	while (++i < process_list -> count)
-		wait(NULL);
+		waitpid(pids[i], status, 0);
 	dup2(original_in, STDIN_FILENO);
 	dup2(original_out, STDOUT_FILENO);
 	close(original_in);
