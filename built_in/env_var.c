@@ -6,26 +6,27 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/10 21:59:49 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/21 00:00:05 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "built_in.h"
-#include "minishell.h"
 
-t_env_node	*create_env_node(char *content)
+t_env_node	*create_env_node(char *content, int modi)
 {
-    t_env_node	*node;
+	t_env_node	*node;
 
 	node = (t_env_node *)malloc(sizeof(t_env_node));
 	if (!node)
 		return (0);
 	node -> content = content;
 	node -> next = NULL;
+	node -> modified = modi;
 	return (node);
 }
 
-void	clear_env_list(t_env_list *env_list)
+void	clear_env_list(t_env_list *env_list, int copied)
 {
 	t_env_node	*now;
 	t_env_node	*tmp;
@@ -36,6 +37,8 @@ void	clear_env_list(t_env_list *env_list)
 		while (now)
 		{
 			tmp = now -> next;
+			if (copied == 0 && now -> modified == 1)
+				free(now -> content);
 			free(now);
 			now = tmp;
 		}
@@ -47,7 +50,7 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 {
 	t_env_node	*tmp;
 
-	if (!env_list -> head)
+	if (env_list == NULL || env_list-> head == NULL)
 	{
 		env_list -> head = node;
 		env_list -> tail = node;
@@ -55,9 +58,9 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 	else
 	{
 		tmp = env_list -> head;
-		while(tmp -> next)
+		while (tmp -> next)
 			tmp = tmp -> next;
-		tmp -> next= node;
+		tmp -> next = node;
 		env_list -> tail = node;
 	}
 }
@@ -66,7 +69,7 @@ t_env_list	*init_env(char **envp)
 {
 	int			i;
 	t_env_list	*env_list;
-    t_env_node	*env_node;
+	t_env_node	*env_node;
 
 	i = 0;
 	env_list = (t_env_list *)malloc(sizeof(t_env_list));
@@ -74,10 +77,10 @@ t_env_list	*init_env(char **envp)
 		return (0);
 	while (envp[i])
 	{
-		env_node = create_env_node(envp[i]);
+		env_node = create_env_node(envp[i], 0);
 		if (!env_node)
 		{
-			clear_env_list(env_list);
+			clear_env_list(env_list, 0);
 			return (0);
 		}
 		add_node_last(env_list, env_node);
@@ -85,51 +88,33 @@ t_env_list	*init_env(char **envp)
 	}
 	return (env_list);
 }
-t_env_list	*copy_env_list(t_env_node *head)
+
+void	del_env_node(t_env_list *list, t_env_node *target_node)
 {
-	t_env_list	*env_list;
-	t_env_node	*env_node;
+	t_env_node	*tmp_node;
+	t_env_node	*next_node;
 
-	env_list = (t_env_list *)malloc(sizeof(t_env_list));
-	while (head)
+	tmp_node = list -> head;
+	if (tmp_node == target_node)
 	{
-		env_node = create_env_node(head->content);
-		if (!env_node)
-		{
-			clear_env_list(env_list);
-			return (0);
-		}
-		add_node_last(env_list, env_node);
-		head = head->next;
-	}
-	return (env_list);
-}
-
-
-void	del_env_node(t_env_list *list, char *env_var)
-{
-	t_env_node *node_1;
-	t_env_node *node_2;
-	char	**envir;
-
-	node_1 = list -> head;
-	node_2 = NULL;
-	envir = ft_split(node_1-> content, '=');
-	while (node_1 && ft_strcmp(envir[0], env_var) != 0)
-	{
-		free_2d(envir);
-		node_2 = node_1;
-		node_1 = node_1 -> next;
-		if (node_1 != NULL)
-			envir = ft_split(node_1-> content, '=');
-	}
-	// free_2d(envir);
-	if (!node_1){
+		list -> head = target_node -> next;
+		if (target_node -> modified == 1)
+			free(target_node -> content);
+		free(target_node);
 		return ;
 	}
-	if (!node_2)
-		list -> head = node_1 -> next;
-	else
-		node_2 -> next = node_1 -> next;
-	free(node_1);
+	next_node = tmp_node -> next;
+	while (tmp_node)
+	{
+		if (next_node == target_node)
+		{
+			tmp_node -> next = next_node -> next;
+			if (target_node -> modified == 1)
+				free(target_node -> content);
+			free(target_node);
+			return ;
+		}
+		tmp_node = tmp_node -> next;
+		next_node = tmp_node -> next;
+	}
 }

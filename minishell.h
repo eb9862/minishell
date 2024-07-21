@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 23:45:34 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:14:44 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./gnl/get_next_line.h"
+# include "./built_in/built_in.h"
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -35,19 +36,6 @@ enum e_token_type
 	FILE_CONTENT,
 	DELEMETER
 };
-
-// evnp -> linked list
-typedef struct s_env_node
-{
-	char				*content;
-	struct s_env_node	*next;
-}	t_env_node;
-
-typedef struct s_env_list
-{
-	t_env_node	*head;
-	t_env_node	*tail;
-}	t_env_list;
 
 // token
 typedef struct s_token
@@ -85,8 +73,8 @@ typedef struct s_process_list
 	t_process_info	*tail;
 }	t_process_list;
 
-t_env_list			*init_env(char **envp);
-void				clear_env_list(t_env_list *env_list);
+//t_env_list			*init_env(char **envp);
+//void				clear_env_list(t_env_list *env_list);
 enum e_token_type	is_seperator(char *s);
 int					regist_token(t_token_list *token_list, \
 						char *line, int start, int end);
