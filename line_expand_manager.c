@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 16:01:11 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/21 16:34:35 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ char    *get_expand_line(char *line)
     list = create_q_token_list();
     if (!list)
         return (0);
-    fill_q_token(list, line);
-	print_q_token(list);
+    if (!fill_q_token(list, line))
+		return (0);
+	expand_double_quotes(list);
     return (line);
 }
