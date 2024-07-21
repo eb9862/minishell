@@ -6,16 +6,13 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:53:58 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/10 21:57:19 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/21 00:05:50 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "built_in.h"
-#include "minishell.h"
-
-#include "./libft/libft.h"
 
 char	*ft_strcat(char *s, char c)
 {
@@ -33,7 +30,7 @@ char	*ft_strcat(char *s, char c)
 	}
 	*(res + i++) = c;
 	*(res + i) = '\0';
-	return (res); 
+	return (res);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -41,6 +38,10 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
+	if (s1 == NULL)
+		return (*s2);
+	if (s2 == NULL)
+		return (*s1);
 	while (*(s1 + i) != '\0' && *(s2 + i) != '\0')
 	{
 		if (*(s1 + i) != *(s2 + i))
@@ -50,7 +51,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (*(s1 + i) - *(s2 + i));
 }
 
-void	swap_str(t_env_node *node1, t_env_node *node2)
+static void	swap_str(t_env_node *node1, t_env_node *node2)
 {
 	char	*tmp;
 
@@ -71,7 +72,9 @@ void	environ_sort(t_env_node *lst)
 		while (tmp2)
 		{
 			if (ft_strcmp(tmp1->content, tmp2->content) > 0)
+			{
 				swap_str(tmp1, tmp2);
+			}
 			tmp2 = tmp2->next;
 		}
 		tmp1 = tmp1->next;
@@ -83,9 +86,9 @@ void	free_2d(char **s)
 	int	n;
 
 	n = 0;
-	while (*(s + n) != NULL && *(s + n) != 0)
+	while (*(s + n) != 0)
 	{
-		free(s[n]);
+		free(*(s + n));
 		n++;
 	}
 	free(s);
