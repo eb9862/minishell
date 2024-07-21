@@ -6,71 +6,22 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 18:00:22 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 01:05:30 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int get_dollar_sign_idx(char *line)
-{
-    int i;
-
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == '$')
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
-void	change_double2single(char *s)
-{
-	int len;
-
-	len = ft_strlen(s);
-	s[0] = '\'';
-	s[len - 1] = '\'';
-}
-
-int	get_env_len(char *env)
-{
-	int	i;
-
-	i = 0;
-	if (!env)
-		return (0);
-	while (env[i])
-		i++;
-	return (i);
-}
-
 char	*get_expanded_content(char *content, int dollar_idx)
 {
-	char	*env_str;
-	char	*new_conetnt;
-	int		env_len;
-	int		idx;
-	int		env_idx;
+	char	*only_env;
+	char	*expanded_content;
 
-	idx = -1;
-	env_idx = -1;
-	printf("str = %s\n",content + dollar_idx + 1 );
-	env_str = getenv(content + dollar_idx + 1);
-	printf("env_str = %s\n", env_str);
-	env_len = get_env_len(env_str);
-	new_conetnt = (char *)malloc(sizeof(char) * (dollar_idx + env_len + 1));
-	if (!new_conetnt)
+	only_env = get_only_env(content + dollar_idx + 1);
+	if (!only_env)
 		return (0);
-	while (++idx < dollar_idx)
-		new_conetnt[idx] = content[idx];
-	while (env_str[++env_idx])
-		new_conetnt[++idx + env_idx] = env_str[env_idx];
-	new_conetnt[idx + env_idx] = 0;
-	free(content);
-	return (new_conetnt);
+	expanded_content = get_new_content(content, dollar_idx, getenv(only_env));
+	return (expanded_content);
 }
 
 int expand_content(t_q_token *token)
@@ -81,13 +32,12 @@ int expand_content(t_q_token *token)
     if (dollar_idx != -1)
 	{
 		token -> content = get_expanded_content(token -> content, dollar_idx);
+		token -> content_len = ft_strlen(token -> content);
 		if (!token -> content)
 			return (0);
-		change_double2single(token -> content);
 	}
-	else
-		change_double2single(token -> content);
-	printf("new content = %s\n", token -> content);
+	change_double2single(token -> content);
+	token -> type = SINGLE_QUOTES;
 	return (1);
 }
 
