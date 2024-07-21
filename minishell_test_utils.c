@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 02:17:22 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 08:33:31 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void print_q_token_type(int type)
 		printf("type = RDRT LEFT\n");
 	if (type ==RDRT_R)
 		printf("type = RDRT RIGHT\n");
+	if (type == PIP)
+		printf("type = PIPE\n");
 
 }
 

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 03:12:03 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 08:31:32 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ enum e_q_token_type
 	RDRT_HD,
 	RDRT_TO,
 	RDRT_IN,
+	PIP
 };
 
 typedef struct s_q_token

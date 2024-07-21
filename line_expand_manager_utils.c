@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 02:25:48 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 08:32:26 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int get_type(char c)
         return (RDRT_R);
     if (c == '<')
         return (RDRT_L);
+    if (c == '|')
+        return (PIP);
     return (PLAIN);
 }
 
@@ -45,7 +47,7 @@ int get_next_same_type_element_idx(char *line, int idx)
 
     type = get_type(line[idx++]);
     if (type == PLAIN || type == SPACE_TYPE || type == RDRT_L || \
-         type == RDRT_R)
+         type == RDRT_R || type == PIP)
     {
         while (line[idx] && get_type(line[idx]) == type)
             idx++;
