@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 15:14:44 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:33:52 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,28 @@ typedef struct s_process_list
 	t_process_info	*tail;
 }	t_process_list;
 
+enum e_q_token_type
+{
+	PLAIN = 0,
+	SPACE_TYPE,
+	SINGLE_QUOTES,
+	DOUBLE_QOUTES
+};
+
+typedef struct s_q_token
+{
+	enum e_q_token_type	type;
+	char				*content;
+	int					content_len;
+	struct s_q_token	*next;
+}	t_q_token;
+
+typedef struct s_q_token_list
+{
+	t_q_token	*head;
+	t_q_token	*tail;
+}	t_q_token_list;
+
 //t_env_list			*init_env(char **envp);
 //void				clear_env_list(t_env_list *env_list);
 enum e_token_type	is_seperator(char *s);
@@ -104,9 +126,16 @@ int					handle_file(t_token_list *token_list);
 int					open_file(t_process_info *process, t_token *token);
 int					set_cmd(t_process_info *process, t_token *st, \
 						t_token *et, int cmd_count);
+int					check_quotes_syntax(char *line);
+char				*get_expand_line(char *line);
+int					get_type(char c);
+t_q_token_list 		*create_q_token_list();
+int					get_next_same_type_element_idx(char *line, int idx);
 // test
 void				print_process(t_process_info *process);
 void				print_token_type(enum e_token_type type);
 void				print_token(t_token_list *token_list);
+void				print_q_token(t_q_token_list *list);
+
 
 #endif

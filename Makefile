@@ -26,7 +26,10 @@ SRCS =	excutor.c\
 		tokenizer.c\
 		validator_utils.c\
 		validator.c\
-		minishell_test_utils.c
+		minishell_test_utils.c\
+		quotes_handler.c\
+		line_expand_manager.c\
+		line_expand_manager_utils.c\
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/17 15:37:54 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/21 15:34:13 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,32 @@ void	print_process_list(t_process_list *process_list)
 	{
 		print_process(process);
 		process = process -> next;
+	}
+}
+
+void print_q_token_type(int type)
+{
+	if (type == 0)
+		printf("type = PLAIN\n");
+	if (type == 1)
+		printf("type = SPACE\n");
+	if (type == 2)
+		printf("type = SINGLE QUOTES\n");
+	if (type ==3)
+		printf("type = DOUBLE QUOTES\n");
+}
+
+void print_q_token(t_q_token_list *list)
+{
+	t_q_token *now;
+
+	now = list -> head;
+	while(now)
+	{
+		printf("===q_token===\n");
+		printf("content %s\n", now -> content);
+		printf("len = %d\n", now -> content_len);
+		print_q_token_type(now -> type);
+		now = now -> next;
 	}
 }
