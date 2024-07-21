@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 15:34:13 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 02:17:22 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ void print_q_token_type(int type)
 		printf("type = SINGLE QUOTES\n");
 	if (type ==3)
 		printf("type = DOUBLE QUOTES\n");
+	if (type ==RDRT_L)
+		printf("type = RDRT LEFT\n");
+	if (type ==RDRT_R)
+		printf("type = RDRT RIGHT\n");
+
 }
 
 void print_q_token(t_q_token_list *list)

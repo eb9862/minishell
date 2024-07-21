@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 01:05:30 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 02:36:06 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	expand_double_quotes(t_q_token_list *list)
 		if (now -> type == DOUBLE_QOUTES)
 		{
 			if(!expand_content(now))
-                return (0);
+			{
+				clear_q_token_list(list);
+				return (0);
+			}
 		}
         now = now -> next;
 	}

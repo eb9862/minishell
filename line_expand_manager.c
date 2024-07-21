@@ -6,28 +6,11 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 23:24:57 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 03:15:40 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_q_content(char *line, int s, int e)
-{
-	int		idx;
-	int		size;
-	char	*content;
-
-	idx = 0;
-	size = e - s + 1;
-	content = (char *)malloc(sizeof(char) * (size + 1));
-	if (!content)
-		return (0);
-	while (s <= e)
-		content[idx++] = line[s++]; 
-	content[idx] = 0;
-	return (content);
-}
 
 t_q_token *create_q_token(char *line, int s, int e)
 {
@@ -44,6 +27,7 @@ t_q_token *create_q_token(char *line, int s, int e)
 	}
 	token -> content_len = ft_strlen(token -> content);
 	token -> next = NULL;
+	token -> previous = NULL;
 	token -> type = get_type(token -> content[0]);
 	return (token);
 }
@@ -63,6 +47,7 @@ void	add_q_token_last(t_q_token_list *list, t_q_token *token)
 		while (now -> next)
 			now = now -> next;
 		now -> next = token;
+		now -> previous = now;
 	}
 }
 
@@ -87,7 +72,11 @@ int fill_q_token(t_q_token_list *list, char *line)
     while (line[s])
     {
         e = get_next_same_type_element_idx(line, s);
-        register_q_token(list, line, s, e);
+        if(!register_q_token(list, line, s, e))
+		{
+			clear_q_token_list(list);
+			return (0);
+		}
         s = ++e;
     }
     return (1);
@@ -102,7 +91,10 @@ char    *get_expand_line(char *line)
         return (0);
     if (!fill_q_token(list, line))
 		return (0);
-	expand_double_quotes(list);
+	if (!expand_double_quotes(list))
+		return (0);
+	if (!handle_single_quotes(list))
+		return (0);
 	print_q_token(list);
-    return (line);
+	return (line);
 }

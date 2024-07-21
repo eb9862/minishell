@@ -32,6 +32,8 @@ SRCS =	excutor.c\
 		line_expand_manager_utils.c\
 		double_quotes_handler.c\
 		double_quotes_handler_utils.c\
+		line_expand_clear.c\
+		single_quotes_manager.c\
 
 OBJS = $(SRCS:.c=.o)
 
