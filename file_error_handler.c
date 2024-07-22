@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list_validator_utils.c                       :+:      :+:    :+:   */
+/*   file_error_handler.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 10:26:38 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 19:01:52 by joojeon          ###   ########.fr       */
+/*   Created: 2024/07/22 19:33:05 by joojeon           #+#    #+#             */
+/*   Updated: 2024/07/22 19:35:32 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    handle_rdrt_err(t_q_token *token)
+void	handle_file_open_error(char *content)
 {
-    if (token -> content_len == 3)
-        printf("porschell: syntax error near unexpected token `>'\n");
-    else
-        printf("porschell: syntax error near unexpected token `>>'\n");
+	printf("porschell: %s: No such file or directory\n", content);
 }
 
-void	handle_missed_file_error()
+void	handle_file_create_error(char *content)
 {
-	printf("porschell: syntax error near unexpected token `newline'\n");
+	printf("porschell: %s: Cannot create file\n", content);
 }
-
-void	handle_pipe_error()
-{
-	printf("porschell: syntax error near unexpected token `|'\n");
-}
-

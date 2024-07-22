@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:38:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 03:56:28 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 20:15:48 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ char	*combine_sq_sq(char *s1, char *s2)
 
 	i1 = 1;
 	s_idx = 1;
-	size = ft_strlen(s1) + ft_strlen(s2) - 2;
+	size = get_content_len(s1) + get_content_len(s2) - 2;
 	combined_content = (char *)malloc(sizeof(char) * (size + 1));
 	if (!combined_content)
 		return (0);
 	combined_content[0] = '\'';
-	while(s1[s_idx] && s1[s_idx] != '\'')
+	while(s_idx < get_content_len(s1) - 1)
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 1;
-	while(s2[s_idx] && s2[s_idx] != '\'')
+	while(s_idx < get_content_len(s2) - 1)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
@@ -46,7 +46,7 @@ char	*combine_plain_sq(char *s1, char *s2)
 
 	i1 = 1;
 	s_idx = 0;
-	size = ft_strlen(s1) + ft_strlen(s2);
+	size = get_content_len(s1) + get_content_len(s2);
 	combined_content = (char *)malloc(sizeof(char) * (size + 1));
 	if (!combined_content)
 		return (0);
@@ -54,7 +54,7 @@ char	*combine_plain_sq(char *s1, char *s2)
 	while(s1[s_idx])
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 1;
-	while(s2[s_idx] && s2[s_idx] != '\'')
+	while(s_idx < get_content_len(s2) - 1)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
@@ -70,12 +70,12 @@ char	*combine_sq_plain(char *s1, char *s2)
 
 	i1 = 1;
 	s_idx = 1;
-	size = ft_strlen(s1) + ft_strlen(s2);
+	size = get_content_len(s1) + get_content_len(s2);
 	combined_content = (char *)malloc(sizeof(char) * (size + 1));
 	if (!combined_content)
 		return (0);
 	combined_content[0] = '\'';
-	while(s1[s_idx] && s1[s_idx] != '\'')
+	while(s_idx < get_content_len(s1)  - 1)
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 0;
 	while (s2[s_idx])
@@ -152,11 +152,9 @@ int	handle_single_quotes(t_q_token_list *list)
 			}
 			else
 				now = start;
-			
 		}
 		else
 			now = now -> next;
-		
 	}
 	return (1);
 }

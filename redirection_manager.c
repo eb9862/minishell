@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 10:44:50 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 20:11:43 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int expand_redirection(t_q_token_list *list)
 	set_rdrt(list);
 	if (!validate_token_list(list))
 		return (0);
-	// if (!open_files(list))
-	// 	return (0);
+	if (!open_files(list))
+		return (0);
 	return (1);
 }
