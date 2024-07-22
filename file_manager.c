@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:16:16 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 19:41:36 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 20:48:03 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ int	openfile_v2(t_q_token *prev, t_q_token *now)
 				O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd == -1)
 		{
+			printf("error!!\n");
 			handle_file_create_error(now -> content);
 			return (0);
 		}
 		now -> fd = fd;
 	}
-	else if (type == RDRT_IN)
+	if (type == RDRT_IN)
 		return (open_input_file_v2(now));
+	// if (type == RDRT_HD)
+	// 	return (handle_heredoc(now -> content));
 	return (1);
 }
 
@@ -61,7 +64,7 @@ int	open_files(t_q_token_list *list)
 	now = list -> head;
 	while (now)
 	{
-		if (now -> type == FILE_CONTENT)
+		if (now -> type == FILE_C)
 		{
 			if(!openfile_v2(prev, now))
 			{

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 20:12:01 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 20:44:21 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void				handle_file_open_error(char *content);
 void				handle_file_create_error(char *content);
 int					get_content_len(char *s);
 int					open_files(t_q_token_list *list);
+int					trim_each_token_quotes(t_q_token_list *list);
 // test
 void				print_process(t_process_info *process);
 void				print_token_type(enum e_token_type type);

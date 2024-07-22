@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 10:50:42 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:15:46 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	add_q_token_last(t_q_token_list *list, t_q_token *token)
 		while (now -> next)
 			now = now -> next;
 		now -> next = token;
+		list -> tail = now;
 		now -> fd = -1;
 	}
 }
@@ -95,6 +96,8 @@ char    *get_expand_line(char *line)
 	if (!handle_single_quotes(list))
 		return (0);
 	delete_space(list);
+	// if (validate_token_list(list))
+	// 	return (0);
 	expand_redirection(list);
 	print_q_token(list);
 	return (line);

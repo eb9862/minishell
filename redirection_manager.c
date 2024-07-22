@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 20:11:43 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:27:16 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,35 @@ void	set_rdrt(t_q_token_list *list)
     while (now)
     {
         if (now -> type == RDRT_L)
-		{
             handle_left_redirection(now);
-			if (now -> next && now -> next -> type == PLAIN)
-				now -> next -> type = FILE_C;
-		}
         if (now -> type == RDRT_R)
-		{
             handle_right_redirection(now);
-			if (now -> next && now -> next -> type == PLAIN)
-				now -> next -> type = FILE_C;
-			if (now -> next && now -> next -> type == PLAIN && \
-				now -> type == RDRT_HD )
-				now -> next -> type = FILE_C;
-		}
         now = now -> next;
     }
+}
+
+void	set_file_content_v2(t_q_token_list *list)
+{
+	t_q_token *now;
+
+	now = list -> head;
+	while (now)
+	{
+		if (now -> next && (now -> type == RDRT_AO || now -> type == RDRT_TO || \
+			now -> type == RDRT_IN))
+			now -> next -> type = FILE_C;
+		if (now -> next && now -> type == RDRT_HEREDOC)
+			now -> next -> type = DELI;
+		now = now -> next;
+	}
 }
 
 int expand_redirection(t_q_token_list *list)
 {
 	set_rdrt(list);
-	if (!validate_token_list(list))
+	if (!trim_each_token_quotes(list))
 		return (0);
+	set_file_content_v2(list);
 	if (!open_files(list))
 		return (0);
 	return (1);

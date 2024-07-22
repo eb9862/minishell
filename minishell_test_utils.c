@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 08:55:05 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:26:34 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void print_q_token(t_q_token_list *list)
 		printf("===q_token===\n");
 		printf("content %s\n", now -> content);
 		printf("len = %d\n", now -> content_len);
+		printf("fd = %d\n", now -> fd);
 		print_q_token_type(now -> type);
 		now = now -> next;
 	}
