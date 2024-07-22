@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:40:24 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 03:15:39 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int					open_file(t_process_info *process, t_token *token);
 int					set_cmd(t_process_info *process, t_token *st, \
 						t_token *et, int cmd_count);
 int					check_quotes_syntax(char *line);
-char				*get_expand_line(char *line);
+t_q_token_list		*get_expand_line(char *line);
 int					get_type(char c);
 t_q_token_list 		*create_q_token_list();
 int					get_next_same_type_element_idx(char *line, int idx);

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:15:46 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 03:15:04 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_q_token *create_q_token(char *line, int s, int e)
 	token -> content_len = ft_strlen(token -> content);
 	token -> next = NULL;
 	token -> type = get_type(token -> content[0]);
+	token -> fd = -1;
 	return (token);
 }
 
@@ -47,7 +48,6 @@ void	add_q_token_last(t_q_token_list *list, t_q_token *token)
 			now = now -> next;
 		now -> next = token;
 		list -> tail = now;
-		now -> fd = -1;
 	}
 }
 
@@ -82,7 +82,7 @@ int fill_q_token(t_q_token_list *list, char *line)
     return (1);
 }
 
-char    *get_expand_line(char *line)
+t_q_token_list    *get_expand_line(char *line)
 {
     t_q_token_list  *list;
 
@@ -98,7 +98,7 @@ char    *get_expand_line(char *line)
 	delete_space(list);
 	// if (validate_token_list(list))
 	// 	return (0);
-	expand_redirection(list);
-	print_q_token(list);
-	return (line);
+	if (!expand_redirection(list))
+		return (0);
+	return (list);
 }

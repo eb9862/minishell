@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:38:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 20:15:48 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 03:03:41 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*combine_sq_sq(char *s1, char *s2)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
-	free(s1);
 	return (combined_content); 
 }
 
@@ -115,14 +114,12 @@ int	combine_token(t_q_token *t1, t_q_token *t2)
 
 	if (t1 -> type == SINGLE_QUOTES && t2 -> type == SINGLE_QUOTES)
 		combined_content = combine_sq_sq(t1 -> content, t2 -> content);
-	else if (t1 -> type == PLAIN && t2 -> type == SINGLE_QUOTES)
+	if (t1 -> type == PLAIN && t2 -> type == SINGLE_QUOTES)
 		combined_content = combine_plain_sq(t1 -> content, t2 -> content);
-	else if (t1 -> type == SINGLE_QUOTES && t2 -> type == PLAIN)
+	if (t1 -> type == SINGLE_QUOTES && t2 -> type == PLAIN)
 		combined_content = combine_sq_plain(t1 -> content, t2 -> content);
-	else if (t1 -> type == PLAIN && t2 -> type == PLAIN)
+	if (t1 -> type == PLAIN && t2 -> type == PLAIN)
 		combined_content = combine_plain_plain(t1 -> content, t2 -> content);
-	else
-		return (0);
 	if (!combined_content)
 		return (0);
 	t1 -> content = combined_content;

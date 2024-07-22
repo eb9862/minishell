@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:07:50 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:16:53 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 03:14:39 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	trim_each_token_quotes(t_q_token_list *list)
 {
 	t_q_token *now;
 
-	printf("invoked trim single quotes!!\n");
 	now = list -> head;
 	while (now)
 	{
