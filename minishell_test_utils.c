@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:26:34 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:31:43 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void print_q_token_type(int type)
 		printf("type = RDRT ERR\n");
 	if (type == PIP)
 		printf("type = PIPE\n");
+	if (type == DELI)
+		printf("type = DELEMTER\n");
 	if (type == FILE_C)
 		printf("type = FILE\n");
 

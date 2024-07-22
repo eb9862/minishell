@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:16:16 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 20:48:03 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:40:31 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int	openfile_v2(t_q_token *prev, t_q_token *now)
 	}
 	if (type == RDRT_IN)
 		return (open_input_file_v2(now));
-	// if (type == RDRT_HD)
-	// 	return (handle_heredoc(now -> content));
 	return (1);
 }
 
@@ -71,6 +69,11 @@ int	open_files(t_q_token_list *list)
 				clear_q_token_list(list);
 				return (0);
 			}
+		}
+		if (now -> type == DELI)
+		{
+			if (!handle_heredoc_v2(list, now))
+				return (0);
 		}
 		prev = now;
 		now = now -> next;

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:27:16 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:37:31 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	set_file_content_v2(t_q_token_list *list)
 		if (now -> next && (now -> type == RDRT_AO || now -> type == RDRT_TO || \
 			now -> type == RDRT_IN))
 			now -> next -> type = FILE_C;
-		if (now -> next && now -> type == RDRT_HEREDOC)
+		if (now -> next && now -> type == RDRT_HD)
 			now -> next -> type = DELI;
 		now = now -> next;
 	}
