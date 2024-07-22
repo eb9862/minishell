@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 08:31:32 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 10:50:42 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ enum e_q_token_type
 	RDRT_HD,
 	RDRT_TO,
 	RDRT_IN,
-	PIP
+	RDRT_ERR,
+	DELI,
+	PIP,
+	FILE_C
 };
 
 typedef struct s_q_token
@@ -94,7 +97,7 @@ typedef struct s_q_token
 	char				*content;
 	int					content_len;
 	struct s_q_token	*next;
-	struct s_q_token	*previous;
+	int					fd;
 }	t_q_token;
 
 typedef struct s_q_token_list
@@ -150,6 +153,12 @@ t_q_token			*create_q_token(char *line, int s, int e);
 void				clear_q_token_list(t_q_token_list *list);
 int					handle_single_quotes(t_q_token_list *list);
 void				clear_q_token(t_q_token *token);
+int					expand_redirection(t_q_token_list *list);
+void				delete_space(t_q_token_list *list);
+int					validate_token_list(t_q_token_list *list);
+void   				handle_rdrt_err(t_q_token *token);
+void				handle_missed_file_error();
+void				handle_pipe_error();
 // test
 void				print_process(t_process_info *process);
 void				print_token_type(enum e_token_type type);

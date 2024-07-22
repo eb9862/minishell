@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 08:33:31 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/22 08:55:05 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,20 @@ void print_q_token_type(int type)
 		printf("type = RDRT LEFT\n");
 	if (type ==RDRT_R)
 		printf("type = RDRT RIGHT\n");
+	if (type ==RDRT_TO)
+		printf("type = RDRT TRUNC OUT\n");
+	if (type ==RDRT_AO)
+		printf("type = RDRT APPEND_OUT\n");
+	if (type ==RDRT_IN)
+		printf("type = RDRT IN\n");
+	if (type ==RDRT_HD)
+		printf("type = RDRT HD\n");
+	if (type == RDRT_ERR)
+		printf("type = RDRT ERR\n");
 	if (type == PIP)
 		printf("type = PIPE\n");
+	if (type == FILE_C)
+		printf("type = FILE\n");
 
 }
 

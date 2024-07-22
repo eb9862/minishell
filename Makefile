@@ -34,6 +34,10 @@ SRCS =	excutor.c\
 		double_quotes_handler_utils.c\
 		line_expand_clear.c\
 		single_quotes_manager.c\
+		redirection_manager.c\
+		space_handler.c\
+		token_list_validator.c\
+		token_list_validator_utils.c\
 
 OBJS = $(SRCS:.c=.o)
 
