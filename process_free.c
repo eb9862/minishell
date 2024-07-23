@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 02:27:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/13 22:58:16 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 16:45:25 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	free_split(char **split)
 
 void	clear_process(t_process_info *process)
 {
-	free_split(process -> argv);
+	// if (process -> argv)
+	// 	free_split(process -> argv);
 	free(process);
 }
 

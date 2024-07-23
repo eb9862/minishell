@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:17:35 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:01:10 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_line(char *line, char **envp, int *status)
 {
 	// t_token_list	*token_list;
-	// t_process_list	*process_list;
+	t_process_list	*process_list;
 	t_q_token_list		*token_list;
 
 	(void) envp;
@@ -26,20 +26,16 @@ void	handle_line(char *line, char **envp, int *status)
 		return ;
 	}
 	token_list =  get_expand_line(line);
-	print_q_token(token_list);
-	clear_q_token_list(token_list);
-	// token_list = get_token_list(line);
-	// if (!token_list)
-	// 	return ;
+	if (!token_list)
+		return ;
+	// print_q_token(token_list);
 	// if (!validate(token_list))
 	// 	return ;
-	// process_list = get_process_list(token_list);
-	// if (!process_list)
-	// {
-	// 	clear_token_list(token_list);
-	// 	return ;
-	// }
-	// handle_process(process_list, envp, status, process_list -> count);
-	// clear_process_list(process_list);
-	// clear_token_list(token_list);
+	process_list = get_process_list(token_list);
+	if (!process_list)
+		return ;
+	// print_process_list(process_list);
+	handle_process(process_list, envp, status, process_list -> count);
+	clear_process_list(process_list);
+	clear_q_token_list(token_list);
 }

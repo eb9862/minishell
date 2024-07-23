@@ -13,19 +13,10 @@ DIR_GNL = ./gnl
 DIR_BI = ./built_in
 
 SRCS =	excutor.c\
-		file_handler.c\
-		file_handler_utils.c\
 		line_handler.c\
 		main.c\
 		process_free.c\
-		process_info_creator.c\
 		process_handler.c\
-		process_info_utils.c\
-		tokenizer_free.c\
-		tokenizer_utils.c\
-		tokenizer.c\
-		validator_utils.c\
-		validator.c\
 		minishell_test_utils.c\
 		quotes_handler.c\
 		line_expand_manager.c\
@@ -42,6 +33,8 @@ SRCS =	excutor.c\
 		file_manager.c\
 		file_error_handler.c\
 		heredoc_handler.c\
+		process_create_manager.c\
+		process_create_utils.c\
 
 OBJS = $(SRCS:.c=.o)
 

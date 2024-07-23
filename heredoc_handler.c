@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:55:19 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 16:52:11 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	is_delemeter_v2(char *line, char *delemeter)
 {
-    printf("delemeter = %s\n", delemeter);
 	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
 		return (0);
 	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)

@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:27:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:18:10 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 16:44:05 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	clear_q_token(t_q_token *token)
 	free(token -> content);
 	if (token -> fd != -1)
 		close(token -> fd);
-	token -> next = NULL;
+	// token -> next = NULL;
 }
 
 void	clear_q_token_list(t_q_token_list *list)

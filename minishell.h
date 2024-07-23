@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:15:39 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:04:27 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct s_q_token_list
 enum e_token_type	is_seperator(char *s);
 int					regist_token(t_token_list *token_list, \
 						char *line, int start, int end);
-void				clear_token_list(t_token_list *token_list);
 t_token_list		*get_token_list(char *line);
 void				handle_line(char *line, char**envp, int *status);
 int					validate(t_token_list *token_list);
@@ -119,24 +118,16 @@ int					is_redirection(enum e_token_type type);
 void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
-t_process_list		*get_process_list(t_token_list *token_list);
 void				handle_process(t_process_list *process_list, char **envp, \
 						int *status, int count);
 void				adjust_file_name(t_token_list *token_list);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
-int					set_str_data(t_process_info *process, \
-						t_token *token, t_token_list *token_list);
 void				add_process_last(t_process_list *list, \
 						t_process_info *process);
 void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
 void				free_split(char **split);
-int					create_heredoc_file(t_token *token);
-int					handle_file(t_token_list *token_list);
-int					open_file(t_process_info *process, t_token *token);
-int					set_cmd(t_process_info *process, t_token *st, \
-						t_token *et, int cmd_count);
 int					check_quotes_syntax(char *line);
 t_q_token_list		*get_expand_line(char *line);
 int					get_type(char c);
@@ -164,9 +155,16 @@ void				handle_file_create_error(char *content);
 int					get_content_len(char *s);
 int					open_files(t_q_token_list *list);
 int					trim_each_token_quotes(t_q_token_list *list);
+void				clear_process(t_process_info *process);
+t_process_list		*get_process_list(t_q_token_list *token_list);
 int					handle_heredoc_v2(t_q_token_list *list,t_q_token *now);
+void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
+int					get_plain_count(t_q_token_list *list);
+void				add_process_last(t_process_list *list, t_process_info *process);
+int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count);
 // test
 void				print_process(t_process_info *process);
+void	print_process_list(t_process_list *process_list);
 void				print_token_type(enum e_token_type type);
 void				print_token(t_token_list *token_list);
 void				print_q_token(t_q_token_list *list);
