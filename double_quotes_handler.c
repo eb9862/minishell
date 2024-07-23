@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 02:36:06 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 22:24:55 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_expanded_content(char *content, int dollar_idx)
 	return (expanded_content);
 }
 
-int expand_content(t_q_token *token)
+int	expand_content(t_q_token *token)
 {
     int		dollar_idx;
 

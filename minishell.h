@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 18:01:35 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:23:36 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
 int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);
 int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count);
+int					get_dollar_sign_idx(char *line);
+char				*get_expanded_content(char *content, int dollar_idx);
 // test
 void				print_process(t_process_info *process);
 void	print_process_list(t_process_list *process_list);
