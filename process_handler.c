@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/21 17:38:54 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:58:46 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,12 @@ void	excute_child_process(t_process_info *process, char **envp, \
 }
 
 void	handle_process(t_process_list *process_list, \
-	char **envp, int *status, int count)
+	char **envp, int *status, pid_t *pids)
 {
 	t_process_info	*process;
 	int				original_in;
 	int				original_out;
 	int				i;
-	pid_t			pids[count];
 
 	i = -1;
 	process = process_list -> head;

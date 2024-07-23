@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:46:48 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 18:00:30 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	handle_line(char *line, char **envp, int *status)
 {
 	t_process_list	*process_list;
-	t_q_token_list		*token_list;
+	t_q_token_list	*token_list;
+	pid_t	*pids;
 
 	(void) envp;
 	(void) status;
@@ -24,7 +25,7 @@ void	handle_line(char *line, char **envp, int *status)
 		printf("syntax error : quotes error!!!!!!!\n");
 		return ;
 	}
-	token_list =  get_expand_line(line);
+	token_list = get_expand_line(line);
 	if (!token_list)
 		return ;
 	// print_q_token(token_list);
@@ -34,7 +35,10 @@ void	handle_line(char *line, char **envp, int *status)
 	if (!process_list)
 		return ;
 	// print_process_list(process_list);
-	handle_process(process_list, envp, status, process_list -> count);
+	pids = malloc(sizeof(pid_t) * process_list -> count);
+	if (pids == NULL)
+		return ; // 임시
+	handle_process(process_list, envp, status, pids);
 	clear_process_list(process_list);
 	clear_q_token_list(token_list);
 }

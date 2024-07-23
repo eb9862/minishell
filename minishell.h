@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:38:55 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 18:01:35 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int					is_redirection(enum e_token_type type);
 void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
-void				handle_process(t_process_list *process_list, char **envp, \
-						int *status, int count);
+void				handle_process(t_process_list *process_list, \
+						char **envp, int *status, pid_t *pids);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
 void				add_process_last(t_process_list *list, \
@@ -99,7 +99,7 @@ void				free_split(char **split);
 int					check_quotes_syntax(char *line);
 t_q_token_list		*get_expand_line(char *line);
 int					get_type(char c);
-t_q_token_list 		*create_q_token_list();
+t_q_token_list		*create_q_token_list(void);
 int					get_next_same_type_element_idx(char *line, int idx);
 int					expand_double_quotes(t_q_token_list *list);
 int					get_dollar_sign_idx(char *line);
