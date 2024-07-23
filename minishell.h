@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:04:27 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:38:55 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-enum e_token_type
-{
-	CMD = 0,
-	PIPE,
-	RDRT_APPEND_OUT,
-	RDRT_HEREDOC,
-	RDRT_TRUNC_OUT,
-	RDRT_INPUT,
-	FILE_CONTENT,
-	DELEMETER
-};
-
-// token
-typedef struct s_token
-{
-	enum e_token_type	type;
-	char				*content;
-	int					fd;
-	struct s_token		*next;
-	struct s_token		*previous;
-}	t_token;
-
-typedef struct s_token_list
-{
-	t_token	*head;
-	t_token	*tail;
-}	t_token_list;
 
 //process_info
 typedef struct s_process_info
@@ -109,18 +82,13 @@ typedef struct s_q_token_list
 //t_env_list			*init_env(char **envp);
 //void				clear_env_list(t_env_list *env_list);
 enum e_token_type	is_seperator(char *s);
-int					regist_token(t_token_list *token_list, \
-						char *line, int start, int end);
-t_token_list		*get_token_list(char *line);
 void				handle_line(char *line, char**envp, int *status);
-int					validate(t_token_list *token_list);
 int					is_redirection(enum e_token_type type);
 void				redirection_newline_error(void);
 void				redirection_chaining_error(enum e_token_type type);
 void				pipe_error(void);
 void				handle_process(t_process_list *process_list, char **envp, \
 						int *status, int count);
-void				adjust_file_name(t_token_list *token_list);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
 void				add_process_last(t_process_list *list, \
@@ -166,7 +134,6 @@ int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_c
 void				print_process(t_process_info *process);
 void	print_process_list(t_process_list *process_list);
 void				print_token_type(enum e_token_type type);
-void				print_token(t_token_list *token_list);
 void				print_q_token(t_q_token_list *list);
 
 

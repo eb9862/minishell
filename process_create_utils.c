@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:02:29 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:04:29 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:37:13 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count
 		return (0);
 	while (now != et)
 	{
-		if (now -> type == CMD)
+		if (now -> type == PLAIN)
 			argv[i++] = now -> content;
 		now = now -> next;
 	}

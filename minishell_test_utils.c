@@ -6,33 +6,12 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 21:31:43 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:39:18 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_token_type(enum e_token_type type)
-{
-	printf("token type = ");
-	if (type == CMD)
-		printf("CMD");
-	if (type == PIPE)
-		printf("PIPE");
-	if (type == RDRT_APPEND_OUT)
-		printf("RDRT_APPEND_OUT");
-	if (type == RDRT_HEREDOC)
-		printf("RDRT_HEREDOC");
-	if (type == RDRT_TRUNC_OUT)
-		printf("RDRT_TRUNC_OUT");
-	if (type == RDRT_INPUT)
-		printf("RDRT_INPUT");
-	if (type == FILE_CONTENT)
-		printf("FILE_CONTENT");
-	if (type == DELEMETER)
-		printf("DELEMETER");
-	printf("\n");
-}
 
 void	print_argv(char **s)
 {
@@ -58,20 +37,6 @@ void	print_process(t_process_info *process)
 	printf("outfile_name = %s\n", process -> outfile_name);
 }
 
-void	print_token(t_token_list *token_list)
-{
-	t_token	*token;
-
-	token = token_list -> head;
-	while (token)
-	{
-		printf("===token===\n");
-		print_token_type(token -> type);
-		printf("content = %s\n", token -> content);
-		printf("fd = %d\n", token -> fd);
-		token = token -> next;
-	}
-}
 
 void	print_process_list(t_process_list *process_list)
 {

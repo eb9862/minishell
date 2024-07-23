@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:01:10 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:38:26 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_line(char *line, char **envp, int *status)
 {
-	// t_token_list	*token_list;
 	t_process_list	*process_list;
 	t_q_token_list		*token_list;
 
@@ -34,7 +33,7 @@ void	handle_line(char *line, char **envp, int *status)
 	process_list = get_process_list(token_list);
 	if (!process_list)
 		return ;
-	// print_process_list(process_list);
+	print_process_list(process_list);
 	handle_process(process_list, envp, status, process_list -> count);
 	clear_process_list(process_list);
 	clear_q_token_list(token_list);
