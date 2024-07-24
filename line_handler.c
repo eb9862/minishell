@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/24 15:46:09 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 00:14:14 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ void	handle_line(char *line, char **envp, int *status)
 	pid_t	*pids;
 
 	(void) envp;
-	(void) status;
 	if (!check_quotes_syntax(line))
 	{
 		printf("syntax error : quotes error!!!!!!!\n");
 		return ;
 	}
-	token_list = get_expand_line(line);
+	token_list = get_expand_line(line, status);
 	if (!token_list)
 		return ;
 	// print_q_token(token_list);

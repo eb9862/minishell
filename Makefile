@@ -35,6 +35,7 @@ SRCS =	excutor.c\
 		heredoc_handler.c\
 		process_create_manager.c\
 		process_create_utils.c\
+		plain_handler.c\
 
 OBJS = $(SRCS:.c=.o)
 

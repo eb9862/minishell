@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 22:23:36 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 03:28:25 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,7 @@ typedef struct s_q_token_list
 
 //t_env_list			*init_env(char **envp);
 //void				clear_env_list(t_env_list *env_list);
-enum e_token_type	is_seperator(char *s);
 void				handle_line(char *line, char**envp, int *status);
-int					is_redirection(enum e_token_type type);
-void				redirection_newline_error(void);
-void				redirection_chaining_error(enum e_token_type type);
-void				pipe_error(void);
 void				handle_process(t_process_list *process_list, \
 						char **envp, int *status, pid_t *pids);
 char				**ft_split(char const *s, char c);
@@ -97,16 +92,17 @@ void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
 void				free_split(char **split);
 int					check_quotes_syntax(char *line);
-t_q_token_list		*get_expand_line(char *line);
+t_q_token_list		*get_expand_line(char *line, int *status);
 int					get_type(char c);
 t_q_token_list		*create_q_token_list(void);
 int					get_next_same_type_element_idx(char *line, int idx);
-int					expand_double_quotes(t_q_token_list *list);
+int					expand_double_quotes(t_q_token_list *list, int *status);
 int					get_dollar_sign_idx(char *line);
 void				change_double2single(char *s);
 int					get_env_len(char *env);
 char				*get_only_env(char *s);
 char				*get_new_content(char *content, int dollar_idx, char *env);
+char				*get_new_content_ds(char *content, int dollar_idx, char *env);
 char				*get_q_content(char *line, int s, int e);
 t_q_token			*create_q_token(char *line, int s, int e);
 void				clear_q_token_list(t_q_token_list *list);
@@ -117,7 +113,7 @@ void				delete_space(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
 void   				handle_rdrt_err(t_q_token *token);
 void				handle_missed_file_error();
-void				handle_pipe_error();
+void				handle_pipe_error(void);
 void				handle_file_open_error(char *content);
 void				handle_file_create_error(char *content);
 int					get_content_len(char *s);
@@ -131,11 +127,11 @@ int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);
 int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count);
 int					get_dollar_sign_idx(char *line);
-char				*get_expanded_content(char *content, int dollar_idx);
+char				*get_expanded_content(char *content, int dollar_idx, int *status);
+int					expand_plain(t_q_token_list *list, int *status);
 // test
 void				print_process(t_process_info *process);
-void	print_process_list(t_process_list *process_list);
-void				print_token_type(enum e_token_type type);
+void				print_process_list(t_process_list *process_list);
 void				print_q_token(t_q_token_list *list);
 
 

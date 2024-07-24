@@ -6,32 +6,52 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 22:24:55 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 03:29:54 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_expanded_content(char *content, int dollar_idx)
+int	is_dollar_question(char *content, int dollar_idx)
+{
+	if (content[dollar_idx] == '$' && content[dollar_idx + 1] == '?')
+		return (1);
+	return (0);
+}
+
+char	*get_expanded_content(char *content, int dollar_idx, int *status)
 {
 	char	*only_env;
 	char	*expanded_content;
+	char	*c_status;
 
-	only_env = get_only_env(content + dollar_idx + 1);
-	if (!only_env)
-		return (0);
-	expanded_content = get_new_content(content, dollar_idx, getenv(only_env));
+	if (is_dollar_question(content, dollar_idx))
+	{
+		c_status = ft_itoa(*status >> 8);
+		if (!c_status)
+			return (0);
+		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
+		free(c_status);
+	}
+	else
+	{
+		only_env = get_only_env(content + dollar_idx + 1);
+		if (!only_env)
+			return (0);
+		expanded_content = get_new_content(content, dollar_idx, getenv(only_env));
+	}
+	free(content);
 	return (expanded_content);
 }
 
-int	expand_content(t_q_token *token)
+int	expand_content(t_q_token *token, int *status)
 {
     int		dollar_idx;
 
     dollar_idx = get_dollar_sign_idx(token -> content);
     if (dollar_idx != -1)
 	{
-		token -> content = get_expanded_content(token -> content, dollar_idx);
+		token -> content = get_expanded_content(token -> content, dollar_idx, status);
 		token -> content_len = ft_strlen(token -> content);
 		if (!token -> content)
 			return (0);
@@ -41,7 +61,7 @@ int	expand_content(t_q_token *token)
 	return (1);
 }
 
-int	expand_double_quotes(t_q_token_list *list)
+int	expand_double_quotes(t_q_token_list *list, int *status)
 {
 	t_q_token	*now;
 
@@ -50,7 +70,7 @@ int	expand_double_quotes(t_q_token_list *list)
 	{
 		if (now -> type == DOUBLE_QOUTES)
 		{
-			if(!expand_content(now))
+			if(!expand_content(now, status))
 			{
 				clear_q_token_list(list);
 				return (0);

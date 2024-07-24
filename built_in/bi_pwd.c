@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <linux/limits.h> // linux PATH_MAX
-//#include <sys/syslimits.h>
+//#include <linux/limits.h> // linux PATH_MAX
+#include <sys/syslimits.h>
 #include <unistd.h>
 #include <stdio.h>
 

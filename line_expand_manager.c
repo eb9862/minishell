@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 22:25:25 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 02:15:59 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ void	add_q_token_last(t_q_token_list *list, t_q_token *token)
 int    register_q_token(t_q_token_list *list, char *line, int s, int e)
 {
 	t_q_token	*token;
-	int			dollar_sign_idx;
 
 	token = create_q_token(line, s, e);
 	if (!token)
 		return (0);
-	dollar_sign_idx = get_dollar_sign_idx(token -> content);
-	if (token -> type == PLAIN && dollar_sign_idx != -1)
-		token -> content = get_expanded_content(token -> content, dollar_sign_idx);
 	add_q_token_last(list, token);
 	return (1);
 }
@@ -87,16 +83,19 @@ int fill_q_token(t_q_token_list *list, char *line)
     return (1);
 }
 
-t_q_token_list    *get_expand_line(char *line)
+t_q_token_list    *get_expand_line(char *line, int *status)
 {
     t_q_token_list  *list;
 
+	(void) status;
     list = create_q_token_list();
     if (!list)
         return (0);
     if (!fill_q_token(list, line))
 		return (0);
-	if (!expand_double_quotes(list))
+	if (!expand_plain(list, status))
+		return (0);
+	if (!expand_double_quotes(list, status))
 		return (0);
 	if (!handle_single_quotes(list))
 		return (0);
