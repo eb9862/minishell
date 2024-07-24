@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:58:46 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:45:48 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*get_path_name(char *p_name, char **envp)
 		i++;
 	}
 	free_split(paths);
+	if (access(p_name, F_OK) == 0 && access(p_name, X_OK) == 0)
+		return (p_name);
 	printf("%s : command not found\n", p_name);
 	exit(127);
 	return (0);
