@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 00:14:14 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:52:11 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_line(char *line, char **envp, int *status)
 {
 	t_process_list	*process_list;
 	t_q_token_list	*token_list;
-	pid_t	*pids;
+	pid_t			*pids;
 
 	(void) envp;
 	if (!check_quotes_syntax(line))
@@ -35,7 +35,7 @@ void	handle_line(char *line, char **envp, int *status)
 		return ;
 	pids = malloc(sizeof(pid_t) * process_list -> count);
 	if (pids == NULL)
-		return ; // 임시
+		return ;// 임시
 	handle_process(process_list, envp, status, pids);
 	clear_process_list(process_list);
 	clear_q_token_list(token_list);

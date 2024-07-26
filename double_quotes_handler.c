@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 03:29:54 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:36:48 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ char	*get_expanded_content(char *content, int dollar_idx, int *status)
 
 int	expand_content(t_q_token *token, int *status)
 {
-    int		dollar_idx;
+	int	dollar_idx;
 
-    dollar_idx = get_dollar_sign_idx(token -> content);
-    if (dollar_idx != -1)
+	dollar_idx = get_dollar_sign_idx(token -> content);
+	if (dollar_idx != -1)
 	{
 		token -> content = get_expanded_content(token -> content, dollar_idx, status);
 		token -> content_len = ft_strlen(token -> content);
@@ -70,13 +70,13 @@ int	expand_double_quotes(t_q_token_list *list, int *status)
 	{
 		if (now -> type == DOUBLE_QOUTES)
 		{
-			if(!expand_content(now, status))
+			if (!expand_content(now, status))
 			{
 				clear_q_token_list(list);
 				return (0);
 			}
 		}
-        now = now -> next;
+		now = now -> next;
 	}
-    return (1);
+	return (1);
 }

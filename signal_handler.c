@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/26 17:35:58 by eunhwang         ###   ########.fr       */
+/*   Created: 2024/07/26 17:30:16 by eunhwang          #+#    #+#             */
+/*   Updated: 2024/07/26 17:34:06 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **envp)
+void	sigint_in_process(int sig)
 {
-	char		*line;
-	t_env_list	*env_list;
-	int			status;
+	printf("\n");
+	(void) sig;
+}
 
-	(void)ac;
-	(void)av;
-	status = 0;
-	env_list = init_env(envp);
-	(void)env_list;
-	set_signal(); // test
-	while (1)
-	{
-		line = readline("porschell🏎  ");
-		if (!line)
-			break ;
-		add_history(line);
-		handle_line(line, envp, &status);
-		free(line);
-	}
+void	sigquit_in_process(int sig)
+{
+	write(2, "Quit (core dumped)\n", 19);
+	(void) sig;
+}
+
+void	sigint_handler(int sig)
+{
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void) sig;
+}
+
+void	set_signal(void)
+{
+	signal(SIGINT, sigint_handler); // ctrl + c
+	signal(SIGQUIT, SIG_IGN); // ctrl + '\'
 }

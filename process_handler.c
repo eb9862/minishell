@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/24 15:45:48 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/26 17:57:52 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	excute_child_process(t_process_info *process, char **envp, \
 	if (pipe(fd) == -1)
 		return ;
 	pid = fork();
+	signal(SIGQUIT, sigquit_in_process); // test
+	signal(SIGINT, sigint_in_process); // test too
 	pids[i] = pid;
 	if (pid == 0)
 	{
@@ -119,7 +121,10 @@ void	handle_process(t_process_list *process_list, \
 	}
 	i = -1;
 	while (++i < process_list -> count)
+	{
 		waitpid(pids[i], status, 0);
+		set_signal(); // test
+	}
 	dup2(original_in, STDIN_FILENO);
 	dup2(original_out, STDOUT_FILENO);
 	close(original_in);
