@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:38:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:03:41 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:53:45 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ char	*combine_sq_sq(char *s1, char *s2)
 	if (!combined_content)
 		return (0);
 	combined_content[0] = '\'';
-	while(s_idx < get_content_len(s1) - 1)
+	while (s_idx < get_content_len(s1) - 1)
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 1;
-	while(s_idx < get_content_len(s2) - 1)
+	while (s_idx < get_content_len(s2) - 1)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
-	return (combined_content); 
+	return (combined_content);
 }
 
 char	*combine_plain_sq(char *s1, char *s2)
@@ -50,10 +50,10 @@ char	*combine_plain_sq(char *s1, char *s2)
 	if (!combined_content)
 		return (0);
 	combined_content[0] = '\'';
-	while(s1[s_idx])
+	while (s1[s_idx])
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 1;
-	while(s_idx < get_content_len(s2) - 1)
+	while (s_idx < get_content_len(s2) - 1)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
@@ -74,7 +74,7 @@ char	*combine_sq_plain(char *s1, char *s2)
 	if (!combined_content)
 		return (0);
 	combined_content[0] = '\'';
-	while(s_idx < get_content_len(s1)  - 1)
+	while (s_idx < get_content_len(s1) - 1)
 		combined_content[i1++] = s1[s_idx++];
 	s_idx = 0;
 	while (s2[s_idx])
@@ -108,6 +108,7 @@ char	*combine_plain_plain(char *s1, char *s2)
 	combined_content[i1] = 0;
 	return (combined_content);
 }
+
 int	combine_token(t_q_token *t1, t_q_token *t2)
 {
 	char	*combined_content;
@@ -139,13 +140,13 @@ int	handle_single_quotes(t_q_token_list *list)
 	start = now;
 	while (now)
 	{
-		if (now -> next && (now -> type == SINGLE_QUOTES  || now -> type == PLAIN) && \
+		if (now -> next && (now -> type == SINGLE_QUOTES || now -> type == PLAIN) && \
 			(now -> next -> type == SINGLE_QUOTES || now -> next -> type == PLAIN))
 		{
 			if (!combine_token(now, now -> next))
 			{
 				clear_q_token_list(list);
-				return (0); 
+				return (0);
 			}
 			else
 				now = start;

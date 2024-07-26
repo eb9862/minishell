@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 03:28:25 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/26 17:35:28 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "./built_in/built_in.h"
 # include <sys/types.h>
 # include <sys/wait.h>
-
 
 //process_info
 typedef struct s_process_info
@@ -111,8 +110,8 @@ void				clear_q_token(t_q_token *token);
 int					expand_redirection(t_q_token_list *list);
 void				delete_space(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
-void   				handle_rdrt_err(t_q_token *token);
-void				handle_missed_file_error();
+void				handle_rdrt_err(t_q_token *token);
+void				handle_missed_file_error(void);
 void				handle_pipe_error(void);
 void				handle_file_open_error(char *content);
 void				handle_file_create_error(char *content);
@@ -121,7 +120,7 @@ int					open_files(t_q_token_list *list);
 int					trim_each_token_quotes(t_q_token_list *list);
 void				clear_process(t_process_info *process);
 t_process_list		*get_process_list(t_q_token_list *token_list);
-int					handle_heredoc_v2(t_q_token_list *list,t_q_token *now);
+int					handle_heredoc_v2(t_q_token_list *list, t_q_token *now);
 void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
 int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);
@@ -133,6 +132,10 @@ int					expand_plain(t_q_token_list *list, int *status);
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);
 void				print_q_token(t_q_token_list *list);
-
+// test too
+void	sigint_in_process(int sig);
+void	sigquit_in_process(int sig);
+void	sigint_handler(int sig);
+void	set_signal(void);
 
 #endif

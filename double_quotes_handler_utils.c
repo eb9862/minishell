@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:40:55 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 03:28:27 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:43:11 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int can_first_element(char c)
+int	can_first_element(char c)
 {
 	if ('a' <= c && c <= 'z')
 		return (1);
@@ -38,7 +38,6 @@ int	can_env_element(char *env, int idx, int start_idx)
 			return (0);
 	}
 	return (can_element(env[idx]));
-	
 }
 
 int	get_end_idx(char *content, int dollar_idx)
@@ -109,12 +108,10 @@ char	*get_new_content_ds(char *content, int dollar_idx, char *env)
 	return (new_content);
 }
 
-
-
 char	*get_only_env(char *s)
 {
-	int	size;
-	int	i;
+	int		size;
+	int		i;
 	char	*only_env;
 
 	i = -1;
@@ -132,21 +129,21 @@ char	*get_only_env(char *s)
 
 int	get_dollar_sign_idx(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == '$')
-            return (i);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '$')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 void	change_double2single(char *s)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(s);
 	s[0] = '\'';

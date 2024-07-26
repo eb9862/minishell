@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_test_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:45:44 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:49:02 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	print_argv(char **s)
 {
@@ -37,7 +36,6 @@ void	print_process(t_process_info *process)
 	printf("outfile_name = %s\n", process -> outfile_name);
 }
 
-
 void	print_process_list(t_process_list *process_list)
 {
 	t_process_info	*process;
@@ -50,7 +48,7 @@ void	print_process_list(t_process_list *process_list)
 	}
 }
 
-void print_q_token_type(int type)
+void	print_q_token_type(int type)
 {
 	if (type == 0)
 		printf("type = PLAIN\n");
@@ -58,19 +56,19 @@ void print_q_token_type(int type)
 		printf("type = SPACE\n");
 	if (type == 2)
 		printf("type = SINGLE QUOTES\n");
-	if (type ==3)
+	if (type == 3)
 		printf("type = DOUBLE QUOTES\n");
-	if (type ==RDRT_L)
+	if (type == RDRT_L)
 		printf("type = RDRT LEFT\n");
-	if (type ==RDRT_R)
+	if (type == RDRT_R)
 		printf("type = RDRT RIGHT\n");
-	if (type ==RDRT_TO)
+	if (type == RDRT_TO)
 		printf("type = RDRT TRUNC OUT\n");
-	if (type ==RDRT_AO)
+	if (type == RDRT_AO)
 		printf("type = RDRT APPEND_OUT\n");
-	if (type ==RDRT_IN)
+	if (type == RDRT_IN)
 		printf("type = RDRT IN\n");
-	if (type ==RDRT_HD)
+	if (type == RDRT_HD)
 		printf("type = RDRT HD\n");
 	if (type == RDRT_ERR)
 		printf("type = RDRT ERR\n");
@@ -80,15 +78,14 @@ void print_q_token_type(int type)
 		printf("type = DELEMTER\n");
 	if (type == FILE_C)
 		printf("type = FILE\n");
-
 }
 
-void print_q_token(t_q_token_list *list)
+void	print_q_token(t_q_token_list *list)
 {
-	t_q_token *now;
+	t_q_token	*now;
 
 	now = list -> head;
-	while(now)
+	while (now)
 	{
 		printf("===q_token===\n");
 		printf("content %s\n", now -> content);

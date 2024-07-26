@@ -36,6 +36,7 @@ SRCS =	excutor.c\
 		process_create_manager.c\
 		process_create_utils.c\
 		plain_handler.c\
+		signal_handler.c # test
 
 OBJS = $(SRCS:.c=.o)
 

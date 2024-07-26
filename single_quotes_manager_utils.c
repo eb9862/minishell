@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes_manager_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:07:50 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:14:39 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:12:00 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	trim_single_quotes(t_q_token *now)
 
 int	trim_each_token_quotes(t_q_token_list *list)
 {
-	t_q_token *now;
+	t_q_token	*now;
 
 	now = list -> head;
 	while (now)

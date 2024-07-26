@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_manager.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:00:08 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 17:03:43 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:53:12 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 t_process_list	*create_process_list(void)
 {
@@ -45,28 +43,24 @@ t_process_info	*create_process_info(void)
 	return (process_info);
 }
 
-void    set_fd(t_process_info *process, t_q_token *target, t_q_token_list *list)
+void	set_fd(t_process_info *process, t_q_token *target, t_q_token_list *list)
 {
-    t_q_token   *now;
+	t_q_token	*now;
 
-    now = list -> head;
-    while (now -> next != target)
-        now = now -> next;
-    if (now -> type == RDRT_AO || now -> type == RDRT_TO)
-        process -> out = target -> fd;
-    if (now -> type == RDRT_IN || now -> type == RDRT_HD)
-        process -> in = target -> fd; 
+	now = list -> head;
+	while (now -> next != target)
+		now = now -> next;
+	if (now -> type == RDRT_AO || now -> type == RDRT_TO)
+		process -> out = target -> fd;
+	if (now -> type == RDRT_IN || now -> type == RDRT_HD)
+		process -> in = target -> fd;
 }
-
-
-
-
 
 int	regist_process(t_process_list *process_list, t_q_token *st, \
 	t_q_token *et, t_q_token_list *token_list)
 {
 	t_process_info	*process_info;
-	t_q_token			*now;
+	t_q_token		*now;
 	int				cc;
 
 	cc = get_plain_count(token_list);
@@ -77,24 +71,24 @@ int	regist_process(t_process_list *process_list, t_q_token *st, \
 	while (now != et)
 	{
 		if (now -> type == FILE_C || now -> type == DELI)
-		    set_fd(process_info, now, token_list);
+			set_fd(process_info, now, token_list);
 		if (now -> type == RDRT_AO || now -> type == RDRT_HD \
 			|| now -> type == RDRT_TO || now -> type == RDRT_IN)
 			process_info -> is_redirected = 1;
 		now = now -> next;
 	}
 	if (!set_cmd(process_info, st, et, cc))
-    {
-        clear_pl_tl(token_list,process_list );
-        return (0);
-    }
-    add_process_last(process_list, process_info);
+	{
+		clear_pl_tl(token_list, process_list);
+		return (0);
+	}
+	add_process_last(process_list, process_info);
 	return (1);
 }
 
 t_process_list	*get_process_list(t_q_token_list *token_list)
 {
-	t_process_list      *process_list;
+	t_process_list		*process_list;
 	t_q_token			*s_token;
 	t_q_token			*e_token;
 

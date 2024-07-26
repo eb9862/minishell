@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:16:16 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 02:58:20 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:35:29 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	openfile_v2(t_q_token *prev, t_q_token *now)
 
 int	open_files(t_q_token_list *list)
 {
-    t_q_token	*now;
+	t_q_token	*now;
 	t_q_token	*prev;
 
 	prev = NULL;
@@ -64,7 +64,7 @@ int	open_files(t_q_token_list *list)
 	{
 		if (now -> type == FILE_C)
 		{
-			if(!openfile_v2(prev, now))
+			if (!openfile_v2(prev, now))
 			{
 				clear_q_token_list(list);
 				return (0);

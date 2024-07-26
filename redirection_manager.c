@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_manager.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 03:16:35 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:13:32 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_left_redirection(t_q_token *now)
+void	handle_left_redirection(t_q_token *now)
 {
 	char	*content;
 
@@ -40,22 +40,22 @@ void	handle_right_redirection(t_q_token *now)
 
 void	set_rdrt(t_q_token_list *list)
 {
-	t_q_token *now;
+	t_q_token	*now;
 
-    now = list -> head;
-    while (now)
-    {
-        if (now -> type == RDRT_L)
-            handle_left_redirection(now);
-        if (now -> type == RDRT_R)
-            handle_right_redirection(now);
-        now = now -> next;
-    }
+	now = list -> head;
+	while (now)
+	{
+		if (now -> type == RDRT_L)
+			handle_left_redirection(now);
+		if (now -> type == RDRT_R)
+			handle_right_redirection(now);
+		now = now -> next;
+	}
 }
 
 void	set_file_content_v2(t_q_token_list *list)
 {
-	t_q_token *now;
+	t_q_token	*now;
 
 	now = list -> head;
 	while (now)
@@ -69,7 +69,7 @@ void	set_file_content_v2(t_q_token_list *list)
 	}
 }
 
-int expand_redirection(t_q_token_list *list)
+int	expand_redirection(t_q_token_list *list)
 {
 	set_rdrt(list);
 	if (!trim_each_token_quotes(list))

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_manager.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 02:15:59 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:27:49 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_q_token *create_q_token(char *line, int s, int e)
+t_q_token	*create_q_token(char *line, int s, int e)
 {
 	t_q_token	*token;
 
@@ -51,7 +51,7 @@ void	add_q_token_last(t_q_token_list *list, t_q_token *token)
 	}
 }
 
-int    register_q_token(t_q_token_list *list, char *line, int s, int e)
+int	register_q_token(t_q_token_list *list, char *line, int s, int e)
 {
 	t_q_token	*token;
 
@@ -62,36 +62,35 @@ int    register_q_token(t_q_token_list *list, char *line, int s, int e)
 	return (1);
 }
 
-
-int fill_q_token(t_q_token_list *list, char *line)
+int	fill_q_token(t_q_token_list *list, char *line)
 {
-    int s;
-    int e;
+	int	s;
+	int	e;
 
-    (void) list;
-    s = 0;
-    while (line[s])
-    {
-        e = get_next_same_type_element_idx(line, s);
-        if(!register_q_token(list, line, s, e))
+	(void) list;
+	s = 0;
+	while (line[s])
+	{
+		e = get_next_same_type_element_idx(line, s);
+		if (!register_q_token(list, line, s, e))
 		{
 			clear_q_token_list(list);
 			return (0);
 		}
-        s = ++e;
-    }
-    return (1);
+		s = ++e;
+	}
+	return (1);
 }
 
-t_q_token_list    *get_expand_line(char *line, int *status)
+t_q_token_list	*get_expand_line(char *line, int *status)
 {
-    t_q_token_list  *list;
+	t_q_token_list	*list;
 
 	(void) status;
-    list = create_q_token_list();
-    if (!list)
-        return (0);
-    if (!fill_q_token(list, line))
+	list = create_q_token_list();
+	if (!list)
+		return (0);
+	if (!fill_q_token(list, line))
 		return (0);
 	if (!expand_plain(list, status))
 		return (0);

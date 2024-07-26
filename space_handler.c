@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   space_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:56:28 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/22 09:26:05 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:09:45 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void    delete_space(t_q_token_list *list)
+void	delete_space(t_q_token_list *list)
 {
 	t_q_token	*now;
 	t_q_token	*prev;

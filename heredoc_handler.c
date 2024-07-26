@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 16:52:11 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:40:07 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	create_heredoc_file_v2(char *delemeter)
 {
 	int		fd;
 	char	*line;
+
 	fd = open("tmp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (0);
@@ -44,23 +45,23 @@ int	create_heredoc_file_v2(char *delemeter)
 	return (1);
 }
 
-int handle_heredoc_v2(t_q_token_list *list,t_q_token *now)
+int	handle_heredoc_v2(t_q_token_list *list, t_q_token *now)
 {
-    char    *delemeter;
-    int     fd;
+	char	*delemeter;
+	int		fd;
 
-    delemeter = now -> content;
-    if (!create_heredoc_file_v2(delemeter))
-    {
-        clear_q_token_list(list);
-        return (0);
-    }
-    fd = open("tmp_file", O_RDONLY);
-    if (fd == -1)
-    {
-        clear_q_token_list(list);
-        return (0);
-    }
-    now -> fd = fd;
-    return (1);
+	delemeter = now -> content;
+	if (!create_heredoc_file_v2(delemeter))
+	{
+		clear_q_token_list(list);
+		return (0);
+	}
+	fd = open("tmp_file", O_RDONLY);
+	if (fd == -1)
+	{
+		clear_q_token_list(list);
+		return (0);
+	}
+	now -> fd = fd;
+	return (1);
 }
