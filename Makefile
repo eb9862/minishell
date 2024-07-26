@@ -12,8 +12,7 @@ DIR_GNL = ./gnl
 
 DIR_BI = ./built_in
 
-SRCS =	excutor.c\
-		line_handler.c\
+SRCS =	line_handler.c\
 		main.c\
 		process_free.c\
 		process_handler.c\
@@ -48,10 +47,10 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(DIR_LIBFT) all
 	$(MAKE) -C $(DIR_GNL) all
 	$(MAKE) -C $(DIR_BI) all
-	$(CC) $(CFLAGS) -lreadline $^ -o $(NAME) -lft -L $(DIR_LIBFT) -lgnl -L $(DIR_GNL) -lbi -L $(DIR_BI)
+	$(CC) $(CFLAGS) -lreadline -L/usr/local/opt/readline/lib $^ -o $(NAME) -lft -L $(DIR_LIBFT) -lgnl -L $(DIR_GNL) -lbi -L $(DIR_BI)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I/usr/local/opt/readline/include
 
 clean :
 	$(MAKE) -C $(DIR_LIBFT) clean
