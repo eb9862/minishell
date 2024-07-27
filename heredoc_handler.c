@@ -6,7 +6,7 @@
 /*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/27 15:40:17 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/27 20:22:50 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ int	create_child_process_4_heredoc(char *delemter, int *status)
 		else
 			exit(0);
 	}
-	waitpid(pid, status, 0);
-	if (*status == 1)
-		return (0);
-	return (1);
+	else
+	{
+		waitpid(pid, status, 0);
+		if (*status == 1)
+			return (0);
+		return (1);
+	}
 }
 
 int	handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status)
