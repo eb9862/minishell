@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:40:07 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:40:17 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_delemeter_v2(char *line, char *delemeter)
+int	is_delemeter(char *line, char *delemeter)
 {
-	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
+	if (ft_strlen(delemeter) != ft_strlen(line))
 		return (0);
-	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)
+	if (ft_strncmp(delemeter, line, ft_strlen(line)) == 0)
 		return (1);
 	return (0);
 }
 
-int	create_heredoc_file_v2(char *delemeter)
+int	create_heredoc_file(char *delemeter)
 {
 	int		fd;
 	char	*line;
@@ -31,27 +31,42 @@ int	create_heredoc_file_v2(char *delemeter)
 		return (0);
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
-		if (!line || is_delemeter_v2(line, delemeter))
-		{
-			free(line);
-			break ;
-		}
+		line = readline("> ");
+		if (is_delemeter(line, delemeter))
+			break;
 		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
 		free(line);
 	}
 	close(fd);
 	return (1);
 }
 
-int	handle_heredoc_v2(t_q_token_list *list, t_q_token *now)
+int	create_child_process_4_heredoc(char *delemter, int *status)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (!create_heredoc_file(delemter))
+			exit(1);
+		else
+			exit(0);
+	}
+	waitpid(pid, status, 0);
+	if (*status == 1)
+		return (0);
+	return (1);
+}
+
+int	handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status)
 {
 	char	*delemeter;
 	int		fd;
 
 	delemeter = now -> content;
-	if (!create_heredoc_file_v2(delemeter))
+	if (!create_child_process_4_heredoc(delemeter, status))
 	{
 		clear_q_token_list(list);
 		return (0);

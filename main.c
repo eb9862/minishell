@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/26 17:35:58 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:59:50 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("porschell🏎  ");
-		if (!line)
-			break ;
 		add_history(line);
 		handle_line(line, envp, &status);
 		free(line);

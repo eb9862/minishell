@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/26 17:35:28 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:31:50 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
 void				add_process_last(t_process_list *list, \
 						t_process_info *process);
-void				excute(t_process_list *process_list);
 char				*get_next_line(int fd);
 void				free_split(char **split);
 int					check_quotes_syntax(char *line);
@@ -107,7 +106,7 @@ t_q_token			*create_q_token(char *line, int s, int e);
 void				clear_q_token_list(t_q_token_list *list);
 int					handle_single_quotes(t_q_token_list *list);
 void				clear_q_token(t_q_token *token);
-int					expand_redirection(t_q_token_list *list);
+int					expand_redirection(t_q_token_list *list, int *status);
 void				delete_space(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
 void				handle_rdrt_err(t_q_token *token);
@@ -116,11 +115,11 @@ void				handle_pipe_error(void);
 void				handle_file_open_error(char *content);
 void				handle_file_create_error(char *content);
 int					get_content_len(char *s);
-int					open_files(t_q_token_list *list);
+int					open_files(t_q_token_list *list, int *status);
 int					trim_each_token_quotes(t_q_token_list *list);
 void				clear_process(t_process_info *process);
 t_process_list		*get_process_list(t_q_token_list *token_list);
-int					handle_heredoc_v2(t_q_token_list *list, t_q_token *now);
+int					handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status);
 void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
 int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);

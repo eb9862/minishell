@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_manager.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:13:32 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:31:41 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	set_file_content_v2(t_q_token_list *list)
 	}
 }
 
-int	expand_redirection(t_q_token_list *list)
+int	expand_redirection(t_q_token_list *list, int *status)
 {
 	set_rdrt(list);
 	if (!trim_each_token_quotes(list))
 		return (0);
 	set_file_content_v2(list);
-	if (!open_files(list))
+	if (!open_files(list, status))
 		return (0);
 	return (1);
 }

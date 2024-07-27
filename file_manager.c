@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:16:16 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:35:29 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:32:13 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	openfile_v2(t_q_token *prev, t_q_token *now)
 	return (1);
 }
 
-int	open_files(t_q_token_list *list)
+int	open_files(t_q_token_list *list, int *status)
 {
 	t_q_token	*now;
 	t_q_token	*prev;
@@ -72,7 +72,7 @@ int	open_files(t_q_token_list *list)
 		}
 		if (now -> type == DELI)
 		{
-			if (!handle_heredoc_v2(list, now))
+			if (!handle_heredoc_v2(list, now, status))
 				return (0);
 		}
 		prev = now;

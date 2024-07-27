@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_manager.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:27:49 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:31:14 by joojeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_q_token_list	*get_expand_line(char *line, int *status)
 	delete_space(list);
 	// if (validate_token_list(list))
 	// 	return (0);
-	if (!expand_redirection(list))
+	if (!expand_redirection(list, status))
 		return (0);
 	return (list);
 }
