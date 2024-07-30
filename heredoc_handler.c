@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 20:36:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/30 21:00:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	create_heredoc_file(char *delemeter)
 	{
 		line = readline("> ");
 		if (is_delemeter(line, delemeter))
+		{
+			free(line);
 			break;
+		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
