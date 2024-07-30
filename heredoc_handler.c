@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/27 20:22:50 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/30 20:36:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	create_heredoc_file(char *delemeter)
 	return (1);
 }
 
-int	create_child_process_4_heredoc(char *delemter, int *status)
+int	create_child_process_4_heredoc(char *delemeter, int *status)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		if (!create_heredoc_file(delemter))
+		if (!create_heredoc_file(delemeter))
 			exit(1);
 		else
 			exit(0);
@@ -63,11 +63,12 @@ int	create_child_process_4_heredoc(char *delemter, int *status)
 	}
 }
 
+
 int	handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status)
 {
 	char	*delemeter;
 	int		fd;
-
+	
 	delemeter = now -> content;
 	if (!create_child_process_4_heredoc(delemeter, status))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/27 15:31:50 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/30 19:00:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void				add_process_last(t_process_list *list, \
 						t_process_info *process);
 char				*get_next_line(int fd);
 void				free_split(char **split);
-int					check_quotes_syntax(char *line);
 t_q_token_list		*get_expand_line(char *line, int *status);
 int					get_type(char c);
 t_q_token_list		*create_q_token_list(void);
@@ -123,10 +122,11 @@ int					handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status);
 void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
 int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);
-int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count);
+int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count); 
 int					get_dollar_sign_idx(char *line);
 char				*get_expanded_content(char *content, int dollar_idx, int *status);
 int					expand_plain(t_q_token_list *list, int *status);
+int					delegate_quotes_syntax_check(char *line);
 // test
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);

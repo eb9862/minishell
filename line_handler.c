@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 16:48:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:52:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ void	free_pids(pid_t *pids)
 	free(pids);
 }
 
+int	is_contain_quotes(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' || line[i] == '\"')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	handle_line(char *line, char **envp, int *status)
 {
 	t_process_list	*process_list;
@@ -24,23 +38,23 @@ void	handle_line(char *line, char **envp, int *status)
 	pid_t			*pids;
 
 	(void) envp;
-	if (!check_quotes_syntax(line))
+	if (is_contain_quotes(line))
 	{
-		printf("syntax error : quotes error!!!!!!!\n");
-		return ;
+		if (!delegate_quotes_syntax_check(line))
+			return ;
 	}
 	token_list = get_expand_line(line, status);
 	if (!token_list)
 		return ;
-	// if (!validate(token_list))
-	// 	return ;
 	process_list = get_process_list(token_list);
 	if (!process_list)
 		return ;
 	pids = malloc(sizeof(pid_t) * process_list -> count);
-	if (pids == NULL)
-		return ;// 임시
+	if (!pids)
+	{
+		clear_pl_tl(token_list, process_list);
+		return ;
+	}
 	handle_process(process_list, envp, status, pids);
-	clear_pl_tl(token_list, process_list);
-	free_pids(pids);
+	(clear_pl_tl(token_list, process_list), free_pids(pids));
 }
