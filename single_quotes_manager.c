@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:38:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 14:53:45 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:03:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*combine_sq_sq(char *s1, char *s2)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
+	free(s1);
 	return (combined_content);
 }
 
@@ -57,6 +58,7 @@ char	*combine_plain_sq(char *s1, char *s2)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
+	free(s1);
 	return (combined_content);
 }
 
@@ -81,6 +83,7 @@ char	*combine_sq_plain(char *s1, char *s2)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
+	free(s1);
 	return (combined_content);
 }
 
@@ -106,6 +109,7 @@ char	*combine_plain_plain(char *s1, char *s2)
 		combined_content[i1++] = s2[s_idx++];
 	combined_content[i1++] = '\'';
 	combined_content[i1] = 0;
+	free(s1);
 	return (combined_content);
 }
 
