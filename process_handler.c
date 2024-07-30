@@ -6,53 +6,71 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 16:27:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:33:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_paths(char **envp)
+char	**get_paths()
 {
-	int		i;
 	char	*path_line;
 	char	**split;
 
-	i = 0;
-	path_line = NULL;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH", 4) == 0)
-		{
-			path_line = envp[i];
-			break ;
-		}
-		i++;
-	}
-	split = ft_split(path_line + 5, ':');
+	path_line = getenv("PATH");
+	split = ft_split(path_line, ':');
 	if (!split)
 		return (0);
 	return (split);
 }
 
-char	*get_path_name(char *p_name, char **envp)
+char	*get_res_path(char *path, char *p_name, char **paths)
+{
+	int		size;
+	char	*res;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	size = get_content_len(path) + get_content_len(p_name) + 1;
+	res = (char *)malloc(sizeof(char) * (size + 1));
+	if (!res)
+	{
+		free_split(paths);
+		return (0);
+	}
+	while (path[j])
+		res[i++] = path[j++];
+	res[i++] = '/';
+	j = 0;
+	while (p_name[j])
+		res[i++] = p_name[j++];
+	res[i] = 0;
+	return (res);
+}
+
+char	*get_path_name(char *p_name)
 {
 	char	**paths;
 	int		i;
 	char	*tmp_path;
 
 	i = 0;
-	paths = get_paths(envp);
+	paths = get_paths();
 	if (!paths)
 		return (0);
 	while (paths[i])
 	{
-		tmp_path = ft_strjoin(ft_strjoin(paths[i], "/"), p_name);
+		tmp_path = get_res_path(paths[i], p_name, paths);
+		if (!tmp_path)
+			return (0);
 		if (access(tmp_path, F_OK) == 0 && access(tmp_path, X_OK) == 0)
 		{
 			free_split(paths);
 			return (tmp_path);
 		}
+		free(tmp_path);
 		i++;
 	}
 	free_split(paths);
@@ -78,6 +96,7 @@ void	excute_child_process(t_process_info *process, char **envp, \
 	pid_t	pid;
 	char	*path_name;
 
+	(void) envp;
 	if (pipe(fd) == -1)
 		return ;
 	pid = fork();
@@ -87,7 +106,7 @@ void	excute_child_process(t_process_info *process, char **envp, \
 	if (pid == 0)
 	{
 		close(fd[0]);
-		path_name = get_path_name(process -> program_name, envp);
+		path_name = get_path_name(process -> program_name);
 		if (process -> next)
 			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
 		if (process -> is_redirected)
