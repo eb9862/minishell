@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_manager.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:00:08 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 14:53:12 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:30:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ t_process_info	*create_process_info(void)
 	process_info -> is_redirected = 0;
 	process_info -> in = STDIN_FILENO;
 	process_info -> out = STDOUT_FILENO;
-	process_info -> infile_name = NULL;
-	process_info -> outfile_name = NULL;
+	process_info -> idx = 0;
 	process_info -> next = NULL;
 	return (process_info);
 }

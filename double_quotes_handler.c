@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:36:48 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 00:19:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int status;
 
 int	is_dollar_question(char *content, int dollar_idx)
 {
@@ -19,7 +21,7 @@ int	is_dollar_question(char *content, int dollar_idx)
 	return (0);
 }
 
-char	*get_expanded_content(char *content, int dollar_idx, int *status)
+char	*get_expanded_content(char *content, int dollar_idx)
 {
 	char	*only_env;
 	char	*expanded_content;
@@ -27,7 +29,7 @@ char	*get_expanded_content(char *content, int dollar_idx, int *status)
 
 	if (is_dollar_question(content, dollar_idx))
 	{
-		c_status = ft_itoa(*status >> 8);
+		c_status = ft_itoa(status >> 8);
 		if (!c_status)
 			return (0);
 		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
@@ -44,14 +46,14 @@ char	*get_expanded_content(char *content, int dollar_idx, int *status)
 	return (expanded_content);
 }
 
-int	expand_content(t_q_token *token, int *status)
+int	expand_content(t_q_token *token)
 {
 	int	dollar_idx;
 
 	dollar_idx = get_dollar_sign_idx(token -> content);
 	if (dollar_idx != -1)
 	{
-		token -> content = get_expanded_content(token -> content, dollar_idx, status);
+		token -> content = get_expanded_content(token -> content, dollar_idx);
 		token -> content_len = ft_strlen(token -> content);
 		if (!token -> content)
 			return (0);
@@ -61,7 +63,7 @@ int	expand_content(t_q_token *token, int *status)
 	return (1);
 }
 
-int	expand_double_quotes(t_q_token_list *list, int *status)
+int	expand_double_quotes(t_q_token_list *list)
 {
 	t_q_token	*now;
 
@@ -70,7 +72,7 @@ int	expand_double_quotes(t_q_token_list *list, int *status)
 	{
 		if (now -> type == DOUBLE_QOUTES)
 		{
-			if (!expand_content(now, status))
+			if (!expand_content(now))
 			{
 				clear_q_token_list(list);
 				return (0);

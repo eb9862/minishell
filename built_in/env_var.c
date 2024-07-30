@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/30 21:56:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 00:26:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,6 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 	}
 }
 
-t_env_list	*create_env_list()
-{
-	t_env_list	*env_list;
-
-	env_list = (t_env_list *)malloc(sizeof(t_env_list));
-	if (!env_list)
-		return (0);
-	env_list -> head = NULL;
-	env_list -> tail = NULL;
-	return (env_list);
-}
-
 t_env_list	*init_env(char **envp)
 {
 	int			i;
@@ -84,9 +72,11 @@ t_env_list	*init_env(char **envp)
 	t_env_node	*env_node;
 
 	i = 0;
-	env_list = create_env_list();
+	env_list = (t_env_list *)malloc(sizeof(t_env_list));
 	if (!env_list)
 		return (0);
+	env_list -> head = NULL;
+	env_list -> tail = NULL;
 	while (envp[i])
 	{
 		env_node = create_env_node(envp[i], 0);

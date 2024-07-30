@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:02:29 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 14:50:39 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:45:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	add_process_last(t_process_list *list, t_process_info *process)
 		while (now -> next)
 			now = now -> next;
 		now -> next = process;
+		list -> tail = process;
 	}
+	process -> idx = list -> count;
 	list -> count++;
 }
 

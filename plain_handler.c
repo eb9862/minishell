@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   plain_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 00:24:51 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 02:17:56 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/31 00:21:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expand_plain(t_q_token_list *list, int *status)
+extern int status;
+
+int	expand_plain(t_q_token_list *list)
 {
 	t_q_token	*now;
 	int			dollar_idx;
@@ -26,7 +28,7 @@ int	expand_plain(t_q_token_list *list, int *status)
 			if (dollar_idx != -1)
 			{
 				now -> content = get_expanded_content(now -> content, \
-					dollar_idx, status);
+					dollar_idx);
 				if (!now -> content)
 				{
 					clear_q_token_list(list);

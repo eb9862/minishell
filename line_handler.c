@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 19:52:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 00:17:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_contain_quotes(char *line)
 	return (0);
 }
 
-void	handle_line(char *line, char **envp, int *status)
+void	handle_line(char *line, char **envp, t_env_list *el)
 {
 	t_process_list	*process_list;
 	t_q_token_list	*token_list;
@@ -43,7 +43,7 @@ void	handle_line(char *line, char **envp, int *status)
 		if (!delegate_quotes_syntax_check(line))
 			return ;
 	}
-	token_list = get_expand_line(line, status);
+	token_list = get_expand_line(line);
 	if (!token_list)
 		return ;
 	process_list = get_process_list(token_list);
@@ -55,6 +55,6 @@ void	handle_line(char *line, char **envp, int *status)
 		clear_pl_tl(token_list, process_list);
 		return ;
 	}
-	handle_process(process_list, envp, status, pids);
+	handle_process(process_list, envp, el, pids);
 	(clear_pl_tl(token_list, process_list), free_pids(pids));
 }

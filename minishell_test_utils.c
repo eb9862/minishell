@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_test_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:36:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 14:49:02 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:42:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ void	print_argv(char **s)
 void	print_process(t_process_info *process)
 {
 	printf("====process====\n");
+	printf("idx = %d\n", process -> idx);
 	printf("name = %s\n", process -> program_name);
 	print_argv(process -> argv);
 	printf("in = %d\n", process -> in);
-	printf("infile_name = %s\n", process -> infile_name);
 	printf("is_redirected = %d\n", process -> is_redirected);
 	printf("out = %d\n", process -> out);
-	printf("outfile_name = %s\n", process -> outfile_name);
 }
 
 void	print_process_list(t_process_list *process_list)
@@ -41,6 +40,7 @@ void	print_process_list(t_process_list *process_list)
 	t_process_info	*process;
 
 	process = process_list -> head;
+	printf("process count = %d\n", process_list -> count);
 	while (process)
 	{
 		print_process(process);

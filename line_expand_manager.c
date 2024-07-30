@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_manager.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/27 15:31:14 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/31 00:18:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,26 +82,25 @@ int	fill_q_token(t_q_token_list *list, char *line)
 	return (1);
 }
 
-t_q_token_list	*get_expand_line(char *line, int *status)
+t_q_token_list	*get_expand_line(char *line)
 {
 	t_q_token_list	*list;
 
-	(void) status;
 	list = create_q_token_list();
 	if (!list)
 		return (0);
 	if (!fill_q_token(list, line))
 		return (0);
-	if (!expand_plain(list, status))
+	if (!expand_plain(list))
 		return (0);
-	if (!expand_double_quotes(list, status))
+	if (!expand_double_quotes(list))
 		return (0);
 	if (!handle_single_quotes(list))
 		return (0);
 	delete_space(list);
 	// if (validate_token_list(list))
 	// 	return (0);
-	if (!expand_redirection(list, status))
+	if (!expand_redirection(list))
 		return (0);
 	return (list);
 }

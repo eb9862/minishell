@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:16:16 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/27 15:32:13 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/31 00:16:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	open_input_file_v2(t_q_token *now)
+int	open_input_file(t_q_token *now)
 {
 	int	fd;
 
@@ -26,7 +26,7 @@ int	open_input_file_v2(t_q_token *now)
 	return (1);
 }
 
-int	openfile_v2(t_q_token *prev, t_q_token *now)
+int	openfile(t_q_token *prev, t_q_token *now)
 {
 	enum e_q_token_type	type;
 	int					fd;
@@ -49,11 +49,11 @@ int	openfile_v2(t_q_token *prev, t_q_token *now)
 		now -> fd = fd;
 	}
 	if (type == RDRT_IN)
-		return (open_input_file_v2(now));
+		return (open_input_file(now));
 	return (1);
 }
 
-int	open_files(t_q_token_list *list, int *status)
+int	open_files(t_q_token_list *list)
 {
 	t_q_token	*now;
 	t_q_token	*prev;
@@ -64,7 +64,7 @@ int	open_files(t_q_token_list *list, int *status)
 	{
 		if (now -> type == FILE_C)
 		{
-			if (!openfile_v2(prev, now))
+			if (!openfile(prev, now))
 			{
 				clear_q_token_list(list);
 				return (0);
@@ -72,7 +72,7 @@ int	open_files(t_q_token_list *list, int *status)
 		}
 		if (now -> type == DELI)
 		{
-			if (!handle_heredoc_v2(list, now, status))
+			if (!handle_heredoc(list, now))
 				return (0);
 		}
 		prev = now;

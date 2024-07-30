@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 21:43:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 01:26:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ typedef struct s_process_info
 	char					**argv;
 	int						in;
 	int						out;
-	char					*infile_name;
-	char					*outfile_name;
+	int						idx;
 	int						is_redirected;
 	struct s_process_info	*next;
 }	t_process_info;
@@ -63,7 +62,7 @@ enum e_q_token_type
 	FILE_C
 };
 
-enum built_in_type // test
+enum built_in_type
 {
 	ECHO = 0,
 	CD,
@@ -91,20 +90,20 @@ typedef struct s_q_token_list
 
 //t_env_list			*init_env(char **envp);
 //void				clear_env_list(t_env_list *env_list);
-void				handle_line(char *line, char**envp, int *status);
+void				handle_line(char *line, char **envp, t_env_list *el);
 void				handle_process(t_process_list *process_list, \
-						char **envp, int *status, pid_t *pids);
+						char **envp, t_env_list *el, pid_t *pids);
 char				**ft_split(char const *s, char c);
 void				clear_process_list(t_process_list *list);
 void				add_process_last(t_process_list *list, \
 						t_process_info *process);
 char				*get_next_line(int fd);
 void				free_split(char **split);
-t_q_token_list		*get_expand_line(char *line, int *status);
+t_q_token_list		*get_expand_line(char *line);
 int					get_type(char c);
 t_q_token_list		*create_q_token_list(void);
 int					get_next_same_type_element_idx(char *line, int idx);
-int					expand_double_quotes(t_q_token_list *list, int *status);
+int					expand_double_quotes(t_q_token_list *list);
 int					get_dollar_sign_idx(char *line);
 void				change_double2single(char *s);
 int					get_env_len(char *env);
@@ -116,7 +115,7 @@ t_q_token			*create_q_token(char *line, int s, int e);
 void				clear_q_token_list(t_q_token_list *list);
 int					handle_single_quotes(t_q_token_list *list);
 void				clear_q_token(t_q_token *token);
-int					expand_redirection(t_q_token_list *list, int *status);
+int					expand_redirection(t_q_token_list *list);
 void				delete_space(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
 void				handle_rdrt_err(t_q_token *token);
@@ -125,18 +124,18 @@ void				handle_pipe_error(void);
 void				handle_file_open_error(char *content);
 void				handle_file_create_error(char *content);
 int					get_content_len(char *s);
-int					open_files(t_q_token_list *list, int *status);
+int					open_files(t_q_token_list *list);
 int					trim_each_token_quotes(t_q_token_list *list);
 void				clear_process(t_process_info *process);
 t_process_list		*get_process_list(t_q_token_list *token_list);
-int					handle_heredoc_v2(t_q_token_list *list, t_q_token *now, int *status);
+int					handle_heredoc(t_q_token_list *list, t_q_token *now);
 void				clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list);
 int					get_plain_count(t_q_token_list *list);
 void				add_process_last(t_process_list *list, t_process_info *process);
 int					set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count); 
 int					get_dollar_sign_idx(char *line);
-char				*get_expanded_content(char *content, int dollar_idx, int *status);
-int					expand_plain(t_q_token_list *list, int *status);
+char				*get_expanded_content(char *content, int dollar_idx);
+int					expand_plain(t_q_token_list *list);
 int					delegate_quotes_syntax_check(char *line);
 // test
 void				print_process(t_process_info *process);
