@@ -12,7 +12,7 @@
 
 #include "built_in.h"
 
-void    clear_env_list_no_op(t_env_list *list)
+void	clear_env_list_no_op(t_env_list *list)
 {
     t_env_node  *now;
     t_env_node  *tmp;

@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 
 NAME = libbi.a
 
-HEADER = built_in.h
+HEADER = built_in.h libft.h
 
 #DIR_LIBFT = ../libft
 
@@ -31,10 +31,10 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	ar rcs $@ $^
-#$(CC) $(CFLAGS) $^ -o $(NAME) -lft -L $(DIR_LIBFT)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+#-lft -L $(DIR_LIBFT)
 
 clean :
 	rm -rf $(OBJS)

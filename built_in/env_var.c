@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/30 18:34:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/30 21:56:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 {
 	t_env_node	*tmp;
 
-	if (!env_list-> head)
+	if (env_list == NULL || env_list-> head == NULL)
 	{
 		env_list -> head = node;
 		env_list -> tail = node;

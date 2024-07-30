@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 23:07:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/15 19:04:07 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:24:57 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ int	is_ll(char *s)
 		}
 		return (0);
 	}
+}
+
+int	count_argc(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	return (i);
 }

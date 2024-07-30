@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/30 16:21:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/30 21:54:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_env_list
 	t_env_node	*tail;
 }	t_env_list;
 
-int			cd(char *path);
+int			cd(int argc, char **p_argv);
 int			pwd(void);
 int			bi_exit(int argc, char *argv[]);
 void		echo(int argc, char *argv[]);
@@ -44,6 +44,7 @@ void		free_2d(char **s);
 int			ft_strcmp(char *s1, char *s2);
 int			is_numeric(char *s);
 int			is_ll(char *s);
+int			count_argc(char **argv);
 
 void		clear_env_list(t_env_list *env_list, int copied);
 void		add_node_last(t_env_list *env_list, t_env_node *node);
@@ -57,7 +58,7 @@ void		change_value(t_env_list *lst, char *key, char *value);
 void		join_value(t_env_list *lst, char *key, char *value);
 int			validate_key(char *key);
 void		not_valid_identifier(char *s);
-void   		clear_env_list_no_op(t_env_list *list);
+void		clear_env_list_no_op(t_env_list *list);
 
 t_env_list	*init_env(char **envp);
 t_env_list	*copy_env_list(t_env_node *head);
