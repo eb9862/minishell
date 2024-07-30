@@ -20,6 +20,7 @@ SRCS =	bi_cd.c\
 		env_var.c\
 		env_var2.c\
 		env_var3.c\
+		env_clear.c\
 		#test_main.c
 
 OBJS = $(SRCS:.c=.o)

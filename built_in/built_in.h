@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/21 15:13:56 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:21:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILT_IN_H
 
 # include "../libft/libft.h"
+# include <stdlib.h>
 
 // evnp -> linked list
 typedef struct s_env_node
@@ -56,6 +57,7 @@ void		change_value(t_env_list *lst, char *key, char *value);
 void		join_value(t_env_list *lst, char *key, char *value);
 int			validate_key(char *key);
 void		not_valid_identifier(char *s);
+void   		clear_env_list_no_op(t_env_list *list);
 
 t_env_list	*init_env(char **envp);
 t_env_list	*copy_env_list(t_env_node *head);
