@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 02:27:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 16:45:25 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:45:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	free_split(char **split)
 
 void	clear_process(t_process_info *process)
 {
-	// if (process -> argv)
-	// 	free_split(process -> argv);
+	free(process -> argv);
 	free(process);
 }
 
@@ -41,4 +40,5 @@ void	clear_process_list(t_process_list *list)
 		clear_process(process);
 		process = tmp;
 	}
+	free(list);
 }

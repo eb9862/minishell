@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_clear.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joojeon <joojeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:27:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/23 16:44:05 by joojeon          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:46:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	clear_q_token(t_q_token *token)
 	free(token -> content);
 	if (token -> fd != -1)
 		close(token -> fd);
-	// token -> next = NULL;
+	free(token);
 }
 
 void	clear_q_token_list(t_q_token_list *list)

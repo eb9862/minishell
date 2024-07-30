@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   line_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 14:52:11 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:48:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_pids(pid_t *pids)
+{
+	free(pids);
+}
 
 void	handle_line(char *line, char **envp, int *status)
 {
@@ -27,7 +32,6 @@ void	handle_line(char *line, char **envp, int *status)
 	token_list = get_expand_line(line, status);
 	if (!token_list)
 		return ;
-	// print_q_token(token_list);
 	// if (!validate(token_list))
 	// 	return ;
 	process_list = get_process_list(token_list);
@@ -37,6 +41,6 @@ void	handle_line(char *line, char **envp, int *status)
 	if (pids == NULL)
 		return ;// 임시
 	handle_process(process_list, envp, status, pids);
-	clear_process_list(process_list);
-	clear_q_token_list(token_list);
+	clear_pl_tl(token_list, process_list);
+	free_pids(pids);
 }
