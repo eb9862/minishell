@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/21 00:00:05 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:34:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 {
 	t_env_node	*tmp;
 
-	if (env_list == NULL || env_list-> head == NULL)
+	if (!env_list-> head)
 	{
 		env_list -> head = node;
 		env_list -> tail = node;
@@ -65,6 +65,18 @@ void	add_node_last(t_env_list *env_list, t_env_node *node)
 	}
 }
 
+t_env_list	*create_env_list()
+{
+	t_env_list	*env_list;
+
+	env_list = (t_env_list *)malloc(sizeof(t_env_list));
+	if (!env_list)
+		return (0);
+	env_list -> head = NULL;
+	env_list -> tail = NULL;
+	return (env_list);
+}
+
 t_env_list	*init_env(char **envp)
 {
 	int			i;
@@ -72,7 +84,7 @@ t_env_list	*init_env(char **envp)
 	t_env_node	*env_node;
 
 	i = 0;
-	env_list = (t_env_list *)malloc(sizeof(t_env_list));
+	env_list = create_env_list();
 	if (!env_list)
 		return (0);
 	while (envp[i])
