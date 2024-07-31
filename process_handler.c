@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 01:46:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:58:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 		if (process -> is_redirected)
 			set_stream(process -> in, process -> out);
 		execve(path_name, process -> argv, envp);
+		free(path_name);
 	}
 	else
 	{

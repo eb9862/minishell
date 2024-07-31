@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:19:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:58:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*get_expanded_content(char *content, int dollar_idx)
 		if (!only_env)
 			return (0);
 		expanded_content = get_new_content(content, dollar_idx, getenv(only_env));
+		free(only_env);
 	}
 	free(content);
 	return (expanded_content);

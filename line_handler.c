@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:17:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 14:53:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	handle_line(char *line, char **envp, t_env_list *el)
 	t_q_token_list	*token_list;
 	pid_t			*pids;
 
-	(void) envp;
 	if (is_contain_quotes(line))
 	{
 		if (!delegate_quotes_syntax_check(line))

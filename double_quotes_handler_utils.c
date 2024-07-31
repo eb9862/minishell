@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:40:55 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:43:11 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:53:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
