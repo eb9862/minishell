@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 00:23:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:21:43 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_env_list
 	t_env_node	*tail;
 }	t_env_list;
 
-int			cd(int argc, char **p_argv);
-int			pwd(void);
+int			cd(int argc, char **p_argv, t_env_list *el);
+int			pwd(t_env_list *el);
 int			bi_exit(int argc, char *argv[]);
 void		echo(int argc, char *argv[]);
 void		env(t_env_list *lst);

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   bi_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:48:38 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/30 14:50:00 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:29:19 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <linux/limits.h> // linux PATH_MAX
-//include <sys/syslimits.h>
+//#include <linux/limits.h> // linux PATH_MAX
+#include <sys/syslimits.h>
 #include <unistd.h>
 #include <stdio.h>
 
 #include "built_in.h"
 
 // PATH_MAX는 널문자를 포함한 길이인가?
-int	pwd(void)
+int	pwd(t_env_list *el)
 {
-	char	path[PATH_MAX + 1];
+	/*char	path[PATH_MAX + 1];
 	size_t	l;
 
 	if (getcwd(path, PATH_MAX) == NULL)
@@ -32,5 +32,13 @@ int	pwd(void)
 	path[l] = '\n';
 	path[l + 1] = '\0';
 	write(1, &path, l + 1);
+	return (0);*/
+	t_env_node	*tmp;
+	char		**key_value;
+
+	tmp = find_node(el, "PWD");
+	key_value = env_split(tmp -> content);
+	printf("%s\n", key_value[1]);
+	free_2d(key_value);
 	return (0);
 }
