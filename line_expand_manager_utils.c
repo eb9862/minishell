@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_manager_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:32:56 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:33:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,26 @@ int	get_type(char c)
 	return (PLAIN);
 }
 
+
 int	get_next_same_type_element_idx(char *line, int idx)
 {
 	int	type;
+	int	count;
 
+	count = 0;
 	type = get_type(line[idx++]);
-	if (type == PLAIN || type == SPACE_TYPE || type == RDRT_L || \
-		type == RDRT_R || type == PIP)
+	if (type == PLAIN || type == SPACE_TYPE || type == RDRT_L || RDRT_R || PIP)
 	{
 		while (line[idx] && get_type(line[idx]) == type)
+		{
+			count++;
 			idx++;
+			if (type == RDRT_L || type == RDRT_R)
+			{
+				if (count == 1)
+					break;
+			}
+		}
 		return (idx - 1);
 	}
 	else

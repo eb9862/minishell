@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:47:46 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:18:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:41:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ t_q_token_list	*get_expand_line(char *line)
 	if (!handle_single_quotes(list))
 		return (0);
 	delete_space(list);
-	// if (validate_token_list(list))
-	// 	return (0);
+	set_rdrt(list);
+	if (!validate_token_list(list))
+		return (0);
 	if (!expand_redirection(list))
 		return (0);
 	return (list);

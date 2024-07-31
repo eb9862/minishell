@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_validator.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:07:58 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:09:09 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:57:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_valid_pipe_syntax(t_q_token_list *list)
 	{
 		if (now -> type == PIP)
 		{
-			if (!prev)
+			if (!prev || !now -> next || now -> next -> type == PIP)
 			{
 				handle_pipe_error();
 				return (0);
@@ -43,10 +43,21 @@ int	is_valid_rdrt_token(t_q_token_list *list)
 	now = list -> head;
 	while (now)
 	{
-		if (now -> type == RDRT_ERR)
+		if (now -> type == RDRT_AO || now -> type == RDRT_TO || \
+			now -> type == RDRT_HD || now -> type == RDRT_IN)
 		{
-			handle_rdrt_err(now);
-			return (0);
+			if (!now -> next)
+			{
+				handle_missed_file_error();
+				return (0);
+			}
+			else if (now -> next -> type == RDRT_AO || now ->  next -> \
+				type == RDRT_TO || now -> next -> type == RDRT_HD || now ->\
+			 	next -> type == RDRT_IN )
+			{
+				handle_rdrt_err(now -> next -> content);
+				return (0);
+			}
 		}
 		now = now -> next;
 	}
@@ -76,6 +87,7 @@ int	is_file_missed(t_q_token_list *list)
 
 int	validate_token_list(t_q_token_list *list)
 {
+	print_q_token(list);
 	if (!is_valid_rdrt_token(list))
 	{
 		clear_q_token_list(list);

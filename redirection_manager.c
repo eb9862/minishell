@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:15:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:40:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	handle_left_redirection(t_q_token *now)
 		now -> type = RDRT_IN;
 	else if (ft_strlen(content) == 2)
 		now -> type = RDRT_HD;
-	else
-		now -> type = RDRT_ERR;
 }
 
 void	handle_right_redirection(t_q_token *now)
@@ -34,8 +32,6 @@ void	handle_right_redirection(t_q_token *now)
 		now -> type = RDRT_TO;
 	else if (ft_strlen(content) == 2)
 		now -> type = RDRT_AO;
-	else
-		now -> type = RDRT_ERR;
 }
 
 void	set_rdrt(t_q_token_list *list)
@@ -53,7 +49,7 @@ void	set_rdrt(t_q_token_list *list)
 	}
 }
 
-void	set_file_content_v2(t_q_token_list *list)
+void	set_file_content(t_q_token_list *list)
 {
 	t_q_token	*now;
 
@@ -71,10 +67,10 @@ void	set_file_content_v2(t_q_token_list *list)
 
 int	expand_redirection(t_q_token_list *list)
 {
-	set_rdrt(list);
+	// set_rdrt(list);
 	if (!trim_each_token_quotes(list))
 		return (0);
-	set_file_content_v2(list);
+	set_file_content(list);
 	if (!open_files(list))
 		return (0);
 	return (1);

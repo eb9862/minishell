@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 01:26:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 15:50:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void				clear_q_token(t_q_token *token);
 int					expand_redirection(t_q_token_list *list);
 void				delete_space(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
-void				handle_rdrt_err(t_q_token *token);
+void				handle_rdrt_err(char *content);
 void				handle_missed_file_error(void);
 void				handle_pipe_error(void);
 void				handle_file_open_error(char *content);
@@ -137,6 +137,8 @@ int					get_dollar_sign_idx(char *line);
 char				*get_expanded_content(char *content, int dollar_idx);
 int					expand_plain(t_q_token_list *list);
 int					delegate_quotes_syntax_check(char *line);
+void				set_rdrt(t_q_token_list *list);
+void				set_file_content(t_q_token_list *list);
 // test
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);
