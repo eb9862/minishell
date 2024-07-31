@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 08:37:57 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 15:40:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 16:17:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	set_file_content(t_q_token_list *list)
 
 int	expand_redirection(t_q_token_list *list)
 {
-	// set_rdrt(list);
 	if (!trim_each_token_quotes(list))
 		return (0);
 	set_file_content(list);

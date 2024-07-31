@@ -6,13 +6,12 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:07:58 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 16:15:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 16:17:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// 좀더 자세한 규칙 알아야 함.
 int	is_valid_pipe_syntax(t_q_token_list *list)
 {
 	t_q_token	*now;
@@ -87,7 +86,6 @@ int	is_file_missed(t_q_token_list *list)
 
 int	validate_token_list(t_q_token_list *list)
 {
-	print_q_token(list);
 	if (!is_valid_rdrt_token(list))
 	{
 		clear_q_token_list(list);
