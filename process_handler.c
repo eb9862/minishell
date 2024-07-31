@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 14:58:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/07/31 19:00:33 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,9 +195,9 @@ void	run_built_in(t_process_info *process, t_env_list *el)
 	if (type == ECHO)
 		echo(argc, process -> argv); // 매개변수 수정 필요
 	if (type == CD)
-		cd(argc, process -> argv);
+		cd(argc, process -> argv, el);
 	if (type == PWD)
-		pwd();
+		pwd(el);
 	if (type == EXPORT)
 		export(argc, el, process -> argv); // 매개변수로 env_list를 받는데 현재 전달 불가
 	if (type == UNSET)
