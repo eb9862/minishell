@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 19:00:33 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 22:22:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,34 +208,55 @@ void	run_built_in(t_process_info *process, t_env_list *el)
 		bi_exit(argc, process -> argv);
 }
 
+// void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
+// {
+// 	int		fd[2];
+// 	pid_t	pid;
+
+// 	if (pipe(fd) == -1)
+// 		return ;
+// 	pid = fork();
+// 	signal(SIGQUIT, sigquit_in_process); // test
+// 	signal(SIGINT, sigint_in_process); // test too
+// 	pids[process -> idx] = pid;
+// 	if (pid == 0)
+// 	{
+// 		close(fd[0]);
+// 		if (process -> next)
+// 			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
+// 		if (process -> is_redirected)
+// 			set_stream(process -> in, process -> out);
+// 		run_built_in(process, el);
+// 		exit(0);
+// 	}
+// 	else
+// 	{
+// 		close(fd[1]);
+// 		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
+// 	}
+// }
+
 void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
 {
-	int		fd[2];
-	pid_t	pid;
+	int	fd[2];
 
-	if (pipe(fd) == -1)
-		return ;
-	pid = fork();
 	signal(SIGQUIT, sigquit_in_process); // test
 	signal(SIGINT, sigint_in_process); // test too
-	pids[process -> idx] = pid;
-	if (pid == 0)
-	{
-		close(fd[0]);
-		if (process -> next)
-			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
-		if (process -> is_redirected)
-			set_stream(process -> in, process -> out);
-		run_built_in(process, el);
-		exit(0);
-	}
+	pids[process -> idx] = -1;
+	if (!(process -> next))
+		close(0);
 	else
 	{
+		if (pipe(fd) == -1)
+			return ;
 		close(fd[1]);
-		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
 	}
+	if (process -> is_redirected)
+		set_stream(process -> in, process -> out);
+	run_built_in(process, el);
 }
-
 void	excute_child_process(t_process_info *process, char **envp, \
 	pid_t pids[], t_env_list *el)
 {
@@ -267,11 +288,10 @@ void	handle_process(t_process_list *process_list, \
 	i = -1;
 	while (++i < process_list -> count)
 	{
-		waitpid(pids[i], &status, 0);
+		if (pids[i] != -1)
+			waitpid(pids[i], &status, 0);
 		set_signal(); // test
 	}
-	dup2(original_in, STDIN_FILENO);
-	dup2(original_out, STDOUT_FILENO);
-	close(original_in);
-	close(original_out);
+	(dup2(original_in, STDIN_FILENO), dup2(original_out, STDOUT_FILENO));
+	(close(original_in), close(original_out));
 }

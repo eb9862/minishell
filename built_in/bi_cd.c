@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bi_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:47:01 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 18:29:15 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/07/31 22:24:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <linux/limits.h> // linux PATH_MAX
-#include <sys/syslimits.h>
+#include <linux/limits.h> // linux PATH_MAX
+//#include <sys/syslimits.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -40,7 +40,7 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		free(path);
 		return (1);
 	}
-	free(path);
+	// free(path);
 	getcwd(path, PATH_MAX);
 	printf("%s\n", path);
 	change_value(el, "PWD", path);
