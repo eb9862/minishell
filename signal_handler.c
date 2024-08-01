@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:30:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 01:17:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 15:18:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	sigint_handler(int sig)
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
 	(void) sig;
 }
 
