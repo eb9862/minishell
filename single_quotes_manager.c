@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes_manager.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 02:38:32 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/30 17:03:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 20:35:24 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,32 +87,6 @@ char	*combine_sq_plain(char *s1, char *s2)
 	return (combined_content);
 }
 
-char	*combine_plain_plain(char *s1, char *s2)
-{
-	char	*combined_content;
-	int		size;
-	int		i1;
-	int		s_idx;
-
-	i1 = 1;
-	s_idx = 0;
-	size = ft_strlen(s1) + ft_strlen(s2) + 2;
-	combined_content = (char *)malloc(sizeof(char) * (size + 1));
-	if (!combined_content)
-		return (0);
-	combined_content[0] = '\'';
-	while (s1[s_idx])
-		combined_content[i1++] = s1[s_idx++];
-	combined_content[i1++] = '\'';
-	s_idx = 0;
-	while (s2[s_idx])
-		combined_content[i1++] = s2[s_idx++];
-	combined_content[i1++] = '\'';
-	combined_content[i1] = 0;
-	free(s1);
-	return (combined_content);
-}
-
 int	combine_token(t_q_token *t1, t_q_token *t2)
 {
 	char	*combined_content;
@@ -144,8 +118,9 @@ int	handle_single_quotes(t_q_token_list *list)
 	start = now;
 	while (now)
 	{
-		if (now -> next && (now -> type == SINGLE_QUOTES || now -> type == PLAIN) && \
-			(now -> next -> type == SINGLE_QUOTES || now -> next -> type == PLAIN))
+		if (now -> next && \
+		(now -> type == SINGLE_QUOTES || now -> type == PLAIN) && \
+		(now -> next -> type == SINGLE_QUOTES || now -> next -> type == PLAIN))
 		{
 			if (!combine_token(now, now -> next))
 			{

@@ -3,54 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 22:22:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 19:53:35 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int status;
-
-int		is_buitin(char *p_name)
-{
-	if (ft_strncmp("echo", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("echo") == get_content_len(p_name)))
-		return (ECHO);
-	if (ft_strncmp("cd", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("cd") == get_content_len(p_name)))
-		return (CD);
-	if (ft_strncmp("pwd", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("pwd") == get_content_len(p_name)))
-		return (PWD);
-	if (ft_strncmp("export", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("export") == get_content_len(p_name)))
-		return (EXPORT);
-	if (ft_strncmp("unset", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("unset") == get_content_len(p_name)))
-		return (UNSET);
-	if (ft_strncmp("env", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("env") == get_content_len(p_name)))
-		return (ENV);
-	if (ft_strncmp("exit", p_name, get_content_len(p_name)) == 0 \
-		&& (get_content_len("exit") == get_content_len(p_name)))
-		return (EXIT);
-	return (-1);
-}
-
-char	**get_paths()
-{
-	char	*path_line;
-	char	**split;
-
-	path_line = getenv("PATH");
-	split = ft_split(path_line, ':');
-	if (!split)
-		return (0);
-	return (split);
-}
 
 char	*get_res_path(char *path, char *p_name, char **paths)
 {
@@ -76,35 +36,6 @@ char	*get_res_path(char *path, char *p_name, char **paths)
 		res[i++] = p_name[j++];
 	res[i] = 0;
 	return (res);
-}
-
-int	is_contains_slash(char *p_name)
-{
-	int	i;
-
-	i = 0;
-	while (p_name[i])
-	{
-		if (p_name[i] == '/')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	handle_not_found_pg_or_directory(char *p_name)
-{
-	if (is_contains_slash(p_name))
-	{
-		write(2, "porschell: ", get_content_len("porschell: "));
-		write(2, p_name, get_content_len(p_name));
-		write(2, ": No such file or directory\n", get_content_len(": No such file or directory\n"));
-	}
-	else
-	{
-		write(2, p_name, get_content_len(p_name));
-		write(2, ": command not found\n", get_content_len(": command not found\n"));
-	}
 }
 
 char	*get_path_name(char *p_name)
@@ -133,16 +64,7 @@ char	*get_path_name(char *p_name)
 	free_split(paths);
 	if (access(p_name, F_OK) == 0 && access(p_name, X_OK) == 0)
 		return (p_name);
-	handle_not_found_pg_or_directory(p_name);
-	exit(127);
-}
-
-void	set_stream(int in, int out)
-{
-	if (in != 0)
-		dup2(in, STDIN_FILENO);
-	if (out != 1)
-		dup2(out, 1);
+	(handle_not_found_pg_or_directory(p_name), exit(127));
 }
 
 void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
@@ -154,8 +76,8 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 	if (pipe(fd) == -1)
 		return ;
 	pid = fork();
-	signal(SIGQUIT, sigquit_in_process); // test
-	signal(SIGINT, sigint_in_process); // test too
+	signal(SIGQUIT, sigquit_in_process);
+	signal(SIGINT, sigint_in_process);
 	pids[process -> idx] = pid;
 	if (pid == 0)
 	{
@@ -169,43 +91,7 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 		free(path_name);
 	}
 	else
-	{
-		close(fd[1]);
-		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
-	}
-}
-
-int	get_argc(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i])
-		i++;
-	return (i);
-}
-
-void	run_built_in(t_process_info *process, t_env_list *el)
-{
-	int	argc;
-	int	type;
-
-	argc = get_argc(process -> argv);
-	type = is_buitin(process -> program_name);
-	if (type == ECHO)
-		echo(argc, process -> argv); // 매개변수 수정 필요
-	if (type == CD)
-		cd(argc, process -> argv, el);
-	if (type == PWD)
-		pwd(el);
-	if (type == EXPORT)
-		export(argc, el, process -> argv); // 매개변수로 env_list를 받는데 현재 전달 불가
-	if (type == UNSET)
-		unset(argc, process -> argv, el); // export와 같음
-	if (type == ENV)
-		env(el); // unset와 같음
-	if (type == EXIT)
-		bi_exit(argc, process -> argv);
+		(close(fd[1]), dup2(fd[0], STDIN_FILENO), close(fd[0]));
 }
 
 // void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
@@ -236,31 +122,9 @@ void	run_built_in(t_process_info *process, t_env_list *el)
 // 	}
 // }
 
-void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
-{
-	int	fd[2];
-
-	signal(SIGQUIT, sigquit_in_process); // test
-	signal(SIGINT, sigint_in_process); // test too
-	pids[process -> idx] = -1;
-	if (!(process -> next))
-		close(0);
-	else
-	{
-		if (pipe(fd) == -1)
-			return ;
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-	}
-	if (process -> is_redirected)
-		set_stream(process -> in, process -> out);
-	run_built_in(process, el);
-}
 void	excute_child_process(t_process_info *process, char **envp, \
 	pid_t pids[], t_env_list *el)
 {
-
 	if (is_buitin(process -> program_name) == -1)
 		excute_cmd(process, envp, pids);
 	else
@@ -289,8 +153,8 @@ void	handle_process(t_process_list *process_list, \
 	while (++i < process_list -> count)
 	{
 		if (pids[i] != -1)
-			waitpid(pids[i], &status, 0);
-		set_signal(); // test
+			waitpid(pids[i], &g_status, 0);
+		set_signal();
 	}
 	(dup2(original_in, STDIN_FILENO), dup2(original_out, STDOUT_FILENO));
 	(close(original_in), close(original_out));

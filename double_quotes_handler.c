@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 14:58:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:46:14 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int status;
 
 int	is_dollar_question(char *content, int dollar_idx)
 {
@@ -29,7 +27,7 @@ char	*get_expanded_content(char *content, int dollar_idx)
 
 	if (is_dollar_question(content, dollar_idx))
 	{
-		c_status = ft_itoa(status >> 8);
+		c_status = ft_itoa(g_status >> 8);
 		if (!c_status)
 			return (0);
 		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
@@ -40,7 +38,8 @@ char	*get_expanded_content(char *content, int dollar_idx)
 		only_env = get_only_env(content + dollar_idx + 1);
 		if (!only_env)
 			return (0);
-		expanded_content = get_new_content(content, dollar_idx, getenv(only_env));
+		expanded_content = get_new_content(content, \
+			dollar_idx, getenv(only_env));
 		free(only_env);
 	}
 	free(content);

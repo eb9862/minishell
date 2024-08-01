@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:02:29 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 01:45:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:40:49 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	add_process_last(t_process_list *list, t_process_info *process)
 	list -> count++;
 }
 
-int	set_cmd(t_process_info *process, t_q_token *st, t_q_token *et, int cmd_count)
+int	set_cmd(t_process_info *process, t_q_token *st, \
+	t_q_token *et, int cmd_count)
 {
 	char		**argv;
 	t_q_token	*now;

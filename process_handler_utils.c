@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_handler_utils.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 16:22:26 by eunhwang          #+#    #+#             */
+/*   Updated: 2024/08/01 16:35:26 by eunhwang         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void	set_stream(int in, int out)
+{
+	if (in != 0)
+		dup2(in, STDIN_FILENO);
+	if (out != 1)
+		dup2(out, 1);
+}
+
+char	**get_paths(void)
+{
+	char	*path_line;
+	char	**split;
+
+	path_line = getenv("PATH");
+	split = ft_split(path_line, ':');
+	if (!split)
+		return (0);
+	return (split);
+}
+
+int	is_contains_slash(char *p_name)
+{
+	int	i;
+
+	i = 0;
+	while (p_name[i])
+	{
+		if (p_name[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	handle_not_found_pg_or_directory(char *p_name)
+{
+	if (is_contains_slash(p_name))
+	{
+		write(2, "porschell: ", get_content_len("porschell: "));
+		write(2, p_name, get_content_len(p_name));
+		write(2, ": No such file or directory\n", \
+			get_content_len(": No such file or directory\n"));
+	}
+	else
+	{
+		write(2, p_name, get_content_len(p_name));
+		write(2, ": command not found\n", \
+			get_content_len(": command not found\n"));
+	}
+}

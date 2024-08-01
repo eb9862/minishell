@@ -16,12 +16,15 @@ SRCS =	line_handler.c\
 		main.c\
 		process_free.c\
 		process_handler.c\
+		process_handler_utils.c\
+		built_in_handler.c\
 		minishell_test_utils.c\
 		quotes_handler.c\
 		line_expand_manager.c\
 		line_expand_manager_utils.c\
 		double_quotes_handler.c\
 		double_quotes_handler_utils.c\
+		double_quotes_handler_utils_2.c\
 		line_expand_clear.c\
 		single_quotes_manager.c\
 		single_quotes_manager_utils.c\

@@ -20,6 +20,6 @@ void	heredoc_signal_handler(int signum)
 
 void	set_heredoc_signal(void)
 {
-	signal(SIGINT, heredoc_signal_handler); // ctrl + c
-	signal(SIGQUIT, SIG_IGN); // ctrl + '\'
+	signal(SIGINT, heredoc_signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

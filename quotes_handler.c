@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:28:20 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 00:55:21 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:53 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_quotes(char c)
 		return (2);
 	return (0);
 }
-
 
 int	check_quotes_syntax(char *line)
 {
@@ -51,7 +50,7 @@ int	check_quotes_syntax(char *line)
 	return (is_valid);
 }
 
-void	handle_quotes_error()
+void	handle_quotes_error(void)
 {
 	write(2, "syntax error : quotes error!!!!!!!\n", \
 		get_content_len("syntax error : quotes error!!!!!!!\n"));
@@ -65,7 +64,7 @@ int	delegate_quotes_syntax_check(char *line)
 	if (!res)
 	{
 		handle_quotes_error();
-		return 0;
+		return (0);
 	}
 	return (1);
 }

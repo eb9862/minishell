@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 00:26:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 19:29:34 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ void	del_env_node(t_env_list *list, t_env_node *target_node)
 	if (tmp_node == target_node)
 	{
 		list -> head = target_node -> next;
-		if (target_node -> modified == 1)
-			free(target_node -> content);
-		free(target_node);
+		clear_env_node(target_node);
 		return ;
 	}
 	next_node = tmp_node -> next;
@@ -111,9 +109,7 @@ void	del_env_node(t_env_list *list, t_env_node *target_node)
 		if (next_node == target_node)
 		{
 			tmp_node -> next = next_node -> next;
-			if (target_node -> modified == 1)
-				free(target_node -> content);
-			free(target_node);
+			clear_env_node(target_node);
 			return ;
 		}
 		tmp_node = tmp_node -> next;
