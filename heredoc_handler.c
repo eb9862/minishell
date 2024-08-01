@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 16:51:27 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:18:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	create_child_process_4_heredoc(char *delemeter)
 	pid_t	pid;
 
 	pid = fork();
+	ignore_parent_signal();
 	if (pid == 0)
 	{
 		set_heredoc_signal();
@@ -61,6 +62,7 @@ int	create_child_process_4_heredoc(char *delemeter)
 	else
 	{
 		waitpid(pid, &g_status, 0);
+		set_signal();
 		if (g_status >> 8 == 130)
 			return (0);
 		return (1);

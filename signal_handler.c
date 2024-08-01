@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:30:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 16:51:47 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:19:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ignore_parent_signal()
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	sigint_in_process(int sig)
 {
@@ -29,7 +35,7 @@ void	sigint_handler(int sig)
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	//rl_redisplay();
+	rl_redisplay();
 	(void) sig;
 }
 

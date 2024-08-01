@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 16:32:33 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:19:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_status = 0;
 
 void	write_exit_message(void)
 {
-	printf("\nexit\n");
+	printf("exit\n");
 }
 
 int	main(int ac, char **av, char **envp)
@@ -40,8 +40,6 @@ int	main(int ac, char **av, char **envp)
 		add_history(line);
 		handle_line(line, envp, env_list);
 		free(line);
-		rl_on_new_line();
-		rl_replace_line("", 0);
 	}
 	clear_env_list(env_list, 0);
 }

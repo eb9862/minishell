@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 20:36:27 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:17:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,6 @@ void				sigquit_in_process(int sig);
 void				sigint_handler(int sig);
 void				set_signal(void);
 void				set_heredoc_signal(void);
+void				ignore_parent_signal();
 
 #endif

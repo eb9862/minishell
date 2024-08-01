@@ -15,6 +15,7 @@
 void	heredoc_signal_handler(int signum)
 {
 	(void) signum;
+	write(2, "\n", 1);
 	exit(130);
 }
 
