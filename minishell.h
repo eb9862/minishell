@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 21:17:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 22:37:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,12 @@ int					expand_plain(t_q_token_list *list);
 int					delegate_quotes_syntax_check(char *line);
 void				set_rdrt(t_q_token_list *list);
 void				set_file_content(t_q_token_list *list);
+void				save_original(int *original_in, int *original_out);
+void				handle_multiple_process(t_process_list *process_list, char **envp, \
+    					pid_t *pids, t_env_list *el);
+void				handle_single_built_in(t_process_info *process, t_env_list *el);
+void				excute_child_process(t_process_info *process, char **envp, \
+						pid_t pids[], t_env_list *el);
 // 새로 구분한 파일
 void				excute_built_in(t_process_info *process, \
 						pid_t pids[], t_env_list *el);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 19:53:35 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:36:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,34 +94,6 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 		(close(fd[1]), dup2(fd[0], STDIN_FILENO), close(fd[0]));
 }
 
-// void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
-// {
-// 	int		fd[2];
-// 	pid_t	pid;
-
-// 	if (pipe(fd) == -1)
-// 		return ;
-// 	pid = fork();
-// 	signal(SIGQUIT, sigquit_in_process); // test
-// 	signal(SIGINT, sigint_in_process); // test too
-// 	pids[process -> idx] = pid;
-// 	if (pid == 0)
-// 	{
-// 		close(fd[0]);
-// 		if (process -> next)
-// 			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
-// 		if (process -> is_redirected)
-// 			set_stream(process -> in, process -> out);
-// 		run_built_in(process, el);
-// 		exit(0);
-// 	}
-// 	else
-// 	{
-// 		close(fd[1]);
-// 		(dup2(fd[0], STDIN_FILENO), close(fd[0]));
-// 	}
-// }
-
 void	excute_child_process(t_process_info *process, char **envp, \
 	pid_t pids[], t_env_list *el)
 {
@@ -134,28 +106,15 @@ void	excute_child_process(t_process_info *process, char **envp, \
 void	handle_process(t_process_list *process_list, \
 	char **envp, t_env_list *el, pid_t *pids)
 {
-	t_process_info	*process;
 	int				original_in;
 	int				original_out;
-	int				i;
 
-	i = -1;
-	process = process_list -> head;
-	original_in = dup(STDIN_FILENO);
-	original_out = dup(STDOUT_FILENO);
-	while (process)
-	{
-		++i;
-		excute_child_process(process, envp, pids, el);
-		process = process -> next;
-	}
-	i = -1;
-	while (++i < process_list -> count)
-	{
-		if (pids[i] != -1)
-			waitpid(pids[i], &g_status, 0);
-		set_signal();
-	}
+	save_original(&original_in, &original_out);
+	if (process_list -> count == 1 && \
+		is_buitin(process_list -> head -> program_name) != -1)
+		handle_single_built_in(process_list -> head, el);
+	else
+		handle_multiple_process(process_list, envp, pids, el);
 	(dup2(original_in, STDIN_FILENO), dup2(original_out, STDOUT_FILENO));
 	(close(original_in), close(original_out));
 }

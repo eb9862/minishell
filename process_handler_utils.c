@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:26 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 16:35:26 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:09:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	set_stream(int in, int out)
 		dup2(in, STDIN_FILENO);
 	if (out != 1)
 		dup2(out, 1);
+}
+
+void	save_original(int *original_in, int *original_out)
+{
+	*original_in = dup(STDIN_FILENO);
+	*original_out = dup(STDOUT_FILENO);
 }
 
 char	**get_paths(void)

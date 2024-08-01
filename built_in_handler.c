@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:26:06 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 16:35:29 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:25:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,25 @@ void	run_built_in(t_process_info *process, t_env_list *el)
 
 void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
 {
-	int	fd[2];
+	int		fd[2];
+	pid_t	pid;
 
+	if (pipe(fd) == -1)
+		return ;
+	pid = fork();
 	signal(SIGQUIT, sigquit_in_process);
 	signal(SIGINT, sigint_in_process);
-	pids[process -> idx] = -1;
-	if (!(process -> next))
-		close(0);
-	else
+	pids[process -> idx] = pid;
+	if (pid == 0)
 	{
-		if (pipe(fd) == -1)
-			return ;
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
+		if (process -> next)
+			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
+		if (process -> is_redirected)
+			set_stream(process -> in, process -> out);
+		run_built_in(process, el);
+		exit(0);
 	}
-	if (process -> is_redirected)
-		set_stream(process -> in, process -> out);
-	run_built_in(process, el);
+	else
+		(close(fd[1]), dup2(fd[0], STDIN_FILENO), close(fd[0]));
 }
