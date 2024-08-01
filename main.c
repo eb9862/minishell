@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 15:14:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 15:20:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	main(int ac, char **av, char **envp)
 	{
 		line = readline("porschell🏎  ");
 		if (!line)
+		{
+			write(1, "\n", 1);
 			break ;
+		}
 		add_history(line);
 		handle_line(line, envp, env_list);
 		free(line);
