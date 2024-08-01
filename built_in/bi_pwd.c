@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   bi_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:48:38 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 21:48:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 01:33:44 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <linux/limits.h> // linux PATH_MAX
-//#include <sys/syslimits.h>
+//#include <linux/limits.h> // linux PATH_MAX
+#include <sys/syslimits.h>
 #include <unistd.h>
 #include <stdio.h>
 

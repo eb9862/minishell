@@ -47,10 +47,12 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(DIR_LIBFT) all
 	$(MAKE) -C $(DIR_GNL) all
 	$(MAKE) -C $(DIR_BI) all
-	$(CC) $(CFLAGS)  $^ -o $(NAME)  -lgnl -L $(DIR_GNL) -lbi -L $(DIR_BI)  -lft -L $(DIR_LIBFT) -lreadline -L/usr/lib/x86_64-linux-gnu
+	$(CC) $(CFLAGS)  $^ -o $(NAME)  -lgnl -L $(DIR_GNL) -lbi -L $(DIR_BI)  -lft -L $(DIR_LIBFT) -lreadline -L/opt/homebrew/opt/readline/lib
+#-L/usr/lib/x86_64-linux-gnu
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I/usr/include/readline
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I/opt/homebrew/opt/readline/include
+#-I/usr/include/readline
 
 clean :
 	$(MAKE) -C $(DIR_LIBFT) clean
