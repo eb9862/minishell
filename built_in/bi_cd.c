@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   bi_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:47:01 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 22:24:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 12:30:42 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <linux/limits.h> // linux PATH_MAX
-//#include <sys/syslimits.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -27,9 +25,6 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		write(2, "bash: cd: too many arguments\n", 29);
 		return (1);
 	}
-	path = malloc(sizeof(char) * PATH_MAX);
-	if (!path)
-		return (1);
 	if (argc == 2)
 		path = p_argv[1];
 	else
@@ -40,9 +35,8 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		free(path);
 		return (1);
 	}
-	// free(path);
-	getcwd(path, PATH_MAX);
-	printf("%s\n", path);
+	path = getcwd(NULL, 0);
 	change_value(el, "PWD", path);
+	free(path);
 	return (0);
 }
