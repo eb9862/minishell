@@ -3,69 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 22:36:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/02 01:53:15 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_res_path(char *path, char *p_name, char **paths)
-{
-	int		size;
-	char	*res;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	size = get_content_len(path) + get_content_len(p_name) + 1;
-	res = (char *)malloc(sizeof(char) * (size + 1));
-	if (!res)
-	{
-		free_split(paths);
-		return (0);
-	}
-	while (path[j])
-		res[i++] = path[j++];
-	res[i++] = '/';
-	j = 0;
-	while (p_name[j])
-		res[i++] = p_name[j++];
-	res[i] = 0;
-	return (res);
-}
-
-char	*get_path_name(char *p_name)
-{
-	char	**paths;
-	int		i;
-	char	*tmp_path;
-
-	i = 0;
-	paths = get_paths();
-	if (!paths)
-		return (0);
-	while (paths[i])
-	{
-		tmp_path = get_res_path(paths[i], p_name, paths);
-		if (!tmp_path)
-			return (0);
-		if (access(tmp_path, F_OK) == 0 && access(tmp_path, X_OK) == 0)
-		{
-			free_split(paths);
-			return (tmp_path);
-		}
-		free(tmp_path);
-		i++;
-	}
-	free_split(paths);
-	if (access(p_name, F_OK) == 0 && access(p_name, X_OK) == 0)
-		return (p_name);
-	(handle_not_found_pg_or_directory(p_name), exit(127));
-}
 
 void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 {
@@ -75,10 +20,11 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 
 	if (pipe(fd) == -1)
 		return ;
+	ignore_parent_signal();
 	pid = fork();
+	pids[process -> idx] = pid;
 	signal(SIGQUIT, sigquit_in_process);
 	signal(SIGINT, sigint_in_process);
-	pids[process -> idx] = pid;
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -101,6 +47,40 @@ void	excute_child_process(t_process_info *process, char **envp, \
 		excute_cmd(process, envp, pids);
 	else
 		excute_built_in(process, pids, el);
+}
+
+void	handle_multiple_process(t_process_list *process_list, char **envp, \
+	pid_t *pids, t_env_list *el)
+{
+	int				i;
+	t_process_info	*process;
+
+	i = -1;
+	process = process_list -> head;
+	while (process)
+	{
+		++i;
+		excute_child_process(process, envp, pids, el);
+		process = process -> next;
+	}
+	i = -1;
+	while (++i < process_list -> count)
+	{
+		if (pids[i] != -1)
+		{
+			waitpid(pids[i], &g_status, 0);
+			if ((g_status & 255) != 0)
+				g_status = (g_status + 128) << 8;
+			set_signal();
+		}
+	}
+}
+
+void	handle_single_built_in(t_process_info *process, t_env_list *el)
+{
+	if (process -> is_redirected)
+		set_stream(process -> in, process -> out);
+	run_built_in(process, el);
 }
 
 void	handle_process(t_process_list *process_list, \
