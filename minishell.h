@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 22:37:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/02 01:55:59 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,10 @@ int					delegate_quotes_syntax_check(char *line);
 void				set_rdrt(t_q_token_list *list);
 void				set_file_content(t_q_token_list *list);
 void				save_original(int *original_in, int *original_out);
-void				handle_multiple_process(t_process_list *process_list, char **envp, \
-    					pid_t *pids, t_env_list *el);
-void				handle_single_built_in(t_process_info *process, t_env_list *el);
+void				handle_multiple_process(t_process_list *process_list, \
+						char **envp, pid_t *pids, t_env_list *el);
+void				handle_single_built_in(t_process_info *process, \
+						t_env_list *el);
 void				excute_child_process(t_process_info *process, char **envp, \
 						pid_t pids[], t_env_list *el);
 // 새로 구분한 파일
@@ -162,6 +163,7 @@ int					is_buitin(char *p_name);
 int					get_argc(char **argv);
 void				set_stream(int in, int out);
 char				**get_paths(void);
+char				*get_path_name(char *p_name);
 int					is_contains_slash(char *p_name);
 void				handle_not_found_pg_or_directory(char *p_name);
 // test
@@ -174,6 +176,6 @@ void				sigquit_in_process(int sig);
 void				sigint_handler(int sig);
 void				set_signal(void);
 void				set_heredoc_signal(void);
-void				ignore_parent_signal();
+void				ignore_parent_signal(void);
 
 #endif

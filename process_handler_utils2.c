@@ -12,30 +12,57 @@
 
 #include "minishell.h"
 
-void	handle_multiple_process(t_process_list *process_list, char **envp, \
-	pid_t *pids, t_env_list *el)
+char	*get_res_path(char *path, char *p_name, char **paths)
 {
-	int i = -1;
-	t_process_info *process;
+	int		size;
+	char	*res;
+	int		i;
+	int		j;
 
-	process = process_list -> head;
-	while (process)
+	i = 0;
+	j = 0;
+	size = get_content_len(path) + get_content_len(p_name) + 1;
+	res = (char *)malloc(sizeof(char) * (size + 1));
+	if (!res)
 	{
-		++i;
-		excute_child_process(process, envp, pids, el);
-		process = process -> next;
+		free_split(paths);
+		return (0);
 	}
-	i = -1;
-	while (++i < process_list -> count)
-	{
-		if (pids[i] != -1)
-			waitpid(pids[i], &g_status, 0);
-	}
+	while (path[j])
+		res[i++] = path[j++];
+	res[i++] = '/';
+	j = 0;
+	while (p_name[j])
+		res[i++] = p_name[j++];
+	res[i] = 0;
+	return (res);
 }
 
-void	handle_single_built_in(t_process_info *process, t_env_list *el)
+char	*get_path_name(char *p_name)
 {
-	if (process -> is_redirected)
-		set_stream(process -> in, process -> out);
-	run_built_in(process, el);
+	char	**paths;
+	int		i;
+	char	*tmp_path;
+
+	i = 0;
+	paths = get_paths();
+	if (!paths)
+		return (0);
+	while (paths[i])
+	{
+		tmp_path = get_res_path(paths[i], p_name, paths);
+		if (!tmp_path)
+			return (0);
+		if (access(tmp_path, F_OK) == 0 && access(tmp_path, X_OK) == 0)
+		{
+			free_split(paths);
+			return (tmp_path);
+		}
+		free(tmp_path);
+		i++;
+	}
+	free_split(paths);
+	if (access(p_name, F_OK) == 0 && access(p_name, X_OK) == 0)
+		return (p_name);
+	(handle_not_found_pg_or_directory(p_name), exit(127));
 }

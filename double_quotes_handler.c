@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 16:46:14 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:56:40 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*get_expanded_content(char *content, int dollar_idx)
 	if (is_dollar_question(content, dollar_idx))
 	{
 		c_status = ft_itoa(g_status >> 8);
+		printf("c_status : %s\n", c_status);
 		if (!c_status)
 			return (0);
 		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
