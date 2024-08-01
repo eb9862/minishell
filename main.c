@@ -6,13 +6,18 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 15:20:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:03:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int status = 0;
+
+void	write_exit_message()
+{
+	printf("\nexit\n");
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -29,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 		line = readline("porschell🏎  ");
 		if (!line)
 		{
-			write(1, "\n", 1);
+			write_exit_message();
 			break ;
 		}
 		add_history(line);
