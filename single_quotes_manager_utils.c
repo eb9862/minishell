@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:07:50 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/25 13:12:00 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:34:45 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,30 @@ int	trim_each_token_quotes(t_q_token_list *list)
 		now = now -> next;
 	}
 	return (1);
+}
+
+char	*combine_plain_plain(char *s1, char *s2)
+{
+	char	*combined_content;
+	int		size;
+	int		i1;
+	int		s_idx;
+
+	i1 = 1;
+	s_idx = 0;
+	size = ft_strlen(s1) + ft_strlen(s2) + 2;
+	combined_content = (char *)malloc(sizeof(char) * (size + 1));
+	if (!combined_content)
+		return (0);
+	combined_content[0] = '\'';
+	while (s1[s_idx])
+		combined_content[i1++] = s1[s_idx++];
+	//combined_content[i1++] = '\'';
+	s_idx = 0;
+	while (s2[s_idx])
+		combined_content[i1++] = s2[s_idx++];
+	combined_content[i1++] = '\'';
+	combined_content[i1] = 0;
+	free(s1);
+	return (combined_content);
 }

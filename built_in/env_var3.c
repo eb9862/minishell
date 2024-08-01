@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:01:52 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 22:30:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 19:23:04 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	change_value(t_env_list *lst, char *key, char *value)
 	t_env_node	*tmp_node;
 
 	tmp_node = find_node(lst, key);
-	key_equal = ft_substr(tmp_node -> content, 0, include_equal(tmp_node -> content) + 1);
+	key_equal = ft_substr(tmp_node -> content, 0, \
+		include_equal(tmp_node -> content) + 1);
 	if (tmp_node -> modified == 1)
 		free(tmp_node -> content);
 	tmp_node -> content = ft_strjoin(key_equal, value);

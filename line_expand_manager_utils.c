@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_expand_manager_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:02:42 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 16:14:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 19:22:18 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	get_type(char c)
 	return (PLAIN);
 }
 
-
 int	get_next_same_type_element_idx(char *line, int idx)
 {
 	int	type;
@@ -57,11 +56,8 @@ int	get_next_same_type_element_idx(char *line, int idx)
 		{
 			count++;
 			idx++;
-			if (type == RDRT_L || type == RDRT_R)
-			{
-				if (count == 1)
-					break;
-			}
+			if ((type == RDRT_L || type == RDRT_R) && count == 1)
+				break ;
 		}
 		return (idx - 1);
 	}

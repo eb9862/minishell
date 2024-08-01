@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_validator.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:07:58 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 16:17:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:10:26 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	is_valid_rdrt_token(t_q_token_list *list)
 				handle_missed_file_error();
 				return (0);
 			}
-			else if (now -> next -> type == RDRT_AO || now ->  next -> \
+			else if (now -> next -> type == RDRT_AO || now -> next -> \
 				type == RDRT_TO || now -> next -> type == RDRT_HD || now ->\
-			 	next -> type == RDRT_IN )
+				next -> type == RDRT_IN)
 			{
 				handle_rdrt_err(now -> next -> content);
 				return (0);

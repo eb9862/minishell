@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 15:17:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:51:27 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int	status;
 
 int	is_delemeter(char *line, char *delemeter)
 {
@@ -38,7 +36,7 @@ int	create_heredoc_file(char *delemeter)
 		if (is_delemeter(line, delemeter))
 		{
 			free(line);
-			break;
+			break ;
 		}
 		write(fd, line, ft_strlen(line));
 		free(line);
@@ -62,19 +60,18 @@ int	create_child_process_4_heredoc(char *delemeter)
 	}
 	else
 	{
-		waitpid(pid, &status, 0);
-		if (status >> 8 == 130)
+		waitpid(pid, &g_status, 0);
+		if (g_status >> 8 == 130)
 			return (0);
 		return (1);
 	}
 }
 
-
 int	handle_heredoc(t_q_token_list *list, t_q_token *now)
 {
 	char	*delemeter;
 	int		fd;
-	
+
 	delemeter = now -> content;
 	if (!create_child_process_4_heredoc(delemeter))
 	{

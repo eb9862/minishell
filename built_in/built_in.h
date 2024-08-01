@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 18:21:43 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:29:23 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		join_value(t_env_list *lst, char *key, char *value);
 int			validate_key(char *key);
 void		not_valid_identifier(char *s);
 void		clear_env_list_no_op(t_env_list *env_list);
+void		clear_env_node(t_env_node *node);
 
 t_env_list	*init_env(char **envp);
 t_env_list	*copy_env_list(t_env_node *head);

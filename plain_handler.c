@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   plain_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 00:24:51 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:21:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:54:13 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int status;
 
 int	expand_plain(t_q_token_list *list)
 {

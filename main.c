@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 16:03:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 16:32:33 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int status = 0;
+int	g_status = 0;
 
-void	write_exit_message()
+void	write_exit_message(void)
 {
 	printf("\nexit\n");
 }
@@ -26,9 +26,9 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	status = 0;
+	g_status = 0;
 	env_list = init_env(envp);
-	set_signal(); // test
+	set_signal();
 	while (1)
 	{
 		line = readline("porschell🏎  ");
