@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 01:26:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 14:36:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	main(int ac, char **av, char **envp)
 		handle_line(line, envp, env_list);
 		free(line);
 	}
-	clear_env_list_no_op(env_list);
+	clear_env_list(env_list, 0);
 }
