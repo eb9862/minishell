@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 01:53:15 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 02:38:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	handle_single_built_in(t_process_info *process, t_env_list *el)
 {
 	if (process -> is_redirected)
 		set_stream(process -> in, process -> out);
-	run_built_in(process, el);
+	run_built_in(process, el, 1);
 }
 
 void	handle_process(t_process_list *process_list, \

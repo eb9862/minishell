@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 01:55:59 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 02:37:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void				excute_child_process(t_process_info *process, char **envp, \
 // 새로 구분한 파일
 void				excute_built_in(t_process_info *process, \
 						pid_t pids[], t_env_list *el);
-void				run_built_in(t_process_info *process, t_env_list *el);
+void				run_built_in(t_process_info *process, t_env_list *el, int is_single_cmd);
 int					is_buitin(char *p_name);
 int					get_argc(char **argv);
 void				set_stream(int in, int out);

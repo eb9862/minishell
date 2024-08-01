@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:26:06 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 22:25:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/02 02:37:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	is_buitin(char *p_name)
 	return (-1);
 }
 
-void	run_built_in(t_process_info *process, t_env_list *el)
+void	run_built_in(t_process_info *process, t_env_list *el, int is_single_cmd)
 {
 	int	argc;
 	int	type;
@@ -67,7 +67,12 @@ void	run_built_in(t_process_info *process, t_env_list *el)
 		unset(argc, process -> argv, el);
 	if (type == ENV)
 		env(el);
-	if (type == EXIT)
+	if (type == EXIT && is_single_cmd)
+	{
+		write(1, "exit\n", 5);
+		bi_exit(argc, process -> argv);
+	}
+	else if (type == EXIT && !is_single_cmd)
 		bi_exit(argc, process -> argv);
 }
 
@@ -89,7 +94,7 @@ void	excute_built_in(t_process_info *process, pid_t pids[], t_env_list *el)
 			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
 		if (process -> is_redirected)
 			set_stream(process -> in, process -> out);
-		run_built_in(process, el);
+		run_built_in(process, el, 0);
 		exit(0);
 	}
 	else

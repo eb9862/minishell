@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:49:45 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/15 18:56:42 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 02:24:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int	bi_exit(int argc, char *argv[])
 {
-	write(1, "exit\n", 5);
 	if (argc == 1)
 		exit(0);
 	if (argc >= 2)
