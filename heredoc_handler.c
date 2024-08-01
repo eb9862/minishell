@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:34:33 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:20:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/01 14:56:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ extern int	status;
 
 int	is_delemeter(char *line, char *delemeter)
 {
-	if (ft_strlen(delemeter) != ft_strlen(line))
+	if (ft_strlen(delemeter) != ft_strlen(line) - 1)
 		return (0);
-	if (ft_strncmp(delemeter, line, ft_strlen(line)) == 0)
+	if (ft_strncmp(delemeter, line, ft_strlen(line) - 1) == 0)
 		return (1);
 	return (0);
 }
@@ -33,14 +33,15 @@ int	create_heredoc_file(char *delemeter)
 		return (0);
 	while (1)
 	{
-		line = readline("> ");
+		write(1, "> ", 2);
+		line = get_next_line(0);
 		if (is_delemeter(line, delemeter))
 		{
 			free(line);
 			break;
 		}
 		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		// write(fd, "\n", 1);
 		free(line);
 	}
 	close(fd);
@@ -54,6 +55,7 @@ int	create_child_process_4_heredoc(char *delemeter)
 	pid = fork();
 	if (pid == 0)
 	{
+		set_heredoc_signal();
 		if (!create_heredoc_file(delemeter))
 			exit(1);
 		else
@@ -62,7 +64,7 @@ int	create_child_process_4_heredoc(char *delemeter)
 	else
 	{
 		waitpid(pid, &status, 0);
-		if (status == 1)
+		if (status >> 8 == 130)
 			return (0);
 		return (1);
 	}
