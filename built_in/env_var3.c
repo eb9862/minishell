@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:01:52 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 19:23:04 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:17:55 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,34 @@ void	change_value(t_env_list *lst, char *key, char *value)
 	tmp_node = find_node(lst, key);
 	key_equal = ft_substr(tmp_node -> content, 0, \
 		include_equal(tmp_node -> content) + 1);
-	if (tmp_node -> modified == 1)
-		free(tmp_node -> content);
+	//if (tmp_node -> modified == 1)
+	free(tmp_node -> content);
 	tmp_node -> content = ft_strjoin(key_equal, value);
-	tmp_node -> modified = 1;
+	//tmp_node -> modified = 1;
 	free(key_equal);
 }
 
 void	join_value(t_env_list *lst, char *key, char *value)
 {
 	t_env_node	*tmp_node;
+	char	*rm_content;
 
 	tmp_node = find_node(lst, key);
-	if (tmp_node -> modified)
+	//if (tmp_node -> modified)
+	//	free(tmp_node -> content);
+	if (include_equal(tmp_node -> content) == -1)
+	{
+		rm_content = ft_strjoin(tmp_node -> content, "=");
 		free(tmp_node -> content);
-	tmp_node -> content = ft_strjoin(tmp_node -> content, value);
+		tmp_node -> content = ft_strjoin(rm_content, value);
+		free(rm_content);
+	}
+	else
+	{
+		rm_content = tmp_node -> content;
+		tmp_node -> content = ft_strjoin(tmp_node -> content, value);
+		free(rm_content);
+	}
 }
 
 int	validate_key(char *key)

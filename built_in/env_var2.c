@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:59:53 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/31 18:30:38 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:02:06 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ t_env_list	*copy_env_list(t_env_node *head)
 	env_list -> tail = NULL;
 	while (head)
 	{
-		env_node = create_env_node(head -> content, head -> modified);
+		env_node = create_env_node(head -> content);
 		if (!env_node)
 		{
-			clear_env_list(env_list, 1);
+			clear_env_list(env_list);
 			return (0);
 		}
 		add_node_last(env_list, env_node);
