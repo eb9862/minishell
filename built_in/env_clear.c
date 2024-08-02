@@ -30,7 +30,6 @@ void	clear_env_list_no_op(t_env_list *list)
 
 void	clear_env_node(t_env_node *node)
 {
-	//if (node -> modified == 1)
 	free(node -> content);
 	free(node);
 }
