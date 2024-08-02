@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:26 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 22:09:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/02 17:12:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	handle_not_found_pg_or_directory(char *p_name)
 	}
 	else
 	{
-		write(2, p_name, get_content_len(p_name));
-		write(2, ": command not found\n", \
-			get_content_len(": command not found\n"));
+		not_found_programe_msg(p_name);
 	}
 }

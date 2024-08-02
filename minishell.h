@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 02:37:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/02 17:12:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <dirent.h>
 
 extern int	g_status;
 
@@ -166,6 +167,9 @@ char				**get_paths(void);
 char				*get_path_name(char *p_name);
 int					is_contains_slash(char *p_name);
 void				handle_not_found_pg_or_directory(char *p_name);
+void				is_directory_msg(char *p_name);
+void				single_dot_err_msg(char *p_name);
+void				not_found_programe_msg(char *p_name);
 // test
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);

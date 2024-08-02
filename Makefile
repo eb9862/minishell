@@ -41,6 +41,7 @@ SRCS =	line_handler.c\
 		plain_handler.c\
 		signal_handler.c\
 		heredoc_signal_handler.c\
+		process_handler_errmsg.c\
 
 OBJS = $(SRCS:.c=.o)
 

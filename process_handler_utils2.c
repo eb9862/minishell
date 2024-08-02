@@ -38,17 +38,60 @@ char	*get_res_path(char *path, char *p_name, char **paths)
 	return (res);
 }
 
+int	is_directory(char *p_name)
+{
+	DIR	*dir;
+
+	dir = opendir(p_name);
+	if (dir)
+	{
+		is_directory_msg(p_name);
+		closedir(dir);
+		exit(126);
+		return (1);
+	}
+	return (0);
+}
+
+int	has_only_dot(char *p_name)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = get_content_len(p_name);
+	while (i < len)
+	{
+		if (p_name[i] != '.')
+			return (0);
+		i++;
+	}
+	if (len == 1)
+	{
+		single_dot_err_msg(p_name);
+		exit(2);
+	}
+	if (len > 1)
+	{
+		not_found_programe_msg(p_name);
+		exit(127);
+	}
+	return (1);
+}
+
 char	*get_path_name(char *p_name)
 {
 	char	**paths;
 	int		i;
 	char	*tmp_path;
 
-	i = 0;
+	i = -1;
+	if (has_only_dot(p_name) || is_directory(p_name))
+		return (0);
 	paths = get_paths();
 	if (!paths)
 		return (0);
-	while (paths[i])
+	while (paths[++i])
 	{
 		tmp_path = get_res_path(paths[i], p_name, paths);
 		if (!tmp_path)
@@ -59,7 +102,6 @@ char	*get_path_name(char *p_name)
 			return (tmp_path);
 		}
 		free(tmp_path);
-		i++;
 	}
 	free_split(paths);
 	if (access(p_name, F_OK) == 0 && access(p_name, X_OK) == 0)

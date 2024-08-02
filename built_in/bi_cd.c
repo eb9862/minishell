@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:47:01 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 12:30:42 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:30:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		path = getenv("HOME");
 	if (chdir(path) != 0) // 디렉토리 변경 성공 시 0, 실패시 -1 반환
 	{
+		printf("dasdadsadas\n");
 		perror("Fail to change directory\n");
-		free(path);
 		return (1);
 	}
 	path = getcwd(NULL, 0);
