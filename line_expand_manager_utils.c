@@ -38,6 +38,8 @@ int	get_type(char c)
 		return (RDRT_L);
 	if (c == '|')
 		return (PIP);
+	if (c == '\t')
+		return (TAB_TYPE);
 	return (PLAIN);
 }
 
@@ -50,7 +52,8 @@ int	get_next_same_type_element_idx(char *line, int idx)
 	type = get_type(line[idx++]);
 	if (type == PIP)
 		return (idx - 1);
-	if (type == PLAIN || type == SPACE_TYPE || type == RDRT_L || type == RDRT_R)
+	if (type == PLAIN || type == SPACE_TYPE || type == RDRT_L || type == RDRT_R \
+		|| type == TAB_TYPE)
 	{
 		while (line[idx] && get_type(line[idx]) == type)
 		{

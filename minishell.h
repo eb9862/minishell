@@ -52,6 +52,7 @@ enum e_q_token_type
 {
 	PLAIN = 0,
 	SPACE_TYPE,
+	TAB_TYPE,
 	SINGLE_QUOTES,
 	DOUBLE_QOUTES,
 	RDRT_L,
@@ -122,7 +123,7 @@ void				clear_q_token_list(t_q_token_list *list);
 int					handle_single_quotes(t_q_token_list *list);
 void				clear_q_token(t_q_token *token);
 int					expand_redirection(t_q_token_list *list);
-void				delete_space(t_q_token_list *list);
+void				delete_space_tab(t_q_token_list *list);
 int					validate_token_list(t_q_token_list *list);
 void				handle_rdrt_err(char *content);
 void				handle_missed_file_error(void);

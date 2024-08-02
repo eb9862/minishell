@@ -97,7 +97,7 @@ t_q_token_list	*get_expand_line(char *line)
 		return (0);
 	if (!handle_single_quotes(list))
 		return (0);
-	delete_space(list);
+	delete_space_tab(list);
 	set_rdrt(list);
 	if (!validate_token_list(list))
 		return (0);

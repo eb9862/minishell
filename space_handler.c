@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	delete_space(t_q_token_list *list)
+void	delete_space_tab(t_q_token_list *list)
 {
 	t_q_token	*now;
 	t_q_token	*prev;
@@ -21,7 +21,7 @@ void	delete_space(t_q_token_list *list)
 	prev = NULL;
 	while (now)
 	{
-		if (now -> type == SPACE_TYPE)
+		if (now -> type == SPACE_TYPE || now -> type == TAB_TYPE)
 		{
 			if (!prev)
 				list -> head = now -> next;

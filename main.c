@@ -19,13 +19,24 @@ void	write_exit_message(void)
 	printf("exit\n");
 }
 
+void	excute_err_msg(int ac, char **av)
+{
+	(void) av;
+	(void) ac;
+	write(2, "prochell doesn't need any arguments!!\n", 
+		get_content_len("prochell doesn't need any arguments!!\n"));
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char		*line;
 	t_env_list	*env_list;
 
-	(void)ac;
-	(void)av;
+	if (ac != 1)
+	{
+		excute_err_msg(ac, av);
+		return (0);
+	}
 	g_status = 0;
 	env_list = init_env(envp);
 	set_signal();
