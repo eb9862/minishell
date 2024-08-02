@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 19:29:34 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:02:02 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "built_in.h"
 
-t_env_node	*create_env_node(char *content, int modi)
+t_env_node	*create_env_node(char *content)
 {
 	t_env_node	*node;
 
 	node = (t_env_node *)malloc(sizeof(t_env_node));
 	if (!node)
 		return (0);
-	node -> content = content;
+	node -> content = ft_strdup(content);
 	node -> next = NULL;
-	node -> modified = modi;
+	//node -> modified = modi;
 	return (node);
 }
 
-void	clear_env_list(t_env_list *env_list, int copied)
+void	clear_env_list(t_env_list *env_list)
 {
 	t_env_node	*now;
 	t_env_node	*tmp;
@@ -37,8 +37,8 @@ void	clear_env_list(t_env_list *env_list, int copied)
 		while (now)
 		{
 			tmp = now -> next;
-			if (copied == 0 && now -> modified == 1)
-				free(now -> content);
+			//if (copied == 0 && now -> modified == 1)
+			free(now -> content);
 			free(now);
 			now = tmp;
 		}
@@ -79,10 +79,10 @@ t_env_list	*init_env(char **envp)
 	env_list -> tail = NULL;
 	while (envp[i])
 	{
-		env_node = create_env_node(envp[i], 0);
+		env_node = create_env_node(envp[i]);
 		if (!env_node)
 		{
-			clear_env_list(env_list, 0);
+			clear_env_list(env_list);
 			return (0);
 		}
 		add_node_last(env_list, env_node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_export_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:59:17 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 19:24:32 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:13:12 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	export_no_arg(t_env_list *lst)
 		free_2d(res);
 		tmp_node = tmp_node -> next;
 	}
-	clear_env_list(tmp_lst, 1);
+	clear_env_list(tmp_lst);
 }
 
 static void	plus_equal(t_env_list *lst, char *arg, int eq, int plus)
@@ -48,6 +48,7 @@ static void	plus_equal(t_env_list *lst, char *arg, int eq, int plus)
 	char	*key;
 	char	*value;
 	char	*key_eq;
+	char	*env_content;
 
 	key = ft_substr(arg, 0, plus);
 	value = ft_substr(arg, eq + 1, ft_strlen(arg) - eq + 1);
@@ -56,7 +57,9 @@ static void	plus_equal(t_env_list *lst, char *arg, int eq, int plus)
 	else
 	{
 		key_eq = ft_strjoin(key, "=");
-		add_node_last(lst, create_env_node(ft_strjoin(key_eq, value), 1));
+		env_content = ft_strjoin(key_eq, value);
+		add_node_last(lst, create_env_node(env_content));
+		free(env_content);
 		free(key_eq);
 	}
 	free(key);
@@ -77,7 +80,7 @@ static void	equal_in_arg(t_env_list *lst, char *arg, int eq)
 		else if (is_in_envp(lst, key_value[0]) == 0)
 			change_value(lst, key_value[0], key_value[1]);
 		else
-			add_node_last(lst, create_env_node(arg, 0));
+			add_node_last(lst, create_env_node(arg));
 		free_2d(key_value);
 	}
 	else
@@ -87,7 +90,7 @@ static void	equal_in_arg(t_env_list *lst, char *arg, int eq)
 		else if (plus == eq - 1)
 			plus_equal(lst, arg, eq, plus);
 		else
-			add_node_last(lst, create_env_node(arg, 0));
+			add_node_last(lst, create_env_node(arg));
 	}
 }
 
@@ -105,7 +108,7 @@ static void	export_with_arg(t_env_list *lst, int argc, char **argv)
 			if (validate_key(argv[i]) == -1)
 				not_valid_identifier(argv[i]);
 			else if (is_in_envp(lst, argv[i]) != 0)
-				add_node_last(lst, create_env_node(argv[i], 0));
+				add_node_last(lst, create_env_node(argv[i]));
 				// 지금은 마지막에 추가했는데 env로 확인해보면 마지막에 들아가는게 아닌거 같음 // 무슨 순서???
 			// else 같은 key의 환경변수가 이미 존재하면 아무 변화없음
 		}
@@ -128,3 +131,12 @@ void	export(int argc, t_env_list *lst, char **argv)
 // bash: export: `e-=world': not a valid identifier
 // bash: export: `=': not a valid identifier
 // bash: export: `b++': not a valid identifier
+
+// cc bi_export_new.c libbi.a ../libft/libft.a
+/*int main(int ac, char **av, char **envp)
+{
+	t_env_list	*el;
+
+	el = init_env(envp);
+	export(ac, el, av);
+}*/

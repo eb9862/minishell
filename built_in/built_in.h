@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 19:29:23 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:01:59 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			is_numeric(char *s);
 int			is_ll(char *s);
 int			count_argc(char **argv);
 
-void		clear_env_list(t_env_list *env_list, int copied);
+void		clear_env_list(t_env_list *env_list);
 void		add_node_last(t_env_list *env_list, t_env_node *node);
 void		del_env_node(t_env_list *list, t_env_node *target_node);
 int			include_equal(char *s);
@@ -63,7 +63,7 @@ void		clear_env_node(t_env_node *node);
 
 t_env_list	*init_env(char **envp);
 t_env_list	*copy_env_list(t_env_node *head);
-t_env_node	*create_env_node(char *content, int modi);
+t_env_node	*create_env_node(char *content);
 t_env_node	*find_node(t_env_list *lst, char *target_key);
 
 #endif
