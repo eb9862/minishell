@@ -31,8 +31,10 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		path = getenv("HOME");
 	if (chdir(path) != 0) // 디렉토리 변경 성공 시 0, 실패시 -1 반환
 	{
-		printf("dasdadsadas\n");
-		perror("Fail to change directory\n");
+		write(2, "porshell: cd: ", 15);
+		write(2, path, ft_strlen(path));
+		write(2, ": ", 3);
+		perror("");
 		return (1);
 	}
 	path = getcwd(NULL, 0);
