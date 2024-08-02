@@ -97,10 +97,7 @@ char	*get_path_name(char *p_name)
 		if (!tmp_path)
 			return (0);
 		if (access(tmp_path, F_OK) == 0 && access(tmp_path, X_OK) == 0)
-		{
-			free_split(paths);
-			return (tmp_path);
-		}
+			return (free_split(paths), tmp_path);
 		free(tmp_path);
 	}
 	free_split(paths);
