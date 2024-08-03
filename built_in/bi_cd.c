@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:47:01 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 16:30:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/03 17:31:43 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 
 	if (argc > 2)
 	{
-		write(2, "bash: cd: too many arguments\n", 29);
+		write(2, "porschell: cd: too many arguments\n", 29);
 		return (1);
 	}
 	if (argc == 2)
@@ -31,7 +31,7 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 		path = getenv("HOME");
 	if (chdir(path) != 0) // 디렉토리 변경 성공 시 0, 실패시 -1 반환
 	{
-		write(2, "porshell: cd: ", 15);
+		write(2, "porschell: cd: ", 15);
 		write(2, path, ft_strlen(path));
 		write(2, ": ", 3);
 		perror("");

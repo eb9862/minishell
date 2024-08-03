@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 19:24:21 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 21:02:02 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/03 16:46:10 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_env_node	*create_env_node(char *content)
 		return (0);
 	node -> content = ft_strdup(content);
 	node -> next = NULL;
-	//node -> modified = modi;
 	return (node);
 }
 
@@ -37,7 +36,6 @@ void	clear_env_list(t_env_list *env_list)
 		while (now)
 		{
 			tmp = now -> next;
-			//if (copied == 0 && now -> modified == 1)
 			free(now -> content);
 			free(now);
 			now = tmp;

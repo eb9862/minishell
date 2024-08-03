@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_signal_handler.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 14:52:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/01 14:52:16 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/03 16:50:31 by eunhwang          #+#    #+#             */
+/*   Updated: 2024/08/03 16:50:31 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:26 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 17:12:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/03 16:55:33 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,5 @@ void	handle_not_found_pg_or_directory(char *p_name)
 			get_content_len(": No such file or directory\n"));
 	}
 	else
-	{
 		not_found_programe_msg(p_name);
-	}
 }

@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+// test code
+int	is_only_dollar_sign(char *p_name)
+{
+	int	l;
+
+	l = get_content_len(p_name);
+	if (l == 1 && p_name[0] == '$')
+	{
+		not_found_programe_msg(p_name);
+		exit(127);
+	}
+	return (0);
+}
+// test code end ###############################
+
 char	*get_res_path(char *path, char *p_name, char **paths)
 {
 	int		size;
@@ -86,7 +101,8 @@ char	*get_path_name(char *p_name)
 	char	*tmp_path;
 
 	i = -1;
-	if (has_only_dot(p_name) || is_directory(p_name))
+	if (has_only_dot(p_name) || is_directory(p_name) || \
+		is_only_dollar_sign(p_name))
 		return (0);
 	paths = get_paths();
 	if (!paths)

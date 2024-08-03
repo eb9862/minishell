@@ -35,7 +35,7 @@ void	single_dot_err_msg(char *p_name)
 
 void	not_found_programe_msg(char *p_name)
 {
-	write(2, "porschell: ", get_content_len("porschell: "));
+	//write(2, "porschell: ", get_content_len("porschell: "));
 	write(2, p_name, get_content_len(p_name));
 	write(2, ": command not found\n", \
 		get_content_len(": command not found\n"));
