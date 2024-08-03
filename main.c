@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 22:09:46 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:38:05 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	excute_err_msg(int ac, char **av)
 {
 	(void) av;
 	(void) ac;
-	write(2, "prochell doesn't need any arguments!!\n", \
-		get_content_len("prochell doesn't need any arguments!!\n"));
+	write(2, "porschell doesn't need any arguments!!\n", \
+		get_content_len("porschell doesn't need any arguments!!\n"));
 }
 
 int	main(int ac, char **av, char **envp)

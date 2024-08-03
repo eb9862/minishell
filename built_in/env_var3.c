@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:01:52 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 22:10:24 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:32:45 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	validate_key(char *key)
 
 void	not_valid_identifier(char *s)
 {
-	write(1, "bash: export: `", 16);
+	write(1, "porschell: export: `", 16);
 	write(1, s, ft_strlen(s));
 	write(1, "\': not a valid identifier\n", 27);
 }

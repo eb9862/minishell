@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   double_quotes_handler.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 16:06:04 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 02:29:03 by marvin           ###   ########.fr       */
+/*   Created: 2024/08/03 16:50:09 by eunhwang          #+#    #+#             */
+/*   Updated: 2024/08/03 17:53:56 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// test code
+int	is_only_dollar(char *content)
+{
+	int	l;
+
+	l = get_content_len(content);
+	if (l == 1 && content[0] == '$')
+		return (1);
+	return (0);
+}
+// test code end #######################################
 
 int	is_dollar_question(char *content, int dollar_idx)
 {
@@ -33,7 +45,13 @@ char	*get_expanded_content(char *content, int dollar_idx)
 		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
 		free(c_status);
 	}
-	else
+	else if (is_only_dollar(content)) // test code ###############
+	{
+		expanded_content = malloc(sizeof(char) * 2);
+		expanded_content[0] = '$';
+		expanded_content[1] = '\0';
+	}
+	else // test code end #############################
 	{
 		only_env = get_only_env(content + dollar_idx + 1);
 		if (!only_env)
