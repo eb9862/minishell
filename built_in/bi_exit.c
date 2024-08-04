@@ -19,7 +19,7 @@ int	bi_exit(int argc, char *argv[])
 {
 	if (argc == 1)
 		exit(0);
-	if (argc == 2 && (is_numeric(argv[1]) == 0 || is_ll(argv[1]) == 0))
+	if (argc == 2 && (is_numeric(argv[1]) == 0 && is_ll(argv[1]) == 0))
 		exit(ft_atoi(argv[1]) % 256);
 	if (argc >= 2)
 	{
@@ -34,7 +34,6 @@ int	bi_exit(int argc, char *argv[])
 			if (argc > 2)
 			{
 				write(2, "porschell: exit: too many arguments\n", 31);
-				write(1, "not exit\n", 9);
 				return (1);
 			}
 		}

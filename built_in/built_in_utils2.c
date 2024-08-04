@@ -31,7 +31,6 @@ int	is_numeric(char *s)
 	return (0);
 }
 
-// long long 범위 -9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807
 int	is_ll(char *s)
 {
 	if (is_numeric(s) == -1)
