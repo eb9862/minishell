@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:50:24 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/03 16:50:25 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/04 23:46:24 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,21 @@ int	create_heredoc_file(char *delemeter)
 {
 	int		fd;
 	char	*line;
+	int		ctrl_d;
 
 	fd = open("tmp_file", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (0);
+	ctrl_d = 0;
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
+		if (!line)
+		{
+			ctrl_d = 1;
+			break ;
+		}
 		if (is_delemeter(line, delemeter))
 		{
 			free(line);
@@ -42,6 +49,8 @@ int	create_heredoc_file(char *delemeter)
 		free(line);
 	}
 	close(fd);
+	if (ctrl_d == 1)
+		printf("porschell: warning: here-document at line 130 delimited by end-of-file (wanted `%s')\n", delemeter);
 	return (1);
 }
 
