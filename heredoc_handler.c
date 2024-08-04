@@ -21,6 +21,20 @@ int	is_delemeter(char *line, char *delemeter)
 	return (0);
 }
 
+void	check_line(char **line, int *ctrl_d)
+{
+	if (!(*line))
+		*ctrl_d = 1;
+	else
+		free(*line);
+}
+
+void	print_ctrl_d_msg(char *delemeter)
+{
+	printf("porschell: warning: here-document at line 130 delimited");
+	printf(" by end-of-file (wanted `%s')\n", delemeter);
+}
+
 int	create_heredoc_file(char *delemeter)
 {
 	int		fd;
@@ -35,22 +49,16 @@ int	create_heredoc_file(char *delemeter)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		if (!line)
+		if (!line || is_delemeter(line, delemeter))
 		{
-			ctrl_d = 1;
+			check_line(&line, &ctrl_d);
 			break ;
 		}
-		if (is_delemeter(line, delemeter))
-		{
-			free(line);
-			break ;
-		}
-		write(fd, line, ft_strlen(line));
-		free(line);
+		(write(fd, line, ft_strlen(line)), free(line));
 	}
 	close(fd);
 	if (ctrl_d == 1)
-		printf("porschell: warning: here-document at line 130 delimited by end-of-file (wanted `%s')\n", delemeter);
+		print_ctrl_d_msg(delemeter);
 	return (1);
 }
 

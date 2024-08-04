@@ -37,6 +37,7 @@ SRCS =	line_handler.c\
 		file_manager.c\
 		file_error_handler.c\
 		heredoc_handler.c\
+		heredoc_handler_utils.c\
 		process_create_manager.c\
 		process_create_utils.c\
 		plain_handler.c\
