@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_export_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:59:17 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 21:13:12 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/04 15:51:29 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ static void	export_with_arg(t_env_list *lst, int argc, char **argv)
 				not_valid_identifier(argv[i]);
 			else if (is_in_envp(lst, argv[i]) != 0)
 				add_node_last(lst, create_env_node(argv[i]));
-				// 지금은 마지막에 추가했는데 env로 확인해보면 마지막에 들아가는게 아닌거 같음 // 무슨 순서???
 			// else 같은 key의 환경변수가 이미 존재하면 아무 변화없음
 		}
 		else
@@ -122,8 +121,7 @@ void	export(int argc, t_env_list *lst, char **argv)
 {
 	if (argc == 1)
 		export_no_arg(lst);
-	// 새로운 환경변수를 추가하게 되면 env 명령어 결과의 순서가 어떻게 ???
-	else
+	else // 새로운 환경변수를 추가하게 되면 env 명령어 결과의 순서가 어떻게 ???
 		export_with_arg(lst, argc, argv);
 }
 

@@ -6,13 +6,12 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:50:09 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/03 17:53:56 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/04 15:55:16 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// test code
 int	is_only_dollar(char *content)
 {
 	int	l;
@@ -22,7 +21,6 @@ int	is_only_dollar(char *content)
 		return (1);
 	return (0);
 }
-// test code end #######################################
 
 int	is_dollar_question(char *content, int dollar_idx)
 {
@@ -45,13 +43,9 @@ char	*get_expanded_content(char *content, int dollar_idx)
 		expanded_content = get_new_content_ds(content, dollar_idx, c_status);
 		free(c_status);
 	}
-	else if (is_only_dollar(content)) // test code ###############
-	{
-		expanded_content = malloc(sizeof(char) * 2);
-		expanded_content[0] = '$';
-		expanded_content[1] = '\0';
-	}
-	else // test code end #############################
+	else if (is_only_dollar(content))
+		expanded_content = malloc_only_dollar_sign();
+	else
 	{
 		only_env = get_only_env(content + dollar_idx + 1);
 		if (!only_env)
