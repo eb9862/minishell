@@ -26,6 +26,7 @@ SRCS =	line_handler.c\
 		double_quotes_handler.c\
 		double_quotes_handler_utils.c\
 		double_quotes_handler_utils_2.c\
+		double_quotes_handler_utils_3.c\
 		line_expand_clear.c\
 		single_quotes_manager.c\
 		single_quotes_manager_utils.c\
