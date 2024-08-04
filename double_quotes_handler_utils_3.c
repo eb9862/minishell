@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_env.c                                           :+:      :+:    :+:   */
+/*   double_quotes_handler_utils_3.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 18:58:07 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/04 15:51:11 by eunhwang         ###   ########.fr       */
+/*   Created: 2024/08/04 15:54:36 by eunhwang          #+#    #+#             */
+/*   Updated: 2024/08/04 15:55:46 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "minishell.h"
 
-#include "built_in.h"
-
-void	env(t_env_list *lst)
+char	*malloc_only_dollar_sign(void)
 {
-	size_t		l;
-	t_env_node	*tmp;
+	char	*dollar_sign;
 
-	tmp = lst -> head;
-	while (tmp)
-	{
-		if (include_equal(tmp -> content) != -1)
-		{
-			l = ft_strlen(tmp -> content);
-			write(1, tmp->content, l);
-			write(1, "\n", 1);
-		}
-		tmp = tmp->next;
-	}
+	dollar_sign = malloc(sizeof(char) * 2);
+	dollar_sign[0] = '$';
+	dollar_sign[1] = '\0';
+	return (dollar_sign);
 }
-// 비교 시에 마지막 환경변수 차이 _=./test | _=/usr/bin/env
