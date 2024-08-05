@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/04 15:55:05 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:31:00 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,14 @@ void				not_found_programe_msg(char *p_name);
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);
 void				print_q_token(t_q_token_list *list);
-// test too
+// test
 void				sigint_in_process(int sig);
 void				sigquit_in_process(int sig);
 void				sigint_handler(int sig);
 void				set_signal(void);
 void				set_heredoc_signal(void);
 void				ignore_parent_signal(void);
+void				check_line(char **line, int *ctrl_d);
+void				print_ctrl_d_msg(char *delemeter);
 
 #endif
