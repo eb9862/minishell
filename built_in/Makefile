@@ -6,8 +6,6 @@ NAME = libbi.a
 
 HEADER = built_in.h libft.h
 
-#DIR_LIBFT = ../libft
-
 SRCS =	bi_cd.c\
 		bi_echo.c\
 		bi_env.c\
@@ -20,8 +18,7 @@ SRCS =	bi_cd.c\
 		env_var.c\
 		env_var2.c\
 		env_var3.c\
-		env_clear.c\
-		#test_main.c
+		env_clear.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,7 +31,6 @@ $(NAME) : $(OBJS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-#-lft -L $(DIR_LIBFT)
 
 clean :
 	rm -rf $(OBJS)

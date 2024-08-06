@@ -6,13 +6,12 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:45:30 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/01 21:02:19 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:33:15 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-
 #include "built_in.h"
 
 static int	is_option_n(char *s)
@@ -81,14 +80,14 @@ void	echo(int argc, char *argv[])
 	char	*tmp;
 	int		option_n;
 
-	if (argc == 1) // just echo
+	if (argc == 1)
 	{
 		write(1, "\n", 1);
 		return ;
 	}
 	option_n = is_option_n(argv[1]);
 	tmp = concat_argv(argc, argv);
-	if (option_n != 0) // if -n 옵션
+	if (option_n != 0)
 	{
 		res = ft_strcat(tmp, '\n');
 		free(tmp);

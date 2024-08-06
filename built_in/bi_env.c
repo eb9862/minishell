@@ -6,12 +6,11 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:58:07 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/04 15:51:11 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:34:39 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
 #include "built_in.h"
 
 void	env(t_env_list *lst)
@@ -31,4 +30,3 @@ void	env(t_env_list *lst)
 		tmp = tmp->next;
 	}
 }
-// 비교 시에 마지막 환경변수 차이 _=./test | _=/usr/bin/env

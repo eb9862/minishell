@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 23:07:16 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/30 17:24:57 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:35:06 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
 #include "built_in.h"
 
 int	is_numeric(char *s)

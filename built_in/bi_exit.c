@@ -6,13 +6,12 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:49:45 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/03 17:32:01 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:34:36 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-
 #include "built_in.h"
 
 int	bi_exit(int argc, char *argv[])

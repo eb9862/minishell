@@ -6,13 +6,12 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:59:17 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/04 15:51:29 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:34:32 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-
 #include "built_in.h"
 
 static void	export_no_arg(t_env_list *lst)
@@ -109,7 +108,6 @@ static void	export_with_arg(t_env_list *lst, int argc, char **argv)
 				not_valid_identifier(argv[i]);
 			else if (is_in_envp(lst, argv[i]) != 0)
 				add_node_last(lst, create_env_node(argv[i]));
-			// else 같은 key의 환경변수가 이미 존재하면 아무 변화없음
 		}
 		else
 			equal_in_arg(lst, argv[i], eq);
@@ -121,20 +119,6 @@ void	export(int argc, t_env_list *lst, char **argv)
 {
 	if (argc == 1)
 		export_no_arg(lst);
-	else // 새로운 환경변수를 추가하게 되면 env 명령어 결과의 순서가 어떻게 ???
+	else
 		export_with_arg(lst, argc, argv);
 }
-
-// = 있음 -> 첫번째 = 뒤로 다 value값으로 처리, += 가능, -= 안됨
-// bash: export: `e-=world': not a valid identifier
-// bash: export: `=': not a valid identifier
-// bash: export: `b++': not a valid identifier
-
-// cc bi_export_new.c libbi.a ../libft/libft.a
-/*int main(int ac, char **av, char **envp)
-{
-	t_env_list	*el;
-
-	el = init_env(envp);
-	export(ac, el, av);
-}*/
