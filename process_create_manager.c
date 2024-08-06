@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_manager.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:00:08 by joojeon           #+#    #+#             */
-/*   Updated: 2024/07/31 00:30:35 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/06 16:10:53 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	regist_process(t_process_list *process_list, t_q_token *st, \
 	t_q_token		*now;
 	int				cc;
 
-	cc = get_plain_count(token_list);
+	cc = get_plain_count(token_list, et);
 	process_info = create_process_info();
 	if (!process_info)
 		return (0);

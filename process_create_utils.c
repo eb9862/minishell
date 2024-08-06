@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_create_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:02:29 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 16:40:49 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:06:34 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	clear_pl_tl(t_q_token_list *token_list, t_process_list *process_list)
 	clear_process_list(process_list);
 }
 
-int	get_plain_count(t_q_token_list *list)
+int	get_plain_count(t_q_token_list *list, t_q_token *et)
 {
 	t_q_token	*now;
 	int			pc;
 
 	pc = 0;
 	now = list -> head;
-	while (now)
+	while (now && now != et)
 	{
 		if (now -> type == PLAIN)
 			pc++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:01:54 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/03 17:38:05 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:20:19 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int	main(int ac, char **av, char **envp)
 		excute_err_msg(ac, av);
 		return (0);
 	}
-	g_status = 0;
 	env_list = init_env(envp);
+	if (!env_list)
+		return (0);
 	set_signal();
 	while (1)
 	{

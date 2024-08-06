@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/05 14:31:00 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:06:52 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ t_process_list		*get_process_list(t_q_token_list *token_list);
 int					handle_heredoc(t_q_token_list *list, t_q_token *now);
 void				clear_pl_tl(t_q_token_list *token_list, \
 						t_process_list *process_list);
-int					get_plain_count(t_q_token_list *list);
+int					get_plain_count(t_q_token_list *list, t_q_token *et);
 void				add_process_last(t_process_list *list, \
 						t_process_info *process);
 int					set_cmd(t_process_info *process, t_q_token *st, \

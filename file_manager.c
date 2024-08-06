@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:50:17 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/03 16:50:18 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:01:53 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	openfile(t_q_token *prev, t_q_token *now)
 				O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd == -1)
 		{
-			printf("error!!\n");
 			handle_file_create_error(now -> content);
 			return (0);
 		}

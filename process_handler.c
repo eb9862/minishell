@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/02 02:38:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/06 16:19:04 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 		return ;
 	ignore_parent_signal();
 	pid = fork();
+	if (pid == -1)
+		return ;
 	pids[process -> idx] = pid;
-	signal(SIGQUIT, sigquit_in_process);
-	signal(SIGINT, sigint_in_process);
+	(signal(SIGQUIT, sigquit_in_process), signal(SIGINT, sigint_in_process));
 	if (pid == 0)
 	{
 		close(fd[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_quotes_manager_utils.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:07:50 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/01 20:34:45 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:59:25 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*combine_plain_plain(char *s1, char *s2)
 	combined_content[0] = '\'';
 	while (s1[s_idx])
 		combined_content[i1++] = s1[s_idx++];
-	//combined_content[i1++] = '\'';
 	s_idx = 0;
 	while (s2[s_idx])
 		combined_content[i1++] = s2[s_idx++];
