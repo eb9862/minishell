@@ -106,12 +106,12 @@ char	*get_path_name(char *p_name)
 		return (0);
 	paths = get_paths();
 	if (!paths)
-		return (0);
+		exit (12);
 	while (paths[++i])
 	{
 		tmp_path = get_res_path(paths[i], p_name, paths);
 		if (!tmp_path)
-			return (0);
+			exit (12);
 		if (access(tmp_path, F_OK) == 0 && access(tmp_path, X_OK) == 0)
 			return (free_split(paths), tmp_path);
 		free(tmp_path);
