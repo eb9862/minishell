@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:50:09 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/04 15:55:16 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:21:06 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_only_dollar(char *content)
 	int	l;
 
 	l = get_content_len(content);
-	if (l == 1 && content[0] == '$')
+	if (content[l-2] == '$')
 		return (1);
 	return (0);
 }
@@ -44,7 +44,7 @@ char	*get_expanded_content(char *content, int dollar_idx)
 		free(c_status);
 	}
 	else if (is_only_dollar(content))
-		expanded_content = malloc_only_dollar_sign();
+		expanded_content = ft_strdup(content);
 	else
 	{
 		only_env = get_only_env(content + dollar_idx + 1);

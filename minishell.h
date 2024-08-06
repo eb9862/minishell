@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/06 16:06:52 by joonwan          ###   ########.fr       */
+/*   Updated: 2024/08/06 21:22:41 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void				add_process_last(t_process_list *list, \
 int					set_cmd(t_process_info *process, t_q_token *st, \
 						t_q_token *et, int cmd_count);
 int					get_dollar_sign_idx(char *line);
-char				*malloc_only_dollar_sign(void);
 char				*get_expanded_content(char *content, int dollar_idx);
 int					expand_plain(t_q_token_list *list);
 int					delegate_quotes_syntax_check(char *line);
