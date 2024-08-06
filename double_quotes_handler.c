@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:50:09 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/06 21:21:06 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 21:43:40 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ int	is_only_dollar(char *content)
 	int	l;
 
 	l = get_content_len(content);
-	if (content[l-2] == '$')
-		return (1);
+	if (content[l - 1] == '\'' || content[l - 1] == '\"')
+	{
+		if (content[l - 2] == '$')
+			return (1);
+	}
+	else
+	{
+		if (content[l - 1] == '$')
+			return (1);
+	}
 	return (0);
 }
 
