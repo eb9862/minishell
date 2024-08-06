@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/06 22:10:02 by joonwan          ###   ########.fr       */
+/*   Updated: 2024/08/06 23:29:23 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,14 +165,16 @@ void				run_built_in(t_process_info *process, \
 int					is_buitin(char *p_name);
 int					get_argc(char **argv);
 void				set_stream(int in, int out);
-char				**get_paths(void);
-char				*get_path_name(char *p_name);
+char				**get_paths(char *p_name, t_env_list *el);
+char				*get_path_name(char *p_name, t_env_list *el);
 int					is_contains_slash(char *p_name);
 void				handle_not_found_pg_or_directory(char *p_name);
 void				is_directory_msg(char *p_name);
 void				single_dot_err_msg(char *p_name);
 void				not_found_programe_msg(char *p_name);
 int					is_empty_command(char *p_name);
+char				*get_env_value(t_env_list *el, char *env_key, \
+						char *p_name); // test
 // test
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);

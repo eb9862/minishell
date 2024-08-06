@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:59:53 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 21:02:06 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:10:38 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_env_node	*find_node(t_env_list *lst, char *target_key)
 		free_2d(s);
 		tmp_node = tmp_node -> next;
 	}
-	return (tmp_node);
+	return (0);
 }
 
 int	include_equal(char *s)
