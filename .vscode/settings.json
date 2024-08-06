@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "built_in.h": "c"
     }
 }

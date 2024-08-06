@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 14:37:47 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/02 21:01:59 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:35:22 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 
-// evnp -> linked list
 typedef struct s_env_node
 {
 	char				*content;

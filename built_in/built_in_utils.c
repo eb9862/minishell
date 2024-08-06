@@ -6,12 +6,11 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:53:58 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/07/21 00:05:50 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:35:03 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
 #include "built_in.h"
 
 char	*ft_strcat(char *s, char c)
