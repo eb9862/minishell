@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:49:45 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/06 16:34:36 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:00:48 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	bi_exit(int argc, char *argv[])
 	{
 		if (is_numeric(argv[1]) != 0 || is_ll(argv[1]) != 0)
 		{
-			write(2, "porschell: exit: ", 13);
+			write(2, "porschell: exit: ", 17);
 			write(2, argv[1], ft_strlen(argv[1]));
 			write(2, ": numeric argument required\n", 28);
 		}
@@ -32,7 +32,7 @@ int	bi_exit(int argc, char *argv[])
 		{
 			if (argc > 2)
 			{
-				write(2, "porschell: exit: too many arguments\n", 31);
+				write(2, "porschell: exit: too many arguments\n", 36);
 				return (1);
 			}
 		}

@@ -6,12 +6,10 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:48:38 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/06 16:34:27 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:57:25 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <linux/limits.h> // linux PATH_MAX
-//#include <sys/syslimits.h>
 #include <unistd.h>
 #include <stdio.h>
 #include "built_in.h"

@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 18:47:01 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/06 16:33:25 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:47:36 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	cd(int argc, char **p_argv, t_env_list *el)
 
 	if (argc > 2)
 	{
-		write(2, "porschell: cd: too many arguments\n", 29);
+		write(2, "porschell: cd: too many arguments\n", 34);
 		return (1);
 	}
 	if (argc == 2)
