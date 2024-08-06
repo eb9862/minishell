@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
+/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:44:12 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/06 21:22:41 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:10:02 by joonwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void				handle_not_found_pg_or_directory(char *p_name);
 void				is_directory_msg(char *p_name);
 void				single_dot_err_msg(char *p_name);
 void				not_found_programe_msg(char *p_name);
+int					is_empty_command(char *p_name);
 // test
 void				print_process(t_process_info *process);
 void				print_process_list(t_process_list *process_list);
