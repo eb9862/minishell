@@ -3,6 +3,7 @@
         "minishell.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "built_in.h": "c"
+        "built_in.h": "c",
+        "syslimits.h": "c"
     }
 }
