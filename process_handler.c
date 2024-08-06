@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   process_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joonwan <joonwan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 05:46:07 by joojeon           #+#    #+#             */
-/*   Updated: 2024/08/06 16:19:04 by joonwan          ###   ########.fr       */
+/*   Updated: 2024/08/06 23:30:09 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
+void	excute_cmd(t_process_info *process, char **envp, \
+		t_env_list *el, pid_t pids[])
 {
 	int		fd[2];
 	pid_t	pid;
@@ -29,7 +30,7 @@ void	excute_cmd(t_process_info *process, char **envp, pid_t pids[])
 	if (pid == 0)
 	{
 		close(fd[0]);
-		path_name = get_path_name(process -> program_name);
+		path_name = get_path_name(process -> program_name, el);
 		if (process -> next)
 			(dup2(fd[1], STDOUT_FILENO), close(fd[1]));
 		if (process -> is_redirected)
@@ -45,7 +46,7 @@ void	excute_child_process(t_process_info *process, char **envp, \
 	pid_t pids[], t_env_list *el)
 {
 	if (is_buitin(process -> program_name) == -1)
-		excute_cmd(process, envp, pids);
+		excute_cmd(process, envp, el, pids);
 	else
 		excute_built_in(process, pids, el);
 }

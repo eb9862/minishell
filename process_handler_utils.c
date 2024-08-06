@@ -6,7 +6,7 @@
 /*   By: eunhwang <eunhwang@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:22:26 by eunhwang          #+#    #+#             */
-/*   Updated: 2024/08/03 16:55:33 by eunhwang         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:22:19 by eunhwang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,19 @@ void	save_original(int *original_in, int *original_out)
 	*original_out = dup(STDOUT_FILENO);
 }
 
-char	**get_paths(void)
+char	**get_paths(char *p_name, t_env_list *el)
 {
 	char	*path_line;
 	char	**split;
 
-	path_line = getenv("PATH");
+	path_line = get_env_value(el, "PATH", p_name);
 	split = ft_split(path_line, ':');
 	if (!split)
+	{
+		free(path_line);
 		return (0);
+	}
+	free(path_line);
 	return (split);
 }
 

@@ -94,7 +94,7 @@ int	has_only_dot(char *p_name)
 	return (1);
 }
 
-char	*get_path_name(char *p_name)
+char	*get_path_name(char *p_name, t_env_list *el)
 {
 	char	**paths;
 	int		i;
@@ -104,7 +104,7 @@ char	*get_path_name(char *p_name)
 	if (has_only_dot(p_name) || is_directory(p_name) || \
 		is_only_dollar_sign(p_name) || is_empty_command(p_name))
 		return (0);
-	paths = get_paths();
+	paths = get_paths(p_name, el);
 	if (!paths)
 		exit (12);
 	while (paths[++i])
